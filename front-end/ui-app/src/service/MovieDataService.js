@@ -1,0 +1,17 @@
+import axios from 'axios'
+
+const USER = 'in28minutes'
+const PASSWORD = 'dummy'
+const COURSE_API_URL = 'http://localhost:8080'
+const MOVIE_API_URL = `${COURSE_API_URL}/movies/${USER}`
+
+class MovieDataService {
+
+    retrieveAllMovies(name) {
+        return axios.get(`${MOVIE_API_URL}/courses`,
+            //{ headers: { authorization: 'Basic ' + window.btoa(INSTRUCTOR + ":" + PASSWORD) } }
+        );
+    }
+}
+
+export default new MovieDataService()
