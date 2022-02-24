@@ -46,7 +46,9 @@ class ListMoviesComponent extends Component {
                                     movie =>
                                         <tr key={movie.id}>
                                             <td>{movie.id}</td>
-                                            <td>{movie.description}</td>
+                                            <td>{movie.name}</td>
+                                            <td>{movie.genre}</td>
+                                            <td>{movie.year}</td>
                                         </tr>
                                 )
                             }
