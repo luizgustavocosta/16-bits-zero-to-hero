@@ -1,4 +1,5 @@
 package com.costa.luiz.zero2hero.auth;
+
 public class AuthenticationBean {
 
     private String message;

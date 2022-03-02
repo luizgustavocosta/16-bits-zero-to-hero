@@ -1,6 +1,9 @@
-package com.costa.luiz.zero2hero.movie;
+package com.costa.luiz.zero2hero.model.movie;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -19,6 +22,11 @@ public class Movie {
     private String genre;
     private String name;
     private String year;
+    private String title;
+    private String originalTitle;
+    private Long duration;
+    private String country;
+    private String language;
 
     public Movie(String name, String genre, String year) {
         this.name = name;
