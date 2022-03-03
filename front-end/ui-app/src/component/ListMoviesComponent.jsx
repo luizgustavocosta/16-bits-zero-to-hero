@@ -40,7 +40,7 @@ class ListMoviesComponent extends Component {
     render() {
         return (
             <div className="container">
-                <h3>All Movies</h3>
+                <h3>List of movies</h3>
                 <div className="container">
                     <table className="table">
                         <thead>

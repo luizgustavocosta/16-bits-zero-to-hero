@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Button from "@mui/material/Button";
 
 class LogoutComponent extends Component {
   render() {
@@ -8,6 +9,7 @@ class LogoutComponent extends Component {
         <div className="container">
           Thank You for Using Our Application.
         </div>
+        <Button variant="contained" href={"/"}>Sign in</Button>
       </>
     )
   }

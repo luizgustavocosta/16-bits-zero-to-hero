@@ -3,6 +3,7 @@ import axios from 'axios'
 const API_URL = 'http://localhost:8080'
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
+export const USER_PROFILE = 'userProfile'
 
 class AuthenticationService {
 
@@ -26,6 +27,7 @@ class AuthenticationService {
   registerSuccessfulLogin(username, password) {
     //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
     sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
+    sessionStorage.setItem(USER_PROFILE, "admin")
     this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
   }
 

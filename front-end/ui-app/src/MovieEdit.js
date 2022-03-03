@@ -32,7 +32,6 @@ class MovieEdit extends Component {
   }
 
   save(item) {
-    console.log("Save item[" + item + "]");
     return axios.put(`http://localhost:8080/movies`, item);
   }
 
@@ -82,7 +81,7 @@ class MovieEdit extends Component {
           </FormGroup>
           <FormGroup>
             <Button color="primary" type="submit">Save</Button>{' '}
-            <Button color="secondary" tag={Link} to="/movies">Cancel</Button>
+            <Button color="warning" tag={Link} to="/movies">Cancel</Button>
           </FormGroup>
         </Form>
       </Container>

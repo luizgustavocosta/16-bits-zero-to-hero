@@ -8,8 +8,6 @@ import AuthenticatedRoute from './AuthenticatedRoute';
 import MovieEdit from "../MovieEdit";
 
 class MovieApp extends Component {
-
-
   render() {
     return (
       <>

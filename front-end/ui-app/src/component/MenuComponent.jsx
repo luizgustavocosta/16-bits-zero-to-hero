@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-import {Link, withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import AuthenticationService from '../service/AuthenticationService';
+import Button from "@mui/material/Button";
 
 class MenuComponent extends Component {
 
@@ -9,17 +10,14 @@ class MenuComponent extends Component {
 
     return (
       <header>
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-          <div><label className="navbar-brand">Zero 2 One</label></div>
-          <ul className="navbar-nav">
-            <li><Link className="nav-link" to="/movies">Movies</Link></li>
-          </ul>
-          <ul className="navbar-nav navbar-collapse justify-content-end">
-            {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
-            {isUserLoggedIn &&
-            <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
-          </ul>
-        </nav>
+        {isUserLoggedIn &&
+        <Button href={"/logout"}
+                onClick={AuthenticationService.logout}
+                variant="contained"
+                align="right"
+                color={"secondary"}
+                sx={{ mt: 3, mb: 2 }}>Logout</Button>
+        }
       </header>
     )
   }

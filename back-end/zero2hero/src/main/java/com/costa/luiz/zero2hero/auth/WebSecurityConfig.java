@@ -1,5 +1,6 @@
 package com.costa.luiz.zero2hero.auth;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,6 +12,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${spring.ldap.urls}")
+    private String ldapUrl;
+
+    @Value("${spring.ldap.base}")
+    private String ldapBase;
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -30,7 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDnPatterns("uid={0},ou=people")
                 .groupSearchBase("ou=groups")
                 .contextSource()
-                .url("ldap://localhost:8389/dc=springframework,dc=org")
+                .url(ldapUrl + ldapBase)
                 .and()
                 .passwordCompare()
                 .passwordEncoder(new BCryptPasswordEncoder())

@@ -17,7 +17,7 @@ public class MovieResource {
 
     @GetMapping("/{username}/favorites")
     public List<Movie> getAll(@PathVariable String username) {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @GetMapping

@@ -17,7 +17,6 @@ import java.util.Objects;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
     private String genre;
     private String name;
