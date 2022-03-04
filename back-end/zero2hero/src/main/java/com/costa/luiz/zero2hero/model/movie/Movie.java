@@ -1,48 +1,33 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-import org.hibernate.Hibernate;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
 @Entity
 @RequiredArgsConstructor
+@EqualsAndHashCode
+@Table(name = "movies")
 public class Movie {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
-    private String genre;
     private String name;
-    private String year;
+    private int year;
     private String title;
     private String originalTitle;
-    private Long duration;
+    private int duration;
     private String country;
     private String language;
-
-    public Movie(String name, String genre, String year) {
-        this.name = name;
-        this.genre = genre;
-        this.year = year;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Movie movie = (Movie) o;
-        return id != null && Objects.equals(id, movie.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+    private LocalDateTime createdAt;
+    @OneToMany
+    private List<Genre> genre;
+    @Enumerated(EnumType.STRING)
+    private Classification classification;
 }

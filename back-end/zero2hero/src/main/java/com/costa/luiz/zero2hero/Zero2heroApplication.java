@@ -18,12 +18,12 @@ public class Zero2heroApplication {
 		SpringApplication.run(Zero2heroApplication.class, args);
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void insertMovies() {
-		movieRepository.save(new Movie("The Shawshank Redemption", "Drama", "1994"));
-		movieRepository.save(new Movie("The Godfather", "Crime", "1972"));
-		movieRepository.save(new Movie("The Godfather: Part II", "Crime", "1974"));
-		movieRepository.save(new Movie("The Dark Knight", "Action", "2008"));
-	}
+//	@EventListener(ApplicationReadyEvent.class)
+//	public void insertMovies() {
+//		movieRepository.save(new Movie("The Shawshank Redemption", "Drama", "1994"));
+//		movieRepository.save(new Movie("The Godfather", "Crime", "1972"));
+//		movieRepository.save(new Movie("The Godfather: Part II", "Crime", "1974"));
+//		movieRepository.save(new Movie("The Dark Knight", "Action", "2008"));
+//	}
 
 }

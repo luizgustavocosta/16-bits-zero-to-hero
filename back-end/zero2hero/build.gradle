@@ -31,6 +31,9 @@ dependencies {
 	implementation("org.springframework.ldap:spring-ldap-core")
 	implementation("org.springframework.security:spring-security-ldap")
 	implementation("com.unboundid:unboundid-ldapsdk")
+	// MapStruct
+	implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
 }
 
 tasks.named('test') {
