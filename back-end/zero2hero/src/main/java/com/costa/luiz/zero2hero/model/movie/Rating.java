@@ -1,6 +1,8 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-public enum Classification {
+import java.util.Arrays;
+
+public enum Rating {
     G("General, suitable for all ages"),
     PG("Parental Guidance Suggested"),
     PG13("Parents Strongly Cautioned"),
@@ -10,11 +12,17 @@ public enum Classification {
 
     private String description;
 
-    Classification(String description) {
+    Rating(String description) {
         this.description = description;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public static Rating get(String key) {
+        return Arrays.stream(Rating.values())
+                .filter(current -> key.equalsIgnoreCase(current.name()))
+                .findFirst().orElse(Rating.R);
     }
 }

@@ -37,6 +37,16 @@ class ListMoviesComponent extends Component {
             )
     }
 
+    renderGenres(genres) {
+        return (
+          <a>
+              {genres.map((item) => (
+                    <h6>{item.name}</h6>
+              ))}
+          </a>
+        );
+    }
+
     render() {
         return (
             <div className="container">
@@ -74,7 +84,9 @@ class ListMoviesComponent extends Component {
                                         <tr key={movie.id}>
                                             <td>{movie.id}</td>
                                             <td>{movie.name}</td>
-                                            <td>{movie.genre}</td>
+                                            <td>
+                                                {this.renderGenres(movie.genre)}
+                                            </td>
                                             <td>{movie.year}</td>
                                             <td>
                                                 <ButtonGroup>

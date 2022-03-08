@@ -6,7 +6,9 @@ const MOVIE_API_URL = `${HOST}/movies`
 class MovieDataService {
 
     retrieveAllMovies(name) {
-        return axios.get(`${MOVIE_API_URL}`,);
+        let promise = axios.get(`${MOVIE_API_URL}`,);
+        console.log(promise)
+        return promise;
     }
 
     delete(id) {

@@ -1,9 +1,6 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -11,7 +8,9 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@RequiredArgsConstructor
+@AllArgsConstructor
+@Builder
+@NoArgsConstructor
 @Table(name = "genres")
 public class Genre {
 

@@ -29,6 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+//                .formLogin()
+//                .and()
                 .httpBasic();
     }
 
@@ -46,8 +48,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordAttribute("userPassword");
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**");
-    }
 }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web.ignoring().antMatchers("/**");
+//    }
