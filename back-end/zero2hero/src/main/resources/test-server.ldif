@@ -126,6 +126,13 @@ uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
 uniqueMember: uid=bob,ou=people,dc=springframework,dc=org
 uniqueMember: uid=luiz,ou=people,dc=springframework,dc=org
 
+dn: cn=other,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: others
+ou: other
+uniqueMember: uid=luiz,ou=people,dc=springframework,dc=org
+
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfUniqueNames
@@ -142,3 +149,10 @@ cn: submanagers
 ou: submanager
 uniqueMember: uid=ben,ou=people,dc=springframework,dc=org
 uniqueMember: uid=luiz,ou=people,dc=springframework,dc=org
+
+dn: cn=owner,ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: owner
+ou: owner
+uniqueMember: uid=owner,ou=people,dc=springframework,dc=org

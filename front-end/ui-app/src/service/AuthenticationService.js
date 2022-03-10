@@ -4,6 +4,7 @@ const API_URL = 'http://localhost:8080'
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 export const USER_PROFILE = 'userProfile'
+export const USER_ROLES = 'userRoles'
 
 class AuthenticationService {
 
@@ -13,7 +14,6 @@ class AuthenticationService {
   }
 
   executeJwtAuthenticationService(username, password) {
-    console.log(username);
     return axios.post(`${API_URL}/authenticate`, {
       username,
       password
@@ -24,10 +24,10 @@ class AuthenticationService {
     return 'Basic ' + window.btoa(username + ":" + password)
   }
 
-  registerSuccessfulLogin(username, password) {
-    //let basicAuthHeader = 'Basic ' +  window.btoa(username + ":" + password)
+  registerSuccessfulLogin(username, password, roles) {
     sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
     sessionStorage.setItem(USER_PROFILE, "admin")
+    sessionStorage.setItem(USER_ROLES, roles)
     this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
   }
 

@@ -18,6 +18,7 @@ class LoginComponent extends Component {
     this.state = {
       username: '',
       password: '',
+      roles: '',
       hasLoginFailed: false,
       showSuccessMessage: false
     }
@@ -37,24 +38,24 @@ class LoginComponent extends Component {
   loginClicked() {
     AuthenticationService
       .executeBasicAuthenticationService(this.state.username, this.state.password)
-      .then(() => {
-        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password)
+      .then(value => {
+        AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password, value.data.roles)
         this.props.history.push(`/movies`)
       }).catch(() => {
       this.setState({showSuccessMessage: false})
       this.setState({hasLoginFailed: true})
     })
-
   }
 
   render() {
     return (
       <div>
         <div className="container">
-          {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials for {this.state.username}</div>}
+          {this.state.hasLoginFailed &&
+          <div className="alert alert-warning">Invalid Credentials for {this.state.username}</div>}
           {this.state.showSuccessMessage && <div>Login Successful</div>}
           <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <Box
               sx={{
                 marginTop: 8,
@@ -63,44 +64,56 @@ class LoginComponent extends Component {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                <LockOutlinedIcon />
+              <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+                <LockOutlinedIcon/>
               </Avatar>
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
-          <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="User"
-              name="username"
-              value={this.state.username}
-              autoFocus
-              onChange={this.handleChange}
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={this.handleChange}
-              onKeyPress={(event) => event.key === 'Enter' && this.loginClicked()}
-            />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="User"
+                name="username"
+                value={this.state.username}
+                autoFocus
+                onChange={this.handleChange}
+              />
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={this.handleChange}
+                onKeyPress={(event) => event.key === 'Enter' && this.loginClicked()}
+              />
+              <view style={{}}>
 
-              <Button
-                type="submit"
-                variant="contained"
-                onClick={this.loginClicked}
-                sx={{ mt: 3, mb: 2 }}
-              >
-                Sign In
-              </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  onClick={this.loginClicked}
+                  sx={{mt: 1, mb: 1, mr: 10}}
+                >
+                  Sign In
+                </Button>
+
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{mt: 1, mb: 1}}
+                  href={"/newUser"}
+                >
+                  Create account
+                </Button>
+              </view>
+
             </Box></Container>
         </div>
       </div>

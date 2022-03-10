@@ -27,6 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                .antMatchers("/movies/**").access("hasRole('ROLE_MANAGERS')")
+                .antMatchers("/movies").hasAnyAuthority("ROLE_MANAGERS","ROLE_OTHERS")
+                .antMatchers("/movies/{id}").hasAuthority("ROLE_OTHERS")
                 .anyRequest().authenticated()
                 .and()
 //                .formLogin()
@@ -38,8 +41,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .ldapAuthentication()
+//                .userDnPatterns("uid={0},ou=people")
+//                .groupSearchBase("ou=groups")
                 .userDnPatterns("uid={0},ou=people")
+                .userSearchBase("ou=people")
+                .userSearchFilter("uid={0}")
                 .groupSearchBase("ou=groups")
+                .groupSearchFilter("uniqueMember={0}")
                 .contextSource()
                 .url(ldapUrl + ldapBase)
                 .and()
@@ -48,8 +56,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordAttribute("userPassword");
     }
 
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/h2-console/**");
+    }
 }
-//    @Override
-//    public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/**");
-//    }
