@@ -3,7 +3,8 @@ import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
-
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated';
 class MovieEdit extends Component {
 
   emptyItem = {
@@ -44,9 +45,16 @@ class MovieEdit extends Component {
     this.setState({item});
   }
 
+  handleSelect(items) {
+    items.map((k,v) => {
+      console.log("key["+k.value+"]")
+    })
+  }
+
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
+    item.genre =
     await this.save(item);
     this.props.history.push('/movies');
   }
@@ -54,6 +62,17 @@ class MovieEdit extends Component {
   render() {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
+    const animatedComponents = makeAnimated();
+    const options = [
+      { value: 'horror', label: 'Horror' },
+      { value: 'action', label: 'Action' },
+      { value: 'thriller', label: 'Thriller' },
+      { value: 'comedy', label: 'Comedy' },
+      { value: 'drama', label: 'Drama' },
+      { value: 'science-fiction', label: 'Sci-fi' },
+      { value: 'fantasy', label: 'Fantasy' },
+      { value: 'western', label: 'Western' }
+    ]
     return <div>
       <AppNavbar/>
       <Container>
@@ -65,9 +84,13 @@ class MovieEdit extends Component {
                    onChange={this.handleChange} autoComplete="name"/>
           </FormGroup>
           <FormGroup>
-            <Label for="genre">Genre</Label>
-            <Input type="text" name="genre" id="genre" value={item.genre || ''}
-                   onChange={this.handleChange} autoComplete="genre"/>
+            <Select
+                closeMenuOnSelect={false}
+                defaultValue={[options[1], options[2]]}
+                isMulti
+                onChange={this.handleSelect}
+                options={options}
+            />
           </FormGroup>
           <FormGroup>
             <Label for="year">Year</Label>

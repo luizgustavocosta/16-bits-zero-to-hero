@@ -93,7 +93,7 @@ class LoginComponent extends Component {
                 onChange={this.handleChange}
                 onKeyPress={(event) => event.key === 'Enter' && this.loginClicked()}
               />
-              <view style={{}}>
+              {/*<view style={{}}>*/}
 
                 <Button
                   type="submit"
@@ -112,7 +112,7 @@ class LoginComponent extends Component {
                 >
                   Create account
                 </Button>
-              </view>
+              {/*</view>*/}
 
             </Box></Container>
         </div>

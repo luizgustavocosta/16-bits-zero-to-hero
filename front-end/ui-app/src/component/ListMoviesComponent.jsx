@@ -38,11 +38,11 @@ class ListMoviesComponent extends Component {
 
   renderGenres(genres) {
     return (
-      <a>
+      <li>
         {genres.map((item) => (
-          <h6>{item.name}</h6>
+          <h6 key={item.id}>{item.name}</h6>
         ))}
-      </a>
+      </li>
     );
   }
 

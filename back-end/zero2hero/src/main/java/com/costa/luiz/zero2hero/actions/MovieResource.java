@@ -2,6 +2,7 @@ package com.costa.luiz.zero2hero.actions;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
+import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -32,7 +33,13 @@ public class MovieResource {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public void save(@RequestBody Movie movie) {
+    public void save(@RequestBody MovieDto movieDto) {
+        Movie movie = Movie.builder()
+                .name(movieDto.getName())
+                .year(Integer.parseInt(movieDto.getYear()))
+                .originalTitle(movieDto.getOriginalTitle())
+                .build();
+        //FIXME add MapStruct
         service.newMovie(movie);
     }
 

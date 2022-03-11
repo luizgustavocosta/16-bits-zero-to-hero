@@ -24,3 +24,11 @@ Add dependencies
 npm install axios --save-dev
 npm install react-router-dom --save-dev
 ```
+
+## How to run
+### React
+```
+cd front-end && npm install && npm start
+```
+
+ADR from https://github.com/joelparkerhenderson/architecture-decision-record
