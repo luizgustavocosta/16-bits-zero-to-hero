@@ -3,6 +3,7 @@ import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
+import Modal from './Modal.js';
 
 class NewUser extends Component {
 
@@ -13,15 +14,26 @@ class NewUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.emptyUser
+      user: this.emptyUser,
+      show: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  }
+
+  hideModal = () => {
+    this.setState({ show: false });
   }
 
   save(user) {
     return axios.put(`http://localhost:8080/user`, user);
   }
+
 
   handleChange(event) {
     const target = event.target;
@@ -53,8 +65,12 @@ class NewUser extends Component {
                    onChange={this.handleChange} autoComplete="name"/>
           </FormGroup>
           <FormGroup>
-            <Button color="primary" type="submit">Save</Button>{''}
+            <Button color="primary" type="button" onClick={this.showModal}>Save</Button>{''}
             <Button color="warning" tag={Link} to="/movies">Cancel</Button>
+
+            <Modal show={this.state.show} handleClose={this.hideModal}>
+              <p>Operation not supported</p>
+            </Modal>
           </FormGroup>
         </Form>
       </Container>

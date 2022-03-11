@@ -13,7 +13,6 @@ public class BasicAuthenticationController {
 
     @GetMapping(path = "/basicauth")
     public AuthenticationBean basicAuth() {
-        // Get the user data here
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return new AuthenticationBean("You are authenticated", authentication
                 .getAuthorities()

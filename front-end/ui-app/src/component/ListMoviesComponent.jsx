@@ -88,7 +88,10 @@ class ListMoviesComponent extends Component {
                     </td>
                     <td>{movie.year}</td>
                     <td>
-                      {sessionStorage.getItem("userRoles").split(',').filter(item => (item === 'ROLE_OTHERS')) !== '' &&
+                      {sessionStorage.getItem("userRoles")
+                        .split(',')
+                        .filter(item => (item === 'ROLE_OTHERS'))
+                        .length > 0 &&
                       <ButtonGroup>
                         <Button size="sm" color="primary" tag={Link} to={"/movies/" + movie.id}>Edit</Button>
                         <Button size="sm" color="danger" onClick={() => this.remove(movie.id)}>Delete</Button>

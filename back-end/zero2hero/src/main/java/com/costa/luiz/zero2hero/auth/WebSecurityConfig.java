@@ -20,6 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.ldap.base}")
     private String ldapBase;
 
+    @Value("${roles.view}")
+    private String viewRoles;
+
+    @Value("${roles.view}")
+    private String editRoles;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -27,13 +32,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .antMatchers("/movies/**").access("hasRole('ROLE_MANAGERS')")
-                .antMatchers("/movies").hasAnyAuthority("ROLE_MANAGERS","ROLE_OTHERS")
-                .antMatchers("/movies/{id}").hasAuthority("ROLE_OTHERS")
+//                .antMatchers("/movies").pr(viewRoles)
+//                .antMatchers("/movies/{id}").hasAnyAuthority(editRoles)
+                .antMatchers(HttpMethod.POST,"/movies").access("hasRole('ROLE_OTHERS')")
+//                .antMatchers("/movies/{id}").hasRole("ROLE_OTHERS")
+                .antMatchers("/movies/{id}").access("hasRole('ROLE_OTHERS')")
                 .anyRequest().authenticated()
                 .and()
-//                .formLogin()
-//                .and()
                 .httpBasic();
     }
 
@@ -41,8 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .ldapAuthentication()
-//                .userDnPatterns("uid={0},ou=people")
-//                .groupSearchBase("ou=groups")
                 .userDnPatterns("uid={0},ou=people")
                 .userSearchBase("ou=people")
                 .userSearchFilter("uid={0}")
@@ -55,7 +58,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .passwordAttribute("userPassword");
     }
-
 
     @Override
     public void configure(WebSecurity web) throws Exception {
