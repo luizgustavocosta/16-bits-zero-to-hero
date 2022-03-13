@@ -4,7 +4,6 @@ import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
 import Select from 'react-select'
-import makeAnimated from 'react-select/animated';
 class MovieEdit extends Component {
 
   emptyItem = {
@@ -14,10 +13,14 @@ class MovieEdit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      item: this.emptyItem
+      item: this.emptyItem,
+      genres: '',
+      selectedGenres: [],
+      newGenres:[]
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect= this.handleSelect.bind(this);
   }
 
   async componentDidMount() {
@@ -26,10 +29,20 @@ class MovieEdit extends Component {
       const movie = axiosResponse.data;
       this.setState({item: movie});
     }
+    let axiosResponse = await this.findAllGenres();
+    const genres = axiosResponse.data;
+    let options = genres.map(function (genre) {
+        return { value: genre.id, label: genre.name };
+      })
+    this.setState({genres: options})
   }
 
   findBy(id) {
     return axios.get(`http://localhost:8080/movies/${id}`,);
+  }
+
+  findAllGenres() {
+    return axios.get(`http://localhost:8080/api/v1/genres`,);
   }
 
   save(item) {
@@ -45,16 +58,17 @@ class MovieEdit extends Component {
     this.setState({item});
   }
 
-  handleSelect(items) {
-    items.map((k,v) => {
-      console.log("key["+k.value+"]")
+  handleSelect(genre) {
+    console.log(genre)
+    console.log({...this.state})
+    genre.map(item => {
+     this.state.item.genres = genre;
     })
   }
 
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
-    item.genre =
     await this.save(item);
     this.props.history.push('/movies');
   }
@@ -62,17 +76,17 @@ class MovieEdit extends Component {
   render() {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
-    const animatedComponents = makeAnimated();
-    const options = [
-      { value: 'horror', label: 'Horror' },
-      { value: 'action', label: 'Action' },
-      { value: 'thriller', label: 'Thriller' },
-      { value: 'comedy', label: 'Comedy' },
-      { value: 'drama', label: 'Drama' },
-      { value: 'science-fiction', label: 'Sci-fi' },
-      { value: 'fantasy', label: 'Fantasy' },
-      { value: 'western', label: 'Western' }
-    ]
+    const genresFromMovie = []
+    for (const index in item.genre) {
+      genresFromMovie.push(Number(item.genre[index].id))
+    }
+    if (typeof this.state.genres != "string") {
+      for (const index in this.state.genres) {
+        if (genresFromMovie.includes(this.state.genres[index].value)) {
+          this.state.selectedGenres.push(this.state.genres[index])
+        }
+      }
+    }
     return <div>
       <AppNavbar/>
       <Container>
@@ -86,20 +100,20 @@ class MovieEdit extends Component {
           <FormGroup>
             <Select
                 closeMenuOnSelect={false}
-                defaultValue={[options[1], options[2]]}
+                defaultValue={this.state.selectedGenres}
                 isMulti
                 onChange={this.handleSelect}
-                options={options}
+                options={this.state.genres}
             />
           </FormGroup>
           <FormGroup>
             <Label for="year">Year</Label>
-            <Input type="text" name="year" id="genre" value={item.year || ''}
+            <Input type="text" name="year" id="year" value={item.year || ''}
                    onChange={this.handleChange} autoComplete="year"/>
           </FormGroup>
           <FormGroup>
             <Label for="originalTitle">Original title</Label>
-            <Input type="text" name="originalTitle" id="genre" value={item.originalTitle || ''}
+            <Input type="text" name="originalTitle" id="originalTitle" value={item.originalTitle || ''}
                    onChange={this.handleChange} autoComplete="originalTitle"/>
           </FormGroup>
           <FormGroup>
