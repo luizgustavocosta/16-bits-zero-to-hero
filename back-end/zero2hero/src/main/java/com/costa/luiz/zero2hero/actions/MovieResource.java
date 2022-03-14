@@ -1,20 +1,28 @@
 package com.costa.luiz.zero2hero.actions;
 
+import com.costa.luiz.zero2hero.model.genre.Genre;
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
+import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/movies")
 public class MovieResource {
 
     private final MovieService service;
+
+    @Autowired
+    private final GenreMapper genreMapper;
 
     @GetMapping("/{username}/favorites")
     public List<Movie> getAll(@PathVariable String username) {
@@ -36,7 +44,7 @@ public class MovieResource {
     public void save(@RequestBody MovieDto movieDto) {
         Movie movie = Movie.builder()
                 .name(movieDto.getName())
-                .year(Integer.parseInt(movieDto.getYear()))
+                .year(movieDto.getYear())
                 .originalTitle(movieDto.getOriginalTitle())
                 .build();
         //FIXME add MapStruct
@@ -44,7 +52,16 @@ public class MovieResource {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody Movie movie) {
+    public void update(@RequestBody MovieDto movieDto) {
+        Movie movie = Movie.builder()
+                .id(movieDto.getId())
+                .name(movieDto.getName())
+                .year(movieDto.getYear())
+                .originalTitle(movieDto.getOriginalTitle())
+                .genre(movieDto.getGenres().stream()
+                        .map(genreMapper::toGenre)
+                        .collect(Collectors.toUnmodifiableList()))
+                .build();
         service.update(movie);
     }
 

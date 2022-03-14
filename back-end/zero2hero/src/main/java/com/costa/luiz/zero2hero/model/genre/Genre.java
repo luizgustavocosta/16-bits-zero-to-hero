@@ -1,4 +1,4 @@
-package com.costa.luiz.zero2hero.model.movie;
+package com.costa.luiz.zero2hero.model.genre;
 
 import lombok.*;
 

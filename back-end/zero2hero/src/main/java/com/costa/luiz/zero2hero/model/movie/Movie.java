@@ -1,12 +1,15 @@
 package com.costa.luiz.zero2hero.model.movie;
 
+import com.costa.luiz.zero2hero.model.genre.Genre;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -29,18 +32,21 @@ public class Movie {
     private String country;
     private String language;
     private LocalDateTime createdAt;
-    @OneToMany(cascade = CascadeType.ALL)
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @ToString.Exclude
     private List<Genre> genre;
+
     @Enumerated(EnumType.STRING)
     private Rating classification;
-    @OneToMany(
-            mappedBy = "review",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
-    @ToString.Exclude
-    private List<Review> comments;
+
+//    @OneToMany(
+//            mappedBy = "review",
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true
+//    )
+//    @ToString.Exclude
+//    private List<Review> comments;
 
     @Override
     public boolean equals(Object o) {

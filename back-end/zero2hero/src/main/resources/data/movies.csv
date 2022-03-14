@@ -1,2 +1,3 @@
-name, classification, genre, language
-The Lord of the rings, G, adventure, English
+name, classification, genre, language, year
+The Lord of the rings, G, Action Drama, English, 2001
+Cobra, NC17, Action Thriller, English, 1986

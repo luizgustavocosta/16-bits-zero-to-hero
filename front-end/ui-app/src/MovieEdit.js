@@ -59,8 +59,6 @@ class MovieEdit extends Component {
   }
 
   handleSelect(genre) {
-    console.log(genre)
-    console.log({...this.state})
     genre.map(item => {
      this.state.item.genres = genre;
     })
@@ -69,6 +67,9 @@ class MovieEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
+    if (!item.genres) {
+      item.genres = this.state.selectedGenres
+    }
     await this.save(item);
     this.props.history.push('/movies');
   }
@@ -82,7 +83,7 @@ class MovieEdit extends Component {
     }
     if (typeof this.state.genres != "string") {
       for (const index in this.state.genres) {
-        if (genresFromMovie.includes(this.state.genres[index].value)) {
+        if (genresFromMovie.includes(this.state.genres[index].value) && !this.state.selectedGenres.includes(this.state.genres[index].value)) {
           this.state.selectedGenres.push(this.state.genres[index])
         }
       }
@@ -92,6 +93,7 @@ class MovieEdit extends Component {
       <Container>
         {title}
         <Form onSubmit={this.handleSubmit}>
+          <Input type="hidden" name="id" id="id" value={item.id}/>
           <FormGroup>
             <Label for="name">Name</Label>
             <Input type="text" name="name" id="name" value={item.name || ''}
