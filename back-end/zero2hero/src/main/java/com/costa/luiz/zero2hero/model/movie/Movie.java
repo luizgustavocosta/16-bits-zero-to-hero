@@ -33,20 +33,20 @@ public class Movie {
     private String language;
     private LocalDateTime createdAt;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.REFRESH)
     @ToString.Exclude
     private List<Genre> genre;
 
     @Enumerated(EnumType.STRING)
     private Rating classification;
 
-//    @OneToMany(
-//            mappedBy = "review",
-//            cascade = CascadeType.ALL,
-//            orphanRemoval = true
-//    )
-//    @ToString.Exclude
-//    private List<Review> comments;
+    @OneToMany(
+            mappedBy = "review",
+            cascade = CascadeType.ALL
+    )
+    @ToString.Exclude
+    private List<Review> comments;
+    private Double rating;
 
     @Override
     public boolean equals(Object o) {

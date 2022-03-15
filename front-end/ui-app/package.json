@@ -14,9 +14,11 @@
     "axios": "^0.26.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-draggable": "^4.4.4",
     "react-router-dom": "^5.0.0",
     "react-scripts": "5.0.0",
     "react-select": "^5.2.2",
+    "reactjs-popup": "^2.0.5",
     "reactstrap": "^8.10.0",
     "web-vitals": "^2.1.4"
   },

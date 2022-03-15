@@ -2,6 +2,9 @@ import React, {Component} from 'react'
 import CourseDataService from '../service/MovieDataService.js';
 import {Button, ButtonGroup} from 'reactstrap';
 import {Link} from 'react-router-dom';
+import HoverRating from "./HoverRating";
+import LetterAvatars from "./LetterAvatars";
+import BadgeComponent from "./BadgeComponent";
 
 class ListMoviesComponent extends Component {
   constructor(props) {
@@ -9,7 +12,8 @@ class ListMoviesComponent extends Component {
     this.state = {
       movies: [],
       message: null,
-      editRole: null
+      editRole: null,
+      name: 'LG'
     }
     this.refreshMovies = this.refreshMovies.bind(this)
   }
@@ -48,6 +52,7 @@ class ListMoviesComponent extends Component {
     return (
       <div className="container">
         <h3>List of movies</h3>
+        <LetterAvatars>LG</LetterAvatars>
         <div className="container">
           <table className="table">
             <thead>
@@ -71,6 +76,8 @@ class ListMoviesComponent extends Component {
               <th>Name</th>
               <th>Genre</th>
               <th>Year</th>
+              <th>Rating</th>
+              <th>Reviews</th>
               <th>Operations</th>
             </tr>
             </thead>
@@ -85,6 +92,8 @@ class ListMoviesComponent extends Component {
                       {this.renderGenres(movie.genre)}
                     </td>
                     <td>{movie.year}</td>
+                    <td><HoverRating /></td>
+                    <td><Link to={"/login"}><BadgeComponent /></Link></td>
                     <td>
                       {sessionStorage.getItem("userRoles")
                         .split(',')

@@ -23,7 +23,7 @@ class NewUser extends Component {
   }
 
   showModal = () => {
-    this.setState({ show: true });
+    //this.setState({ show: true });
   }
 
   hideModal = () => {
@@ -44,6 +44,9 @@ class NewUser extends Component {
     this.setState({user});
   }
 
+  show() {
+  }
+
   async handleSubmit(event) {
     event.preventDefault();
     const {user} = this.state;
@@ -54,6 +57,15 @@ class NewUser extends Component {
   render() {
     const {user} = this.state;
     const title = <h2>{'Glad to see you here'}</h2>;
+    const messages = [
+      {
+        content: "Hello world!",
+        author: {
+          username: "DiscordUser",
+        },
+      },
+    ];
+
     return <div>
       <AppNavbar/>
       <Container>
@@ -67,10 +79,6 @@ class NewUser extends Component {
           <FormGroup>
             <Button color="primary" type="button" onClick={this.showModal}>Save</Button>{''}
             <Button color="warning" tag={Link} to="/movies">Cancel</Button>
-
-            <Modal show={this.state.show} handleClose={this.hideModal}>
-              <p>Operation not supported</p>
-            </Modal>
           </FormGroup>
         </Form>
       </Container>
