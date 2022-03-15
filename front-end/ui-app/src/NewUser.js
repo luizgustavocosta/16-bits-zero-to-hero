@@ -3,7 +3,6 @@ import {Link, withRouter} from 'react-router-dom';
 import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
-import Modal from './Modal.js';
 
 class NewUser extends Component {
 

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,7 +9,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import {Component} from "react";
-import { Redirect } from 'react-router-dom';
 
 class NewUserComponent extends Component {
     constructor(props) {
@@ -21,18 +19,23 @@ class NewUserComponent extends Component {
         this.handleClickOpen = this.handleClickOpen.bind(this)
         this.handleClose = this.handleClose.bind(this)
         this.handleAgree = this.handleAgree.bind(this)
+        this.handleConfirmation = this.handleConfirmation.bind(this)
     }
 
     handleClickOpen = () => {
         this.setState({open:true})
     };
 
-    handleAgree = () => {
-        console.log("hit")
+    handleConfirmation = () => {
         this.setState({open:true})
+        this.props.history.push('/movies');
     };
 
     handleClose = () => {
+        this.setState({open:false})
+    };
+
+    handleAgree = () => {
         this.state.open = true;
         if (this.state.open) {
             this.props.history.push('/movies');
@@ -54,7 +57,7 @@ class NewUserComponent extends Component {
                     <TextField id="filled-basic" label="Filled" variant="filled"/>
                     <TextField id="standard-basic" label="Standard" variant="standard"/>
                 </Box>
-                <Button variant="contained" onClick={this.handleAgree}>
+                <Button variant="contained" onClick={this.handleClickOpen}>
                     Save
                 </Button>
                 <Dialog
@@ -63,7 +66,7 @@ class NewUserComponent extends Component {
                     //onClose={this.handleClose}
                     aria-describedby="alert-dialog-slide-description"
                 >
-                    <DialogTitle>{"Confirm?"}</DialogTitle>
+                    <DialogTitle>{"Work in progress....."}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-slide-description">
                             Well, even after the confirmation
@@ -71,8 +74,8 @@ class NewUserComponent extends Component {
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button onClick={this.handleClose}>Disagree</Button>
-                        <Button onClick={this.handleClose}>Agree</Button>
+                        <Button onClick={this.handleClose}>Cancel</Button>
+                        <Button onClick={this.handleConfirmation}>Confirm</Button>
                     </DialogActions>
                 </Dialog>
             </div>
