@@ -1,6 +1,8 @@
 package com.costa.luiz.zero2hero.model.movie;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -22,12 +24,10 @@ import java.util.Set;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int year;
-    private String title;
-    private String originalTitle;
     private int duration;
     private String country;
     private String language;
@@ -40,10 +40,7 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Rating classification;
 
-    @OneToMany(
-            mappedBy = "review",
-            cascade = CascadeType.ALL
-    )
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Review> comments;
     private Double rating;

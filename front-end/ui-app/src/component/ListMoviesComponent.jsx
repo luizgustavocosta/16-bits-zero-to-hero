@@ -49,6 +49,10 @@ class ListMoviesComponent extends Component {
   }
 
   render() {
+    const fixme = {
+      countOfReviews: '3',
+      rating: Math.floor(Math.random() * (5 - 1)) + 1
+    };
     return (
       <div className="container">
         <h3>List of movies</h3>
@@ -92,8 +96,8 @@ class ListMoviesComponent extends Component {
                       {this.renderGenres(movie.genre)}
                     </td>
                     <td>{movie.year}</td>
-                    <td><HoverRating /></td>
-                    <td><Link to={"/login"}><BadgeComponent /></Link></td>
+                    <td><HoverRating value={fixme.rating}/></td>
+                    <td><Link to={"/login"}><BadgeComponent count={fixme.countOfReviews}/></Link></td>
                     <td>
                       {sessionStorage.getItem("userRoles")
                         .split(',')

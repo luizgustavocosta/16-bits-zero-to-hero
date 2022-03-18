@@ -11,3 +11,7 @@ https://vladmihalcea.com/how-to-fix-wrong-column-type-encountered-schema-validat
 http://www.databaseanswers.org/data_models/imdb/index.htm
 
 https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
+
+
+CURL
+curl -X "DELETE" -u luiz:costa http://localhost:8080/api/v1/reviews/35

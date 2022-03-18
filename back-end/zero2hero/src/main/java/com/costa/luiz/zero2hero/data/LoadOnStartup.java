@@ -2,11 +2,7 @@ package com.costa.luiz.zero2hero.data;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
 import com.costa.luiz.zero2hero.model.genre.GenreRepository;
-import com.costa.luiz.zero2hero.model.movie.Author;
-import com.costa.luiz.zero2hero.model.movie.AuthorRepository;
-import com.costa.luiz.zero2hero.model.movie.Movie;
-import com.costa.luiz.zero2hero.model.movie.MovieRepository;
-import com.costa.luiz.zero2hero.model.movie.Rating;
+import com.costa.luiz.zero2hero.model.movie.*;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,10 +14,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ResourceUtils;
 
-import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
+import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,6 +35,9 @@ public class LoadOnStartup {
 
     @Autowired
     private final AuthorRepository authorRepository;
+
+    @Autowired
+    private final ReviewRepository reviewRepository;
 
     @EventListener(ApplicationReadyEvent.class)
     @Order(0)
@@ -80,7 +79,7 @@ public class LoadOnStartup {
                             .language(columns[3])
                             .year(Integer.parseInt(columns[4].trim()))
                             .build();
-                    movieRepository.saveAndFlush(movie);
+                    movieRepository.save(movie);
                     movie.setGenre(genreList);
                     movieRepository.save(movie);
                 });
@@ -90,7 +89,18 @@ public class LoadOnStartup {
     @Order(2)
     @SneakyThrows
     public void insertReviews() {
-
+        AtomicInteger atomicInteger = new AtomicInteger();
+        movieRepository.findAll()
+                .forEach(movie -> {
+                    Author author = authorRepository.findAll().get(atomicInteger.incrementAndGet());
+                    Review review = Review.builder()
+                            .review(Instant.now().toString())
+                            .author(author)
+                            .movie(movie)
+                            .build();
+                    author.getReviews().add(review);
+                    authorRepository.save(author);
+                });
     }
 
     private List<Genre> getGenres(String[] genres) {

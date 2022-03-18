@@ -70,6 +70,7 @@ class MovieEdit extends Component {
     if (!item.genres) {
       item.genres = this.state.selectedGenres
     }
+    console.info("Item->"+JSON.stringify(item))
     await this.save(item);
     this.props.history.push('/movies');
   }

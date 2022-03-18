@@ -1,11 +1,9 @@
 package com.costa.luiz.zero2hero.actions;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
 import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -45,7 +43,6 @@ public class MovieResource {
         Movie movie = Movie.builder()
                 .name(movieDto.getName())
                 .year(movieDto.getYear())
-                .originalTitle(movieDto.getOriginalTitle())
                 .build();
         //FIXME add MapStruct
         service.newMovie(movie);
@@ -57,7 +54,6 @@ public class MovieResource {
                 .id(movieDto.getId())
                 .name(movieDto.getName())
                 .year(movieDto.getYear())
-                .originalTitle(movieDto.getOriginalTitle())
                 .genre(movieDto.getGenres().stream()
                         .map(genreMapper::toGenre)
                         .collect(Collectors.toUnmodifiableList()))

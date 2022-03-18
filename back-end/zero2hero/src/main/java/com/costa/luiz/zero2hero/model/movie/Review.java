@@ -1,23 +1,26 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "reviews")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Review {
 
     @Id
     @GeneratedValue
     private Long id;
-    @ManyToMany
-    private List<Author> authors;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    private Author author;
     private String review;
-    @ManyToOne(fetch = FetchType.LAZY)
+    private boolean archived;
+    @ManyToOne
     private Movie movie;
 }

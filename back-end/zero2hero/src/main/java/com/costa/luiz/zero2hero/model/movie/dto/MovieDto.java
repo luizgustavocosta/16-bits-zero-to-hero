@@ -13,13 +13,12 @@ public class MovieDto {
     private Long id;
     private String name;
     private int year;
-    private String title;
-    private String originalTitle;
     private int duration;
     private String country;
     private String language;
     private LocalDateTime createdAt;
     private List<GenreDto> genres;
+    private List<GenreKeyValue> genre;
     private Rating classification;
     private List<Review> comments;
 
