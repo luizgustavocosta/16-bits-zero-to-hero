@@ -1,4 +1,45 @@
 # 16-bits-zero-to-hero
+
+### Project title
+<hr>
+
+### Motivation
+<hr>
+
+### Solution
+<hr>
+
+#### ADR
+<hr>
+
+### Build Status
+<hr>
+
+### Code Style
+<hr>
+
+### Screenshots
+<hr>
+
+### Tech / Framework used
+<hr>
+
+### Installation
+<hr>
+
+### How to use it?
+<hr>
+
+#### Flows
+<hr>
+
+### Reference
+<hr>
+https://github.com/tekiegirl/TheMadKatas
+
+### License
+<hr>
+
 Java project to show how to run frontend (React) and backend (Java) using Spring
 
 Examples from
@@ -25,8 +66,8 @@ npm install axios --save-dev
 npm install react-router-dom --save-dev
 ```
 
-## How to run
-### React
+### How to run
+#### React
 ```
 cd front-end && npm install && npm start
 ```

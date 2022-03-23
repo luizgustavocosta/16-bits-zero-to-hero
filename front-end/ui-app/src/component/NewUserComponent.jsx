@@ -9,6 +9,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import {FormGroup, InputAdornment, InputLabel, OutlinedInput} from "@material-ui/core";
 
 class NewUserComponent extends Component {
   constructor(props) {
@@ -45,17 +46,29 @@ class NewUserComponent extends Component {
   render() {
     return (
       <div>
-        <Box
-          component="form"
-          sx={{
-            '& > :not(style)': {m: 1, width: '25ch'},
-          }}
+        <Box component="form"
+          sx={{'& > :not(style)': {m: 10, width: '25ch'},}}
           noValidate
-          autoComplete="off"
-        >
-          <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
-          <TextField id="filled-basic" label="Filled" variant="filled"/>
-          <TextField id="standard-basic" label="Standard" variant="standard"/>
+          autoComplete="off">
+          <FormGroup>
+              <InputLabel htmlFor="outlined-adornment-text">First Name</InputLabel>
+              <OutlinedInput
+                  id="outlined-adornment-text"
+                  type={'text'}
+              />
+              <TextField
+                  id="outlined-name"
+                  label="Last Name"
+                  sx={{'& > :not(style)': {mt: 2, mb:3, width: '50ch'},}}
+              />
+              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+              <OutlinedInput
+                  id="outlined-adornment-password"
+                  type={'password'}
+                  label="Password"
+              />
+          </FormGroup>
+
         </Box>
         <Button variant="contained" onClick={this.handleClickOpen}>
           Save
@@ -63,7 +76,6 @@ class NewUserComponent extends Component {
         <Dialog
           open={this.state.open}
           keepMounted
-          //onClose={this.handleClose}
           aria-describedby="alert-dialog-slide-description"
         >
           <DialogTitle>{"Work in progress....."}</DialogTitle>

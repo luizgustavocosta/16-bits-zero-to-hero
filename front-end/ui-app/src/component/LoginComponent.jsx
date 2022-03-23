@@ -62,21 +62,16 @@ class LoginComponent extends Component {
           <Container component="main" maxWidth="xs">
             <CssBaseline/>
             <div>
-              <table>
-                <th>User</th>
-                <th>Password</th>
-                <th>Roles</th>
-                <tr>
-                  <td>luiz</td>
-                  <td>costa</td>
-                  <td>Developer, Admin</td>
-                </tr>
-                <tr>
-                  <td>ben</td>
-                  <td>benspassword</td>
-                  <td>Admin</td>
-                </tr>
-              </table>
+              <label>User&nbsp;</label>
+              <label>luiz&nbsp;</label>
+            </div>
+            <div>
+              <label>Password&nbsp;</label>
+              <label><b>costa</b>&nbsp;</label>
+            </div>
+            <div>
+              <label>Roles&nbsp;</label>
+              <label>Developer, Admin</label>
             </div>
             <Box
               sx={{
@@ -86,7 +81,7 @@ class LoginComponent extends Component {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
+              <Avatar sx={{m: 3, bgcolor: 'secondary.main'}}>
                 <LockOutlinedIcon/>
               </Avatar>
               <Typography component="h1" variant="h5">
