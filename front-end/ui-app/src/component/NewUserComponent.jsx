@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Component} from 'react';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -8,78 +9,78 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
-import {Component} from "react";
 
 class NewUserComponent extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open : false
-       }
-        this.handleClickOpen = this.handleClickOpen.bind(this)
-        this.handleClose = this.handleClose.bind(this)
-        this.handleAgree = this.handleAgree.bind(this)
-        this.handleConfirmation = this.handleConfirmation.bind(this)
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false
     }
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
+    this.handleAgree = this.handleAgree.bind(this)
+    this.handleConfirmation = this.handleConfirmation.bind(this)
+  }
 
-    handleClickOpen = () => {
-        this.setState({open:true})
-    };
+  handleClickOpen = () => {
+    this.setState({open: true})
+  };
 
-    handleConfirmation = () => {
-        this.setState({open:true})
-        this.props.history.push('/movies');
-    };
+  handleConfirmation = () => {
+    this.setState({open: true})
+    this.props.history.push('/movies');
+  };
 
-    handleClose = () => {
-        this.setState({open:false})
-    };
+  handleClose = () => {
+    this.setState({open: false})
+  };
 
-    handleAgree = () => {
-        this.state.open = true;
-        if (this.state.open) {
-            this.props.history.push('/movies');
-        }
-    };
-
-    render() {
-        return (
-            <div>
-                <Box
-                    component="form"
-                    sx={{
-                        '& > :not(style)': {m: 1, width: '25ch'},
-                    }}
-                    noValidate
-                    autoComplete="off"
-                >
-                    <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
-                    <TextField id="filled-basic" label="Filled" variant="filled"/>
-                    <TextField id="standard-basic" label="Standard" variant="standard"/>
-                </Box>
-                <Button variant="contained" onClick={this.handleClickOpen}>
-                    Save
-                </Button>
-                <Dialog
-                    open={this.state.open}
-                    keepMounted
-                    //onClose={this.handleClose}
-                    aria-describedby="alert-dialog-slide-description"
-                >
-                    <DialogTitle>{"Work in progress....."}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText id="alert-dialog-slide-description">
-                            Well, even after the confirmation
-                            nothing will happen, since this is an experimental feature
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={this.handleClose}>Cancel</Button>
-                        <Button onClick={this.handleConfirmation}>Confirm</Button>
-                    </DialogActions>
-                </Dialog>
-            </div>
-        );
+  handleAgree = () => {
+    this.state.open = true;
+    if (this.state.open) {
+      this.props.history.push('/movies');
     }
+  };
+
+  render() {
+    return (
+      <div>
+        <Box
+          component="form"
+          sx={{
+            '& > :not(style)': {m: 1, width: '25ch'},
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" label="Outlined" variant="outlined"/>
+          <TextField id="filled-basic" label="Filled" variant="filled"/>
+          <TextField id="standard-basic" label="Standard" variant="standard"/>
+        </Box>
+        <Button variant="contained" onClick={this.handleClickOpen}>
+          Save
+        </Button>
+        <Dialog
+          open={this.state.open}
+          keepMounted
+          //onClose={this.handleClose}
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle>{"Work in progress....."}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Well, even after the confirmation
+              nothing will happen, since this is an experimental feature
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>Cancel</Button>
+            <Button onClick={this.handleConfirmation}>Confirm</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
 }
+
 export default NewUserComponent

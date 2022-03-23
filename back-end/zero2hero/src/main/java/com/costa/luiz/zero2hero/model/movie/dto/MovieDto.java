@@ -1,7 +1,6 @@
 package com.costa.luiz.zero2hero.model.movie.dto;
 
-import com.costa.luiz.zero2hero.model.movie.Rating;
-import com.costa.luiz.zero2hero.model.movie.Review;
+import com.costa.luiz.zero2hero.model.movie.Classification;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,10 +15,11 @@ public class MovieDto {
     private int duration;
     private String country;
     private String language;
+    private Double rating;
     private LocalDateTime createdAt;
     private List<GenreDto> genres;
     private List<GenreKeyValue> genre;
-    private Rating classification;
-    private List<Review> comments;
+    private Classification classification;
+    private List<ReviewDto> reviews;
 
 }

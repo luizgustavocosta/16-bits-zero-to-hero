@@ -2,7 +2,7 @@ package com.costa.luiz.zero2hero.model.movie;
 
 import java.util.Arrays;
 
-public enum Rating {
+public enum Classification {
     G("General, suitable for all ages"),
     PG("Parental Guidance Suggested"),
     PG13("Parents Strongly Cautioned"),
@@ -12,7 +12,7 @@ public enum Rating {
 
     private String description;
 
-    Rating(String description) {
+    Classification(String description) {
         this.description = description;
     }
 
@@ -20,9 +20,9 @@ public enum Rating {
         return description;
     }
 
-    public static Rating get(String key) {
-        return Arrays.stream(Rating.values())
+    public static Classification get(String key) {
+        return Arrays.stream(Classification.values())
                 .filter(current -> key.equalsIgnoreCase(current.name()))
-                .findFirst().orElse(Rating.R);
+                .findFirst().orElse(Classification.R);
     }
 }

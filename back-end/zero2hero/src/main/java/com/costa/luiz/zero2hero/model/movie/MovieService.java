@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
 
@@ -13,8 +14,16 @@ public class MovieService {
 
     private final MovieRepository movieRepository;
 
+    private final ReviewRepository reviewRepository;
+
     public List<Movie> findAll() {
-        return movieRepository.findAll();
+        return movieRepository.findAll()
+                .stream()
+                .peek(movie -> {
+                    List<Review> allByMovie = reviewRepository.findAllByMovie(movie);
+                    movie.setReviews(allByMovie);
+                })
+                .collect(Collectors.toUnmodifiableList());
     }
 
     public Movie findById(Long id) {

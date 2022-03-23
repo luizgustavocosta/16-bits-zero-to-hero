@@ -15,7 +15,7 @@ code {
 .footer{
   margin-top: 1rem;
   padding: 1rem;
-  background-color: rgb(235, 195, 64);
+  background-color: rgba(246, 244, 244, 0);
   position: fixed;
   bottom: 0;
   left: 0;

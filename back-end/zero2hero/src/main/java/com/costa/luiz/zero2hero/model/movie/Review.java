@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Review {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Author author;

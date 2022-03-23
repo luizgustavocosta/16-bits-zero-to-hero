@@ -4,12 +4,15 @@ import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
 import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
+import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
+import com.costa.luiz.zero2hero.model.movie.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @RestController
@@ -22,14 +25,33 @@ public class MovieResource {
     @Autowired
     private final GenreMapper genreMapper;
 
+    @Autowired
+    private final MovieMapper movieMapper;
+
     @GetMapping("/{username}/favorites")
     public List<Movie> getAll(@PathVariable String username) {
         throw new UnsupportedOperationException();
     }
 
     @GetMapping
-    public List<Movie> getAll() {
-        return service.findAll();
+    public List<MovieDto> getAll() {
+        List<Movie> movies = service.findAll();
+        return movies.stream()
+                .map(movie -> {
+                    MovieDto movieDto = movieMapper.toDto(movie);
+                    movieDto.setReviews(movie.getReviews()
+                            .stream()
+                            .map(review -> ReviewDto.builder()
+                                    .id(review.getId())
+                                    .build()).collect(Collectors.toUnmodifiableList()));
+                    movieDto.setGenre(movie.getGenre().stream()
+                            .map(genreMapper::toGenreKeyAndValue)
+                            .collect(Collectors.toUnmodifiableList()));
+                    double random = ThreadLocalRandom.current().nextDouble(1, 5);
+                    movieDto.setRating(random); //Computation
+                    return movieDto;
+                })
+                .collect(Collectors.toUnmodifiableList());
     }
 
     @DeleteMapping(path = "/{id}")
@@ -62,7 +84,9 @@ public class MovieResource {
     }
 
     @GetMapping(path = "/{id}")
-    public Movie getById(@PathVariable("id") Long id) {
-        return service.findById(id);
+    public MovieDto getById(@PathVariable("id") Long id) {
+        MovieDto movieDto = movieMapper.toDto(service.findById(id));
+        movieDto.setGenre(movieDto.getGenre());
+        return movieDto;
     }
 }

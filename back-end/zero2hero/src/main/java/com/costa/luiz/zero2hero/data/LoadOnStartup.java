@@ -17,6 +17,7 @@ import org.springframework.util.ResourceUtils;
 import java.nio.file.Files;
 import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -75,7 +76,7 @@ public class LoadOnStartup {
                     List<Genre> genreList = getGenres(genres);
                     Movie movie = Movie.builder()
                             .name(columns[0])
-                            .classification(Rating.get(columns[1]))
+                            .classification(Classification.get(columns[1]))
                             .language(columns[3])
                             .year(Integer.parseInt(columns[4].trim()))
                             .build();
@@ -93,14 +94,20 @@ public class LoadOnStartup {
         movieRepository.findAll()
                 .forEach(movie -> {
                     Author author = authorRepository.findAll().get(atomicInteger.incrementAndGet());
-                    Review review = Review.builder()
-                            .review(Instant.now().toString())
-                            .author(author)
-                            .movie(movie)
-                            .build();
-                    author.getReviews().add(review);
+                    if (ThreadLocalRandom.current().nextInt() % 2 == 0) {
+                        author.getReviews().add(createReview(movie, author));
+                    }
+                    author.getReviews().add(createReview(movie, author));
                     authorRepository.save(author);
                 });
+    }
+
+    private Review createReview(Movie movie, Author author) {
+        return Review.builder()
+                .review(Instant.now().toString())
+                .author(author)
+                .movie(movie)
+                .build();
     }
 
     private List<Genre> getGenres(String[] genres) {

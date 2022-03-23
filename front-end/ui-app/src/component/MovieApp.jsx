@@ -7,6 +7,8 @@ import NewUserComponent from './NewUserComponent';
 import MenuComponent from './MenuComponent';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import MovieEdit from "../MovieEdit";
+import MovieMenu from "./MovieMenu";
+import AccountMenu from "../AccountMenu";
 class MovieApp extends Component {
   render() {
     return (
@@ -14,6 +16,8 @@ class MovieApp extends Component {
         <Router>
           <>
             <MenuComponent/>
+            {/*<AccountMenu />*/}
+            {/*<MovieMenu/>*/}
             <Switch>
               <Route path="/" exact component={LoginComponent}/>
               <Route path="/login" exact component={LoginComponent}/>

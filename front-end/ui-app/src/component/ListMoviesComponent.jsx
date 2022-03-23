@@ -35,6 +35,7 @@ class ListMoviesComponent extends Component {
     CourseDataService.retrieveAllMovies()
       .then(
         response => {
+          console.log(response.data)
           this.setState({movies: response.data})
         }
       )
@@ -49,14 +50,10 @@ class ListMoviesComponent extends Component {
   }
 
   render() {
-    const fixme = {
-      countOfReviews: '3',
-      rating: Math.floor(Math.random() * (5 - 1)) + 1
-    };
     return (
       <div className="container">
         <h3>List of movies</h3>
-        <LetterAvatars>LG</LetterAvatars>
+        <LetterAvatars name={sessionStorage.authenticatedUser} />
         <div className="container">
           <table className="table">
             <thead>
@@ -96,8 +93,8 @@ class ListMoviesComponent extends Component {
                       {this.renderGenres(movie.genre)}
                     </td>
                     <td>{movie.year}</td>
-                    <td><HoverRating value={fixme.rating}/></td>
-                    <td><Link to={"/login"}><BadgeComponent count={fixme.countOfReviews}/></Link></td>
+                    <td><HoverRating value={movie.rating}/></td>
+                    <td><Link to={"/login"}><BadgeComponent count={movie.reviews.length}/></Link></td>
                     <td>
                       {sessionStorage.getItem("userRoles")
                         .split(',')

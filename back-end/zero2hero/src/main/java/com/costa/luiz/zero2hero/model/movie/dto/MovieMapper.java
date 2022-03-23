@@ -12,12 +12,14 @@ public interface MovieMapper {
 
     @Mapping(target = "genres", ignore = true)
     @Mapping(target = "genre", ignore = true)
+    @Mapping(target = "reviews", ignore = true)
     MovieDto toDto(Movie movie);
 
 //    @Mapping(target = "genre", expression = "java(String.join(\",\"," +
 //            "movie.getGenre().stream()" +
 //            ".map(com.costa.luiz.zero2hero.model.genre.Genre::getName)" +
 //            ".collect(java.util.stream.Collectors.toList())))")
-    @Mapping(target = "comments", ignore = true)
+    @Mapping(target = "reviews", ignore = true)
+    @Mapping(target = "genres", ignore = true)
     MovieDto toDtoForReview(Movie movie);
 }

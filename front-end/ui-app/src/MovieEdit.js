@@ -102,7 +102,7 @@ class MovieEdit extends Component {
           </FormGroup>
           <FormGroup>
             <Select
-                closeMenuOnSelect={false}
+                closeMenuOnSelect={true}
                 defaultValue={this.state.selectedGenres}
                 isMulti
                 onChange={this.handleSelect}

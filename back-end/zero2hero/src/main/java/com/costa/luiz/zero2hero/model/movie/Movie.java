@@ -1,17 +1,13 @@
 package com.costa.luiz.zero2hero.model.movie;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -38,11 +34,11 @@ public class Movie {
     private List<Genre> genre;
 
     @Enumerated(EnumType.STRING)
-    private Rating classification;
+    private Classification classification;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
-    private List<Review> comments;
+    private List<Review> reviews;
     private Double rating;
 
     @Override

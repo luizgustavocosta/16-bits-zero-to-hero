@@ -14,4 +14,6 @@ public interface GenreMapper {
     @Mapping(source = "label", target = "name")
     Genre toGenre(GenreDto genreDto);
 
+    GenreKeyValue toGenreKeyAndValue(Genre genre);
+
 }

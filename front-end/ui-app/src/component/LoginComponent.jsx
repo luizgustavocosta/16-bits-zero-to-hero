@@ -9,6 +9,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {Alert, AlertTitle} from "@material-ui/lab";
 
 class LoginComponent extends Component {
 
@@ -52,13 +53,34 @@ class LoginComponent extends Component {
       <div>
         <div className="container">
           {this.state.hasLoginFailed &&
-          <div className="alert alert-warning">Invalid Credentials for {this.state.username}</div>}
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              Invalid Credentials for  — <strong>{this.state.username}</strong> — Try again
+            </Alert>
+          }
           {this.state.showSuccessMessage && <div>Login Successful</div>}
           <Container component="main" maxWidth="xs">
             <CssBaseline/>
+            <div>
+              <table>
+                <th>User</th>
+                <th>Password</th>
+                <th>Roles</th>
+                <tr>
+                  <td>luiz</td>
+                  <td>costa</td>
+                  <td>Developer, Admin</td>
+                </tr>
+                <tr>
+                  <td>ben</td>
+                  <td>benspassword</td>
+                  <td>Admin</td>
+                </tr>
+              </table>
+            </div>
             <Box
               sx={{
-                marginTop: 8,
+                marginTop: 2,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -93,23 +115,22 @@ class LoginComponent extends Component {
                 onChange={this.handleChange}
                 onKeyPress={(event) => event.key === 'Enter' && this.loginClicked()}
               />
+              <Box sx={{ '& button': { m: 1 } }}>
                 <Button
                   type="submit"
                   variant="contained"
                   onClick={this.loginClicked}
-                  sx={{mt: 1, mb: 1, mr: 10}}
-                >
+                  sx={{mt: 1, mb: 1, mr: 30}}>
                   Sign In
                 </Button>
-
                 <Button
                   type="submit"
-                  variant="contained"
-                  sx={{mt: 1, mb: 1}}
-                  href={"/newUser"}
-                >
+                  variant="outlined"
+                  sx={{mt: 1, mb: 1, ml: 10}}
+                  href={"/newUser"}>
                   Create account
                 </Button>
+              </Box>
             </Box></Container>
         </div>
       </div>
