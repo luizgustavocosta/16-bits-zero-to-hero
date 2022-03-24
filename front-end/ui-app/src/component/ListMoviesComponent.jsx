@@ -35,7 +35,6 @@ class ListMoviesComponent extends Component {
     CourseDataService.retrieveAllMovies()
       .then(
         response => {
-          console.log(response.data)
           this.setState({movies: response.data})
         }
       )
@@ -53,7 +52,9 @@ class ListMoviesComponent extends Component {
     return (
       <div className="container">
         <h3>List of movies</h3>
-        <LetterAvatars name={sessionStorage.authenticatedUser} />
+        <div style={{display: 'flex', justifyContent:'flex-end'}}>
+          <LetterAvatars name={sessionStorage.authenticatedUser} />
+        </div>
         <div className="container">
           <table className="table">
             <thead>

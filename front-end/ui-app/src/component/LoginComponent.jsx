@@ -10,6 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Alert, AlertTitle} from "@material-ui/lab";
+import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
 
 class LoginComponent extends Component {
 
@@ -49,6 +50,14 @@ class LoginComponent extends Component {
   }
 
   render() {
+    function createUser(name, password, roles) {
+      return { name, password, roles };
+    }
+
+    const rows = [
+      createUser('luiz', 'costa','Developer'),
+      createUser('ben', 'benspassword', 'Others'),
+    ];
     return (
       <div>
         <div className="container">
@@ -61,18 +70,31 @@ class LoginComponent extends Component {
           {this.state.showSuccessMessage && <div>Login Successful</div>}
           <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <div>
-              <label>User&nbsp;</label>
-              <label>luiz&nbsp;</label>
-            </div>
-            <div>
-              <label>Password&nbsp;</label>
-              <label><b>costa</b>&nbsp;</label>
-            </div>
-            <div>
-              <label>Roles&nbsp;</label>
-              <label>Developer, Admin</label>
-            </div>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Username</TableCell>
+                    <TableCell>Password</TableCell>
+                    <TableCell align="right">Roles</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map((row) => (
+                      <TableRow
+                          key={row.name}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell>{row.password}</TableCell>
+                        <TableCell align="right">{row.roles}</TableCell>
+                      </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
             <Box
               sx={{
                 marginTop: 2,

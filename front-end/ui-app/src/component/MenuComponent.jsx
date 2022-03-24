@@ -15,7 +15,7 @@ class MenuComponent extends Component {
                 onClick={AuthenticationService.logout}
                 variant="contained"
                 align="right"
-                color={"secondary"}
+                color={"inherit"}
                 sx={{ mt: 3, mb: 2 }}>Logout</Button>
         }
       </header>
