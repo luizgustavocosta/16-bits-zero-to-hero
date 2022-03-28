@@ -71,3 +71,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 # Modal reference
 https://www.digitalocean.com/community/tutorials/react-modal-component
+
+# Anemic Model
+https://www.alura.com.br/artigos/o-que-e-modelo-anemico-e-por-que-fugir-dele
+
+# MUI React
+https://mui.com/

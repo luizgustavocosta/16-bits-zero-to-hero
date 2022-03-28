@@ -12,17 +12,19 @@
 #### ADR
 <hr>
 
+
 ### Build Status
 <hr>
 
 ### Code Style
 <hr>
-
-### Screenshots
-<hr>
+https://www.oracle.com/java/technologies/javase/codeconventions-contents.html
+https://airbnb.io/javascript/react/
 
 ### Tech / Framework used
 <hr>
+- Backend
+* fdasfdsa
 
 ### Installation
 <hr>
@@ -39,6 +41,7 @@ https://github.com/tekiegirl/TheMadKatas
 
 ### License
 <hr>
+[MIT](https://choosealicense.com/licenses/mit/)
 
 Java project to show how to run frontend (React) and backend (Java) using Spring
 
