@@ -13,7 +13,7 @@ class ListMoviesComponent extends Component {
       movies: [],
       message: null,
       editRole: null,
-      name: 'LG'
+      name: ''
     }
     this.refreshMovies = this.refreshMovies.bind(this)
   }
@@ -41,9 +41,10 @@ class ListMoviesComponent extends Component {
   }
 
   renderGenres(genres) {
+    console.info(JSON.stringify(genres))
     return (
         genres.map((item) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={item.value}>{item.label}</li>
         ))
     );
   }
@@ -91,7 +92,7 @@ class ListMoviesComponent extends Component {
                     <td>{movie.id}</td>
                     <td>{movie.name}</td>
                     <td>
-                      {this.renderGenres(movie.genre)}
+                      {this.renderGenres(movie.genreList)}
                     </td>
                     <td>{movie.year}</td>
                     <td><HoverRating value={movie.rating}/></td>

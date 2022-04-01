@@ -1,9 +1,18 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
 @Getter
@@ -21,6 +30,6 @@ public class Review {
     private Author author;
     private String review;
     private boolean archived;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REFRESH)
     private Movie movie;
 }

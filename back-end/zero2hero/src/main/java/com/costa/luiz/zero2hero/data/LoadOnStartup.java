@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import java.nio.file.Files;
@@ -89,17 +90,26 @@ public class LoadOnStartup {
     @EventListener(ApplicationReadyEvent.class)
     @Order(2)
     @SneakyThrows
+    @Transactional
     public void insertReviews() {
+        //FIXME - It's confusing
         AtomicInteger atomicInteger = new AtomicInteger();
         movieRepository.findAll()
                 .forEach(movie -> {
                     Author author = authorRepository.findAll().get(atomicInteger.incrementAndGet());
                     if (ThreadLocalRandom.current().nextInt() % 2 == 0) {
-                        author.getReviews().add(createReview(movie, author));
+                        Review review = createReview(movie, author);
+                        author.getReviews().add(review);
+                        movie.getReviews().add(review);
                     }
-                    author.getReviews().add(createReview(movie, author));
+                    Review review = createReview(movie, author);
+                    author.getReviews().add(review);
+                    reviewRepository.save(review);
+                    movie.getReviews().add(review);
                     authorRepository.save(author);
+                    movieRepository.save(movie);
                 });
+        log.info("Reviews inserted");
     }
 
     private Review createReview(Movie movie, Author author) {

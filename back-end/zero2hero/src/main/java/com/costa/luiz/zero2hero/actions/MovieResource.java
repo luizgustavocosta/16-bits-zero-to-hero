@@ -44,9 +44,9 @@ public class MovieResource {
                             .map(review -> ReviewDto.builder()
                                     .id(review.getId())
                                     .build()).collect(Collectors.toUnmodifiableList()));
-                    movieDto.setGenre(movie.getGenre().stream()
-                            .map(genreMapper::toGenreKeyAndValue)
-                            .collect(Collectors.toUnmodifiableList()));
+//                    movieDto.setGenre(movie.getGenre().stream()
+//                            .map(genreMapper::toGenreKeyAndValue)
+//                            .collect(Collectors.toUnmodifiableList()));
                     double random = ThreadLocalRandom.current().nextDouble(1, 5);
                     movieDto.setRating(random); //Computation
                     return movieDto;
@@ -76,7 +76,7 @@ public class MovieResource {
                 .id(movieDto.getId())
                 .name(movieDto.getName())
                 .year(movieDto.getYear())
-                .genre(movieDto.getGenres().stream()
+                .genre(movieDto.getGenreList().stream()
                         .map(genreMapper::toGenre)
                         .collect(Collectors.toUnmodifiableList()))
                 .build();
@@ -85,8 +85,8 @@ public class MovieResource {
 
     @GetMapping(path = "/{id}")
     public MovieDto getById(@PathVariable("id") Long id) {
-        MovieDto movieDto = movieMapper.toDto(service.findById(id));
-        movieDto.setGenre(movieDto.getGenre());
+        Movie movie = service.findById(id);
+        MovieDto movieDto = movieMapper.toDto(movie);
         return movieDto;
     }
 }

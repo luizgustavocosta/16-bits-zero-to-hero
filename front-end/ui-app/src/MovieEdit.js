@@ -16,7 +16,8 @@ class MovieEdit extends Component {
       item: this.emptyItem,
       genres: '',
       selectedGenres: [],
-      newGenres:[]
+      newGenres:[],
+      genre: []
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -67,9 +68,12 @@ class MovieEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
-    if (!item.genres) {
-      item.genres = this.state.selectedGenres
+    if (!item.genreList) {
+      item.genreList = this.state.selectedGenres
     }
+    item.genreList = this.state.item.genres;
+    delete item.genres;
+    delete item.genre;
     console.info("Item->"+JSON.stringify(item))
     await this.save(item);
     this.props.history.push('/movies');
@@ -82,6 +86,7 @@ class MovieEdit extends Component {
     for (const index in item.genre) {
       genresFromMovie.push(Number(item.genre[index].id))
     }
+    console.info("this.state.genres["+this.state.genres+"]")
     if (typeof this.state.genres != "string") {
       for (const index in this.state.genres) {
         if (genresFromMovie.includes(this.state.genres[index].value) && !this.state.selectedGenres.includes(this.state.genres[index].value)) {

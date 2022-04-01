@@ -20,7 +20,7 @@ import java.util.Objects;
 public class Movie {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int year;
@@ -29,7 +29,14 @@ public class Movie {
     private String language;
     private LocalDateTime createdAt;
 
-    @ManyToMany(cascade = CascadeType.REFRESH)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "movies_genre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
     @ToString.Exclude
     private List<Genre> genre;
 
