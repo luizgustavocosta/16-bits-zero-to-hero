@@ -1,8 +1,10 @@
 package com.costa.luiz.zero2hero.model.movie;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,4 +16,13 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Review findTheReviewBy(Long id);
 
     List<Review> findAllByMovie(Movie movie);
+    void deleteAllByMovie_Id(Long id);
+    List<Review> findAllByMovieIsNull();
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from Review review where review.movie is null")
+    void deleteAllMovieIdIsNull();
+
+
 }

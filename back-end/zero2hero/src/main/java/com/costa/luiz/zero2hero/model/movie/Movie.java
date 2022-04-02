@@ -3,6 +3,7 @@ package com.costa.luiz.zero2hero.model.movie;
 import com.costa.luiz.zero2hero.model.genre.Genre;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,6 +28,7 @@ public class Movie {
     private int duration;
     private String country;
     private String language;
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     @ManyToMany(cascade = {
@@ -44,6 +46,7 @@ public class Movie {
     private Classification classification;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "movie_id")
     @ToString.Exclude
     private List<Review> reviews;
     private Double rating;

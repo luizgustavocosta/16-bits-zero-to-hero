@@ -19,6 +19,7 @@ public class Author {
     private Long id;
     private String name;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "review_id")
     private List<Review> reviews;
 }
 

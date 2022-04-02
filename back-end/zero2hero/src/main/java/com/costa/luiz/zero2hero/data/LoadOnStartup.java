@@ -80,6 +80,8 @@ public class LoadOnStartup {
                             .classification(Classification.get(columns[1]))
                             .language(columns[3])
                             .year(Integer.parseInt(columns[4].trim()))
+                            .country(columns[5])
+                            .duration(Integer.parseInt(columns[6].trim()))
                             .build();
                     movieRepository.save(movie);
                     movie.setGenre(genreList);

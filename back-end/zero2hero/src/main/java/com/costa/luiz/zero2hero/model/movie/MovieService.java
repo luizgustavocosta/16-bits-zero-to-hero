@@ -32,21 +32,14 @@ public class MovieService {
         return movieRepository.findById(id).orElseThrow();
     }
 
-
     @Transactional
     public void deleteById(Long id) {
-        deleteReviewsToMovie(id);
         movieRepository.deleteById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     void deleteReviewsToMovie(Long id) {
-        Movie movie = movieRepository.findById(id).orElseThrow(IllegalStateException::new);
-        reviewRepository.findAllByMovie(movie)
-                .forEach(review -> {
-                    System.out.println(review);
-                    reviewRepository.deleteById(review.getId());
-                });
+        reviewRepository.deleteAllByMovie_Id(id);
     }
 
     public void update(Movie movie) {

@@ -1,5 +1,6 @@
-name, classification, genre, language, year
-The Lord of the rings, G, Action Drama, English, 2001
-Cobra, NC17, Action Thriller, English, 1986
-The Terminator, NC17, Action Thriller, English, 1984
-The Shawshank Redemption, PG13, Drama, English, 1994
+name, classification, genre, language, year, country, duration
+The Lord of the rings, G, Action Drama, English, 2001, USA, 178
+Cobra, NC17, Action Thriller, English, 1986, USA, 87
+The Terminator, NC17, Action Thriller, English, 1984, USA, 107
+The Shawshank Redemption, PG13, Drama, English, 1994, USA, 142
+Carandiru, PG13, Crime Drama, Portuguese, 2003, Brazil, 145
