@@ -1,4 +1,6 @@
 Password encryption
+https://bcrypt-generator.com
+
 https://www.javainuse.com/onlineBcrypt
 
 LDAP file

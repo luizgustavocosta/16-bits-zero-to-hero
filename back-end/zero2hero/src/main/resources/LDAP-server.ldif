@@ -1,0 +1,85 @@
+dn: dc=springframework,dc=org
+objectclass: top
+objectclass: domain
+objectclass: extensibleObject
+dc: springframework
+
+dn: ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: groups
+
+dn: ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: subgroups
+
+dn: ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: organizationalUnit
+ou: people
+
+dn: uid=james,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: James Bond
+sn: James
+uid: james
+userPassword: $2a$10$ZhRq5S6wxX5xyT5c28PBpu.wspLZ.NehW3iSUyVxRW3J/e7N9lB5O
+
+dn: uid=mando,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Din
+sn: Djarin
+uid: mando
+userPassword: $2a$10$YDtY3xgffrPbk3zoTH9oPOtJnaAQBrx/nl/qAMM8kkT6AycLsVV/a
+
+dn: uid=boba,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Boba Fett
+sn: Boba
+uid: boba
+userPassword: $2a$10$TaDjLHyy/kgYX27Uk6HtlOnBJ1R541XcCs./japcoOazd9ICeVDlq
+
+dn: cn=developers,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: developers
+ou: developer
+uniqueMember: uid=james,ou=people,dc=springframework,dc=org
+uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+
+dn: cn=other,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: others
+ou: other
+uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+
+dn: cn=managers,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: managers
+ou: manager
+uniqueMember: uid=james,ou=people,dc=springframework,dc=org
+uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+
+dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
+objectclass: top
+objectclass: groupOfUniqueNames
+cn: submanagers
+ou: submanager
+uniqueMember: uid=james,ou=people,dc=springframework,dc=org
+uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
+uniqueMember: uid=mando,ou=people,dc=springframework,dc=org

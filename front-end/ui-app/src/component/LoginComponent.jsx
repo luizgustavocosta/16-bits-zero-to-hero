@@ -55,8 +55,9 @@ class LoginComponent extends Component {
     }
 
     const rows = [
-      createUser('luiz', 'costa','Developer'),
-      createUser('ben', 'benspassword', 'Others'),
+      createUser('mando', 'mando','Developer, Others'),
+      createUser('boba', 'fett','Developer, Others'),
+      createUser('james', 'bond', 'Others'),
     ];
     return (
       <div>
@@ -70,13 +71,14 @@ class LoginComponent extends Component {
           {this.state.showSuccessMessage && <div>Login Successful</div>}
           <Container component="main" maxWidth="xs">
             <CssBaseline/>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <br/>
+            <TableContainer component={Paper} >
+              <Table sx={{ minWidth: 650}} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Username</TableCell>
-                    <TableCell>Password</TableCell>
-                    <TableCell align="right">Roles</TableCell>
+                    <TableCell><b>Username</b></TableCell>
+                    <TableCell><b>Password</b></TableCell>
+                    <TableCell align="right"><b>Roles</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
