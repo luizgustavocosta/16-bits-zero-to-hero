@@ -19,6 +19,7 @@ public class MovieDto {
     private LocalDateTime createdAt;
     private List<GenreDto> genreList;
     private List<GenreKeyValue> genre;
+    private String genreAsString;
     private Classification classification;
     private List<ReviewDto> reviews;
 
