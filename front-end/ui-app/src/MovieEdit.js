@@ -17,11 +17,13 @@ class MovieEdit extends Component {
       genres: '',
       selectedGenres: [],
       newGenres:[],
-      genre: []
+      genre: [],
+      year: 0,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelect= this.handleSelect.bind(this);
+    this.handleYearChange = this.handleYearChange.bind(this);
   }
 
   async componentDidMount() {
@@ -36,6 +38,11 @@ class MovieEdit extends Component {
         return { value: genre.id, label: genre.name };
       })
     this.setState({genres: options})
+    this.setState(
+        {year:this.state.item.year}
+    )
+    console.log("This.state.year["+this.state.year+"]")
+    console.log("movie.year["+this.state.item.year+"]")
   }
 
   findBy(id) {
@@ -65,6 +72,12 @@ class MovieEdit extends Component {
     })
   }
 
+  handleYearChange = (event) => {
+    this.setState({
+      year: event.target.value,
+    });
+  };
+
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
@@ -80,6 +93,8 @@ class MovieEdit extends Component {
   }
 
   render() {
+
+
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
     const genresFromMovie = []
@@ -87,6 +102,7 @@ class MovieEdit extends Component {
       genresFromMovie.push(Number(item.genre[index].id))
     }
     console.info("this.state.genres["+this.state.genres+"]")
+
     if (typeof this.state.genres != "string") {
       for (const index in this.state.genres) {
         if (genresFromMovie.includes(this.state.genres[index].value) && !this.state.selectedGenres.includes(this.state.genres[index].value)) {
@@ -94,6 +110,7 @@ class MovieEdit extends Component {
         }
       }
     }
+
     return <div>
       <AppNavbar/>
       <Container>
@@ -120,13 +137,8 @@ class MovieEdit extends Component {
                    onChange={this.handleChange} autoComplete="year"/>
           </FormGroup>
           <FormGroup>
-            <Label for="originalTitle">Original title</Label>
-            <Input type="text" name="originalTitle" id="originalTitle" value={item.originalTitle || ''}
-                   onChange={this.handleChange} autoComplete="originalTitle"/>
-          </FormGroup>
-          <FormGroup>
-            <Button color="primary" type="submit">Save</Button>{' '}
-            <Button color="warning" tag={Link} to="/movies">Cancel</Button>
+            <Button color={"inherit"} type="submit">Save</Button>{' '}
+            <Button color={"inherit"} tag={Link} to="/movies">Cancel</Button>
           </FormGroup>
         </Form>
       </Container>

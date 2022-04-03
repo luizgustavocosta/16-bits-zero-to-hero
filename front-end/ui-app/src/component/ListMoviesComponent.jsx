@@ -2,10 +2,6 @@ import React, {Component} from 'react'
 import CourseDataService from '../service/MovieDataService.js';
 import {Button, ButtonGroup} from 'reactstrap';
 import {Link} from 'react-router-dom';
-import HoverRating from "./HoverRating";
-import LetterAvatars from "./LetterAvatars";
-import BadgeComponent from "./BadgeComponent";
-// MUI
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -87,6 +83,10 @@ class ListMoviesComponent extends Component {
     const rows = this.state.movies;
 
     return (
+        <div>
+          <Link to={"/movies/new"}>
+            <Button variant="contained" color={"inherit"}>Add</Button>
+          </Link>
         <Paper sx={{ width: '100%', overflow: 'hidden' }}>
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">
@@ -123,10 +123,14 @@ class ListMoviesComponent extends Component {
                               );
                             })}
                             <TableCell>
-                              <ButtonGroup>
+                              {sessionStorage.getItem("userRoles")
+                                      .split(',')
+                                      .filter(item => (item === 'ROLE_OTHERS'))
+                                      .length > 0 &&
+                                  <ButtonGroup>
                                <Button color="primary" tag={Link} to={"/movies/" + row.id}>Edit</Button>
                                <Button color="danger" onClick={() => this.remove(row.id)}>Delete</Button>
-                             </ButtonGroup>
+                             </ButtonGroup>}
                             </TableCell>
                           </TableRow>
                       );
@@ -145,72 +149,7 @@ class ListMoviesComponent extends Component {
               onRowsPerPageChange={this.handleChangeRowsPerPage}
           />
         </Paper>
-
-
-      // <div className="container">
-      //   <h3>List of movies</h3>
-      //   <div style={{display: 'flex', justifyContent:'flex-end'}}>
-      //     <LetterAvatars name={sessionStorage.authenticatedUser} />
-      //   </div>
-      //   <div className="container">
-      //     <table className="table">
-      //       <thead>
-      //       <tr>
-      //       </tr>
-      //       </thead>
-      //       <tbody>
-      //       <tr>
-      //         <td>
-      //           <Link to={"/movies/new"}>
-      //             <Button color="success">Add</Button>
-      //           </Link>
-      //         </td>
-      //       </tr>
-      //       </tbody>
-      //     </table>
-      //     <table className="table">
-      //       <thead>
-      //       <tr>
-      //         <th>Id</th>
-      //         <th>Name</th>
-      //         <th>Genre</th>
-      //         <th>Year</th>
-      //         <th>Rating</th>
-      //         <th>Reviews</th>
-      //         <th>Operations</th>
-      //       </tr>
-      //       </thead>
-      //       <tbody>
-      //       {
-      //         this.state.movies.map(
-      //           movie =>
-      //             <tr key={movie.id}>
-      //               <td>{movie.id}</td>
-      //               <td>{movie.name}</td>
-      //               <td>
-      //                 {this.renderGenres(movie.genreList)}
-      //               </td>
-      //               <td>{movie.year}</td>
-      //               <td><HoverRating value={movie.rating}/></td>
-      //               <td><Link to={"/login"}><BadgeComponent count={movie.reviews.length}/></Link></td>
-      //               <td>
-      //                 {sessionStorage.getItem("userRoles")
-      //                   .split(',')
-      //                   .filter(item => (item === 'ROLE_OTHERS'))
-      //                   .length > 0 &&
-      //                 <ButtonGroup>
-      //                   <Button size="sm" color="primary" tag={Link} to={"/movies/" + movie.id}>Edit</Button>
-      //                   <Button size="sm" color="danger" onClick={() => this.remove(movie.id)}>Delete</Button>
-      //                 </ButtonGroup>
-      //                 }
-      //               </td>
-      //             </tr>
-      //         )
-      //       }
-      //       </tbody>
-      //     </table>
-      //   </div>
-      // </div>
+        </div>
     );
   }
 }
