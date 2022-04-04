@@ -4,6 +4,9 @@ import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
 import Select from 'react-select'
+import {Rating} from "@material-ui/lab";
+import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@material-ui/core";
+
 class MovieEdit extends Component {
 
   emptyItem = {
@@ -16,14 +19,14 @@ class MovieEdit extends Component {
       item: this.emptyItem,
       genres: '',
       selectedGenres: [],
-      newGenres:[],
       genre: [],
-      year: 0,
+      firstRound:true,
+      radioClassification: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelect= this.handleSelect.bind(this);
-    this.handleYearChange = this.handleYearChange.bind(this);
+    this.handleClassificationChange= this.handleClassificationChange.bind(this);
   }
 
   async componentDidMount() {
@@ -35,14 +38,10 @@ class MovieEdit extends Component {
     let axiosResponse = await this.findAllGenres();
     const genres = axiosResponse.data;
     let options = genres.map(function (genre) {
-        return { value: genre.id, label: genre.name };
-      })
+      return { value: genre.id, label: genre.name };
+    })
     this.setState({genres: options})
-    this.setState(
-        {year:this.state.item.year}
-    )
-    console.log("This.state.year["+this.state.year+"]")
-    console.log("movie.year["+this.state.item.year+"]")
+
   }
 
   findBy(id) {
@@ -64,18 +63,24 @@ class MovieEdit extends Component {
     let item = {...this.state.item};
     item[name] = value;
     this.setState({item});
+    this.setState({
+      firstRound: false
+    });
+    console.info(item.classification)
   }
 
   handleSelect(genre) {
     genre.map(item => {
-     this.state.item.genres = genre;
+      this.state.item.genres = genre;
     })
   }
 
-  handleYearChange = (event) => {
-    this.setState({
-      year: event.target.value,
-    });
+  handleClassificationChange = (event) => {
+    // this.setState({
+    //   classification: event.target.value,
+    // })
+    this.state.radioClassification = event.target.value;
+    console.log(this.state.radioClassification)
   };
 
   async handleSubmit(event) {
@@ -93,24 +98,23 @@ class MovieEdit extends Component {
   }
 
   render() {
-
-
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
-    const genresFromMovie = []
-    for (const index in item.genre) {
-      genresFromMovie.push(Number(item.genre[index].id))
-    }
-    console.info("this.state.genres["+this.state.genres+"]")
+    if (this.state.firstRound) {
+      this.state.radioClassification = item.classification;
+      const genresFromMovie = []
+      for (const index in item.genre) {
+        genresFromMovie.push(Number(item.genre[index].id))
+      }
 
-    if (typeof this.state.genres != "string") {
-      for (const index in this.state.genres) {
-        if (genresFromMovie.includes(this.state.genres[index].value) && !this.state.selectedGenres.includes(this.state.genres[index].value)) {
-          this.state.selectedGenres.push(this.state.genres[index])
+      if (typeof this.state.genres != "string") {
+        for (const index in this.state.genres) {
+          if (genresFromMovie.includes(this.state.genres[index].value) && !this.state.selectedGenres.includes(this.state.genres[index].value)) {
+            this.state.selectedGenres.push(this.state.genres[index])
+          }
         }
       }
     }
-
     return <div>
       <AppNavbar/>
       <Container>
@@ -137,8 +141,47 @@ class MovieEdit extends Component {
                    onChange={this.handleChange} autoComplete="year"/>
           </FormGroup>
           <FormGroup>
-            <Button color={"inherit"} type="submit">Save</Button>{' '}
-            <Button color={"inherit"} tag={Link} to="/movies">Cancel</Button>
+            <Label for="duration">Duration in minutes</Label>
+            <Input type="text" name="duration" id="duration" value={item.duration || ''}
+                   onChange={this.handleChange} autoComplete="duration"/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="country">Country</Label>
+            <Input type="text" name="country" id="country" value={item.country || ''}
+                   onChange={this.handleChange} autoComplete="country"/>
+          </FormGroup>
+          <FormGroup>
+            <Label for="language">Language</Label>
+            <Input type="text" name="language" id="language" value={item.language || ''}
+                   onChange={this.handleChange} autoComplete="language"/>
+          </FormGroup>
+          {/*<FormGroup>*/}
+          {/*  <Label for="classification">Classification</Label>*/}
+          {/*  <Input type="text" name="classification" id="classification" value={item.classification || ''}*/}
+          {/*         onChange={this.handleChange} autoComplete="classification"/>*/}
+          {/*</FormGroup>*/}
+          <FormControl>
+            <FormLabel id="classification-group-label">Classification</FormLabel>
+            <RadioGroup
+                aria-labelledby="classification-group-label"
+                defaultValue={item.classification || this.state.radioClassification}
+                name="radio-buttons-group"
+                onChange={this.handleClassificationChange}
+            >
+              <FormControlLabel value="G" control={<Radio />}  label="General" />
+              <FormControlLabel value="PG" control={<Radio />} label="Parental Guidance Suggested" />
+              <FormControlLabel value="PG13" control={<Radio />} label="Parents Strongly Cautioned" />
+              <FormControlLabel value="R" control={<Radio />} label="Restricted" />
+              <FormControlLabel value="NC17" control={<Radio />} label="No Children Under 17" />
+              <FormControlLabel value="X" control={<Radio />} label="Not Suitable For Children" />
+            </RadioGroup>
+          </FormControl>
+          <FormGroup>
+            <Rating name="rating" defaultValue={item.rating || 5} precision={0.1}  onChange={this.handleChange}/>
+          </FormGroup>
+          <FormGroup>
+            <Button color={"inherit"} type="submit" disabled={false}>Save</Button>{' '}
+            <Button color={"inherit"} tag={Link} disabled={false} to="/movies">Cancel</Button>
           </FormGroup>
         </Form>
       </Container>
