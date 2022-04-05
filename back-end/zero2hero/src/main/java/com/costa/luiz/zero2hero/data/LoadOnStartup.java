@@ -77,11 +77,12 @@ public class LoadOnStartup {
                     List<Genre> genreList = getGenres(genres);
                     Movie movie = Movie.builder()
                             .name(columns[0])
-                            .classification(Classification.get(columns[1]))
+                            .classification(Classification.get(columns[1].trim()))
                             .language(columns[3])
                             .year(Integer.parseInt(columns[4].trim()))
                             .country(columns[5])
                             .duration(Integer.parseInt(columns[6].trim()))
+                            .rating(Double.parseDouble(columns[7].trim()))
                             .build();
                     movieRepository.save(movie);
                     movie.setGenre(genreList);

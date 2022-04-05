@@ -5,7 +5,7 @@ import AppNavbar from './AppNavbar';
 import axios from 'axios'
 import Select from 'react-select'
 import {Rating} from "@material-ui/lab";
-import {FormControl, FormControlLabel, FormLabel, Radio, RadioGroup} from "@material-ui/core";
+import { FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
 
 class MovieEdit extends Component {
 
@@ -21,19 +21,23 @@ class MovieEdit extends Component {
       selectedGenres: [],
       genre: [],
       firstRound:true,
-      radioClassification: '',
+      movieClassification: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSelect= this.handleSelect.bind(this);
-    this.handleClassificationChange= this.handleClassificationChange.bind(this);
+    this.updateClassification= this.updateClassification.bind(this);
   }
 
   async componentDidMount() {
     if (this.props.match.params.id !== 'new') {
       let axiosResponse = await this.findBy(`${this.props.match.params.id}`);
       const movie = axiosResponse.data;
+      console.log(JSON.stringify(movie))
       this.setState({item: movie});
+      this.setState({
+        movieClassification: movie.classification
+      });
     }
     let axiosResponse = await this.findAllGenres();
     const genres = axiosResponse.data;
@@ -66,7 +70,6 @@ class MovieEdit extends Component {
     this.setState({
       firstRound: false
     });
-    console.info(item.classification)
   }
 
   handleSelect(genre) {
@@ -75,14 +78,6 @@ class MovieEdit extends Component {
     })
   }
 
-  handleClassificationChange = (event) => {
-    // this.setState({
-    //   classification: event.target.value,
-    // })
-    this.state.radioClassification = event.target.value;
-    console.log(this.state.radioClassification)
-  };
-
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
@@ -90,6 +85,7 @@ class MovieEdit extends Component {
       item.genreList = this.state.selectedGenres
     }
     item.genreList = this.state.item.genres;
+    item.classification = this.state.movieClassification;
     delete item.genres;
     delete item.genre;
     console.info("Item->"+JSON.stringify(item))
@@ -97,11 +93,16 @@ class MovieEdit extends Component {
     this.props.history.push('/movies');
   }
 
+  updateClassification = (event) => {
+    this.setState({
+      movieClassification: event.target.value
+    });
+  };
+
   render() {
     const {item} = this.state;
     const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
     if (this.state.firstRound) {
-      this.state.radioClassification = item.classification;
       const genresFromMovie = []
       for (const index in item.genre) {
         genresFromMovie.push(Number(item.genre[index].id))
@@ -115,6 +116,14 @@ class MovieEdit extends Component {
         }
       }
     }
+    const enumClassification = [
+      {id: "G", value: "G-General, suitable for all ages"},
+      {id: "PG", value: "PG-Parental Guidance Suggested"},
+      {id: "PG13", value: "PG13-Parents Strongly Cautioned"},
+      {id: "R", value: "R-Restricted"},
+      {id: "NC17", value: "NC17-No Children Under 17"},
+      {id: "X", value: "X-Not Suitable For Children"}
+    ];
     return <div>
       <AppNavbar/>
       <Container>
@@ -155,29 +164,22 @@ class MovieEdit extends Component {
             <Input type="text" name="language" id="language" value={item.language || ''}
                    onChange={this.handleChange} autoComplete="language"/>
           </FormGroup>
-          {/*<FormGroup>*/}
-          {/*  <Label for="classification">Classification</Label>*/}
-          {/*  <Input type="text" name="classification" id="classification" value={item.classification || ''}*/}
-          {/*         onChange={this.handleChange} autoComplete="classification"/>*/}
-          {/*</FormGroup>*/}
-          <FormControl>
-            <FormLabel id="classification-group-label">Classification</FormLabel>
-            <RadioGroup
-                aria-labelledby="classification-group-label"
-                defaultValue={item.classification || this.state.radioClassification}
-                name="radio-buttons-group"
-                onChange={this.handleClassificationChange}
-            >
-              <FormControlLabel value="G" control={<Radio />}  label="General" />
-              <FormControlLabel value="PG" control={<Radio />} label="Parental Guidance Suggested" />
-              <FormControlLabel value="PG13" control={<Radio />} label="Parents Strongly Cautioned" />
-              <FormControlLabel value="R" control={<Radio />} label="Restricted" />
-              <FormControlLabel value="NC17" control={<Radio />} label="No Children Under 17" />
-              <FormControlLabel value="X" control={<Radio />} label="Not Suitable For Children" />
-            </RadioGroup>
-          </FormControl>
+          <label>Classification</label>
+          <RadioGroup name="value" value={this.state.movieClassification} onChange={this.updateClassification}>
+            {enumClassification
+                .map(option => (
+                    <FormControlLabel
+                        label={option.value}
+                        key={option.value}
+                        value={option.id}
+                        checked={this.state.movieClassification === option.id}
+                        control={<Radio color="primary" />}
+                    />
+                ))}
+          </RadioGroup>
+          <label>Rating</label>
           <FormGroup>
-            <Rating name="rating" defaultValue={item.rating || 5} precision={0.1}  onChange={this.handleChange}/>
+            <Rating name="rating" value={Math.round(item.rating).toFixed(2) || 1} precision={0.5} max={10}  onChange={this.handleChange}/>
           </FormGroup>
           <FormGroup>
             <Button color={"inherit"} type="submit" disabled={false}>Save</Button>{' '}

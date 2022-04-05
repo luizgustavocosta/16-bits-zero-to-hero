@@ -29,7 +29,7 @@ public class Movie {
     private String country;
     private String language;
     @CreationTimestamp
-    private LocalDateTime createdAt;
+    private LocalDateTime lastUpdate;
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,

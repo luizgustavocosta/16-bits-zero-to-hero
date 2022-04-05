@@ -16,10 +16,6 @@ public enum Classification {
         this.description = description;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public static Classification get(String key) {
         return Arrays.stream(Classification.values())
                 .filter(current -> key.equalsIgnoreCase(current.name()))
