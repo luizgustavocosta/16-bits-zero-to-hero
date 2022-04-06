@@ -1,11 +1,15 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import {Button, Container, Form, FormGroup, Input, Label} from 'reactstrap';
+import {Container, Form, Input, Label} from 'reactstrap';
 import AppNavbar from './AppNavbar';
 import axios from 'axios'
 import Select from 'react-select'
 import {Rating} from "@material-ui/lab";
-import { FormControlLabel, Radio, RadioGroup} from "@material-ui/core";
+import {FormControl, FormControlLabel, FormGroup, Radio, RadioGroup, TextField} from "@material-ui/core";
+import ButtonGroup from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 class MovieEdit extends Component {
 
@@ -22,6 +26,12 @@ class MovieEdit extends Component {
       genre: [],
       firstRound:true,
       movieClassification: '',
+      movie: [],
+      name: '',
+      year: '',
+      duration: '',
+      language: '',
+      country: '',
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -33,11 +43,14 @@ class MovieEdit extends Component {
     if (this.props.match.params.id !== 'new') {
       let axiosResponse = await this.findBy(`${this.props.match.params.id}`);
       const movie = axiosResponse.data;
-      console.log(JSON.stringify(movie))
       this.setState({item: movie});
       this.setState({
         movieClassification: movie.classification
       });
+      this.setState({movie: movie});
+      this.setState({name: movie.name});
+      this.setState({duration: movie.duration});
+      this.setState({country: movie.country});
     }
     let axiosResponse = await this.findAllGenres();
     const genres = axiosResponse.data;
@@ -72,6 +85,10 @@ class MovieEdit extends Component {
     });
   }
 
+  handleFormChange = (event, name) => {
+    this.setState({[name] : event.target.value})
+  }
+
   handleSelect(genre) {
     genre.map(item => {
       this.state.item.genres = genre;
@@ -81,6 +98,7 @@ class MovieEdit extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const {item} = this.state;
+    console.log("HandleSubmit["+JSON.stringify(this.state)+"]")
     if (!item.genreList) {
       item.genreList = this.state.selectedGenres
     }
@@ -88,8 +106,8 @@ class MovieEdit extends Component {
     item.classification = this.state.movieClassification;
     delete item.genres;
     delete item.genre;
-    console.info("Item->"+JSON.stringify(item))
-    await this.save(item);
+    console.info("Item->"+JSON.stringify(this.state.movie))
+    await this.save(this.state);
     this.props.history.push('/movies');
   }
 
@@ -115,6 +133,7 @@ class MovieEdit extends Component {
           }
         }
       }
+      console.info("RENDER["+JSON.stringify(this.state.movie)+"]")
     }
     const enumClassification = [
       {id: "G", value: "G-General, suitable for all ages"},
@@ -130,12 +149,33 @@ class MovieEdit extends Component {
         {title}
         <Form onSubmit={this.handleSubmit}>
           <Input type="hidden" name="id" id="id" value={item.id}/>
-          <FormGroup>
-            <Label for="name">Name</Label>
-            <Input type="text" name="name" id="name" value={item.name || ''}
-                   onChange={this.handleChange} autoComplete="name"/>
-          </FormGroup>
-          <FormGroup>
+          <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+          >
+            <TextField id="outlined-basic" label="Name" variant="outlined" value={this.state.name || ''} onChange={event => this.handleFormChange(event, "name")}/>
+            <TextField id="outlined-basic" label="Year" variant="outlined" value={this.state.year || ''} onChange={event => this.handleFormChange(event, "year")}/>
+            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+              <TextField id="outlined-basic" label="Duration" variant="outlined" value={this.state.duration || ''} onChange={event => this.handleFormChange(event, "duration")}/>
+            </FormControl>
+          </Box>
+          <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+          >
+            <TextField id="outlined-basic" label="Country" variant="outlined" value={this.state.country || ''} onChange={event => this.handleFormChange(event, "country")}/>
+            <TextField id="outlined-basic" label="Language" variant="outlined" value={this.state.language || ''} onChange={event => this.handleFormChange(event, "language")}/>
+          </Box>
+          <FormGroup style={{marginLeft:8}} aria-label={"Genres"}>
+            <Label>Genres</Label>
             <Select
                 closeMenuOnSelect={true}
                 defaultValue={this.state.selectedGenres}
@@ -144,47 +184,50 @@ class MovieEdit extends Component {
                 options={this.state.genres}
             />
           </FormGroup>
-          <FormGroup>
-            <Label for="year">Year</Label>
-            <Input type="text" name="year" id="year" value={item.year || ''}
-                   onChange={this.handleChange} autoComplete="year"/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="duration">Duration in minutes</Label>
-            <Input type="text" name="duration" id="duration" value={item.duration || ''}
-                   onChange={this.handleChange} autoComplete="duration"/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="country">Country</Label>
-            <Input type="text" name="country" id="country" value={item.country || ''}
-                   onChange={this.handleChange} autoComplete="country"/>
-          </FormGroup>
-          <FormGroup>
-            <Label for="language">Language</Label>
-            <Input type="text" name="language" id="language" value={item.language || ''}
-                   onChange={this.handleChange} autoComplete="language"/>
-          </FormGroup>
-          <label>Classification</label>
-          <RadioGroup name="value" value={this.state.movieClassification} onChange={this.updateClassification}>
-            {enumClassification
-                .map(option => (
-                    <FormControlLabel
-                        label={option.value}
-                        key={option.value}
-                        value={option.id}
-                        checked={this.state.movieClassification === option.id}
-                        control={<Radio color="primary" />}
-                    />
-                ))}
-          </RadioGroup>
-          <label>Rating</label>
-          <FormGroup>
-            <Rating name="rating" value={Math.round(item.rating).toFixed(2) || 1} precision={0.5} max={10}  onChange={this.handleChange}/>
-          </FormGroup>
-          <FormGroup>
-            <Button color={"inherit"} type="submit" disabled={false}>Save</Button>{' '}
-            <Button color={"inherit"} tag={Link} disabled={false} to="/movies">Cancel</Button>
-          </FormGroup>
+          <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { mr: 8, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+          >
+            <label style={{marginLeft:8}}>Classification</label>
+            <RadioGroup name="value" value={this.state.movieClassification} onChange={this.updateClassification}>
+              {enumClassification
+                  .map(option => (
+                      <FormControlLabel
+                          style={{marginLeft:8}}
+                          label={option.value}
+                          key={option.value}
+                          value={option.id}
+                          checked={this.state.movieClassification === option.id}
+                          control={<Radio color="primary" />}
+                      />
+                  ))}
+            </RadioGroup>
+          </Box>
+          <Box
+              component="form"
+              sx={{
+                '& .MuiTextField-root': { mr: 8, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+          >
+            <label style={{marginLeft:8}}>Rating</label>
+            <FormGroup style={{marginLeft:8}}>
+              <Rating name="rating" value={Math.round(this.state.rating).toFixed(2) || 1}
+                      precision={0.5} max={10}
+                      onChange={event => this.handleFormChange(event, "rating")}/>
+            </FormGroup>
+          </Box>
+          <ButtonGroup>
+            <Stack spacing={2} direction="row">
+              <Button variant="contained" type={"submit"}>Save</Button>
+              <Button variant="contained" component={Link} to={"/movies"}>Cancel</Button>
+            </Stack>
+          </ButtonGroup>
         </Form>
       </Container>
     </div>

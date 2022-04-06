@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import CourseDataService from '../service/MovieDataService.js';
-import {Button, ButtonGroup} from 'reactstrap';
 import {Link} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -10,6 +9,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/Button';
+import Stack from "@mui/material/Stack";
 
 class ListMoviesComponent extends Component {
   constructor(props) {
@@ -85,70 +87,74 @@ class ListMoviesComponent extends Component {
     return (
         <div>
           <Link to={"/movies/new"}>
-            <Button variant="contained" color={"inherit"}>Add</Button>
+            <Button variant="contained" sx={{ mb: 2 }}>Add</Button>
           </Link>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-          <TableContainer sx={{ maxHeight: 440 }}>
-            <Table stickyHeader aria-label="sticky table">
-              <TableHead>
-                <TableRow>
-                  {columns.map((column) => (
-                      <TableCell
-                          key={column.id}
-                          align={column.align}
-                          style={{ minWidth: column.minWidth, fontSize: "medium", fontWeight: "bold" }}
-                      >
-                        {column.label}
-                      </TableCell>
-                  ))}
-                  <TableCell style={{fontSize: "medium", fontWeight: "bold" }}>
-                    Operations
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows
-                    .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
-                    .map((row) => {
-                      return (
-                          <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
-                            {columns.map((column) => {
-                              const value = row[column.id];
-                              return (
-                                  <TableCell key={column.id} align={column.align}>
-                                    {column.format && typeof value === 'number'
-                                        ? column.format(value)
-                                        : value}
-                                  </TableCell>
-                              );
-                            })}
-                            <TableCell>
-                              {sessionStorage.getItem("userRoles")
-                                      .split(',')
-                                      .filter(item => (item === 'ROLE_OTHERS'))
-                                      .length > 0 &&
-                                  <ButtonGroup>
-                               <Button color="primary" tag={Link} to={"/movies/" + row.id}>Edit</Button>
-                               <Button color="danger" onClick={() => this.remove(row.id)}>Delete</Button>
-                             </ButtonGroup>}
-                            </TableCell>
-                          </TableRow>
-                      );
-                    })}
+          <Paper sx={{ width: '100%', overflow: 'hidden', mt: '2px' }}>
+            <TableContainer sx={{ maxHeight: 600 }}>
+              <Table stickyHeader aria-label="sticky table">
+                <TableHead>
+                  <TableRow>
+                    {columns.map((column) => (
+                        <TableCell
+                            key={column.id}
+                            align={column.align}
+                            style={{ minWidth: column.minWidth, fontSize: "medium", fontWeight: "bold" }}
+                        >
+                          {column.label}
+                        </TableCell>
+                    ))}
+                    <TableCell style={{fontSize: "medium", fontWeight: "bold" }}>
+                      Operations
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows
+                      .slice(this.state.page * this.state.rowsPerPage, this.state.page * this.state.rowsPerPage + this.state.rowsPerPage)
+                      .map((row) => {
+                        return (
+                            <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
+                              {columns.map((column) => {
+                                const value = row[column.id];
+                                return (
+                                    <TableCell key={column.id} align={column.align}>
+                                      {column.format && typeof value === 'number'
+                                          ? column.format(value)
+                                          : value}
+                                    </TableCell>
+                                );
+                              })}
+                              <TableCell>
+                                {sessionStorage.getItem("userRoles")
+                                        .split(',')
+                                        .filter(item => (item === 'ROLE_OTHERS'))
+                                        .length > 0 &&
+                                    <ButtonGroup>
+                                      <Stack spacing={2} direction="row">
+                                        <Button variant="contained" component={Link} to={"/movies/"+row.id}>Edit</Button>
+                                        <Button variant="contained" onClick={()=> this.remove(row.id)} color={"error"}>Delete</Button>
+                                      </Stack>
+                                 </ButtonGroup>
+                                }
+                              </TableCell>
+                            </TableRow>
+                        );
+                      })}
 
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <TablePagination
-              rowsPerPageOptions={[10, 25, 100]}
-              component="div"
-              count={rows.length}
-              rowsPerPage={this.state.rowsPerPage}
-              page={this.state.page}
-              onPageChange={this.handleChangePage}
-              onRowsPerPageChange={this.handleChangeRowsPerPage}
-          />
-        </Paper>
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination
+                sx={{mt:2}}
+                rowsPerPageOptions={[10, 25, 100]}
+                component="div"
+                count={rows.length}
+                rowsPerPage={this.state.rowsPerPage}
+                page={this.state.page}
+                onPageChange={this.handleChangePage}
+                onRowsPerPageChange={this.handleChangeRowsPerPage}
+            />
+          </Paper>
         </div>
     );
   }

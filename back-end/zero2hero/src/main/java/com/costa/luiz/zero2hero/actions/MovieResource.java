@@ -37,20 +37,7 @@ public class MovieResource {
     public List<MovieDto> getAll() {
         List<Movie> movies = service.findAll();
         return movies.stream()
-                .map(movie -> {
-                    MovieDto movieDto = movieMapper.toDto(movie);
-                    movieDto.setReviews(movie.getReviews()
-                            .stream()
-                            .map(review -> ReviewDto.builder()
-                                    .id(review.getId())
-                                    .build()).collect(Collectors.toUnmodifiableList()));
-//                    movieDto.setGenre(movie.getGenre().stream()
-//                            .map(genreMapper::toGenreKeyAndValue)
-//                            .collect(Collectors.toUnmodifiableList()));
-                    double random = ThreadLocalRandom.current().nextDouble(1, 5);
-                    movieDto.setRating(random); //Computation
-                    return movieDto;
-                })
+                .map(movieMapper::toDto)
                 .collect(Collectors.toUnmodifiableList());
     }
 
