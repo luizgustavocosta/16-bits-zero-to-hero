@@ -49,6 +49,16 @@ sn: Boba
 uid: boba
 userPassword: $2a$10$TaDjLHyy/kgYX27Uk6HtlOnBJ1R541XcCs./japcoOazd9ICeVDlq
 
+dn: uid=boba,ou=people,dc=springframework,dc=org
+objectclass: top
+objectclass: person
+objectclass: organizationalPerson
+objectclass: inetOrgPerson
+cn: Tony Stark
+sn: tony
+uid: tony
+userPassword: $2a$10$kvPaH.d2asc5HFxg8o0D9ecCQiRisNNuiIFje7Xl.p/y6vtlI0KAy
+
 dn: cn=developers,ou=groups,dc=springframework,dc=org
 objectclass: top
 objectclass: groupOfUniqueNames
@@ -57,6 +67,7 @@ ou: developer
 uniqueMember: uid=james,ou=people,dc=springframework,dc=org
 uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+uniqueMember: uid=tony,ou=people,dc=springframework,dc=org
 
 dn: cn=other,ou=groups,dc=springframework,dc=org
 objectclass: top
@@ -65,6 +76,7 @@ cn: others
 ou: other
 uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+uniqueMember: uid=tony,ou=people,dc=springframework,dc=org
 
 dn: cn=managers,ou=groups,dc=springframework,dc=org
 objectclass: top
@@ -74,6 +86,7 @@ ou: manager
 uniqueMember: uid=james,ou=people,dc=springframework,dc=org
 uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+uniqueMember: uid=tony,ou=people,dc=springframework,dc=org
 
 dn: cn=submanagers,ou=subgroups,ou=groups,dc=springframework,dc=org
 objectclass: top
@@ -83,3 +96,4 @@ ou: submanager
 uniqueMember: uid=james,ou=people,dc=springframework,dc=org
 uniqueMember: uid=boba,ou=people,dc=springframework,dc=org
 uniqueMember: uid=mando,ou=people,dc=springframework,dc=org
+uniqueMember: uid=tony,ou=people,dc=springframework,dc=org

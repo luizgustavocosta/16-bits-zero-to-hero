@@ -1,12 +1,10 @@
 import React, {Component} from 'react'
 import AuthenticationService from '../service/AuthenticationService';
 
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Alert, AlertTitle} from "@material-ui/lab";
@@ -50,14 +48,15 @@ class LoginComponent extends Component {
   }
 
   render() {
-    function createUser(name, password, roles) {
-      return { name, password, roles };
+    function createUser(name, password, roles, permission) {
+      return { name, password, roles, permission };
     }
 
-    const rows = [
-      createUser('mando', 'mando','Developer, Others'),
-      createUser('boba', 'fett','Developer, Others'),
-      createUser('james', 'bond', 'Others'),
+    const users = [
+      createUser('mando', 'mando','Developer, Others', 'Edit'),
+      createUser('boba', 'fett','Developer, Others', 'Edit'),
+      createUser('tony', 'stark','Developer, Others', 'Edit'),
+      createUser('james', 'bond', 'Others', 'Read'),
     ];
     return (
       <div>
@@ -78,20 +77,20 @@ class LoginComponent extends Component {
                   <TableRow>
                     <TableCell><b>Username</b></TableCell>
                     <TableCell><b>Password</b></TableCell>
-                    <TableCell align="right"><b>Roles</b></TableCell>
+                    <TableCell align="center"><b>Permission</b></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {users.map((user) => (
                       <TableRow
-                          key={row.name}
+                          key={user.name}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                       >
                         <TableCell component="th" scope="row">
-                          {row.name}
+                          {user.name}
                         </TableCell>
-                        <TableCell>{row.password}</TableCell>
-                        <TableCell align="right">{row.roles}</TableCell>
+                        <TableCell>{user.password}</TableCell>
+                        <TableCell align="center">{user.permission}</TableCell>
                       </TableRow>
                   ))}
                 </TableBody>
@@ -105,9 +104,6 @@ class LoginComponent extends Component {
                 alignItems: 'center',
               }}
             >
-              <Avatar sx={{m: 3, bgcolor: 'secondary.main'}}>
-                <LockOutlinedIcon/>
-              </Avatar>
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
