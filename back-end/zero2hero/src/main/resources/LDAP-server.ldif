@@ -49,7 +49,7 @@ sn: Boba
 uid: boba
 userPassword: $2a$10$TaDjLHyy/kgYX27Uk6HtlOnBJ1R541XcCs./japcoOazd9ICeVDlq
 
-dn: uid=boba,ou=people,dc=springframework,dc=org
+dn: uid=tony,ou=people,dc=springframework,dc=org
 objectclass: top
 objectclass: person
 objectclass: organizationalPerson

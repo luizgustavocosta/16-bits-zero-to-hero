@@ -14,10 +14,11 @@ code {
 }
 .footer{
   margin-top: 1rem;
+  margin-bottom: 1rem;
   padding: 1rem;
   background-color: rgba(246, 244, 244, 0);
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 20%;
 }
