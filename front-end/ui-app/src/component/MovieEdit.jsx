@@ -19,18 +19,9 @@ import Select from "@mui/material/Select";
 
 class MovieEdit extends Component {
 
-    emptyItem = {
-        name: ''
-    };
-
     constructor(props) {
         super(props);
         this.state = {
-            item: this.emptyItem,
-            // genres: '',
-            // selectedGenres: [],
-            // genre: [],
-            firstRound: true,
             classification: '',
             movie: [],
             name: '',
@@ -50,9 +41,9 @@ class MovieEdit extends Component {
         if (this.props.match.params.id !== 'new') {
             let axiosResponse = await this.findBy(`${this.props.match.params.id}`);
             const movie = axiosResponse.data;
-            // movie.genreIds = Array.from(movie.genreList).map(genre => genre.id);
-            console.log(movie.genreIds)
             this.setState({ movie: movie});
+        } else {
+            this.state.movie.genreIds = []
         }
 
         let axiosResponse = await this.findAllGenres();
@@ -83,9 +74,6 @@ class MovieEdit extends Component {
         let item = {...this.state.item};
         item[name] = value;
         this.setState({item});
-        this.setState({
-            firstRound: false
-        });
     }
 
     handleFormChange = (event, name) => {
@@ -99,7 +87,8 @@ class MovieEdit extends Component {
     handleSelect(genre) {
         const value = Number(genre.target.value);
         const current = this.state.movie.genreIds
-        if (this.state.movie.genreIds.includes(value)) {
+        console.log(this.state.movie.genreIds)
+        if (this.state.movie.genreIds !== undefined && this.state.movie.genreIds.includes(value)) {
             delete current[current.indexOf(value)]
         } else {
             current.push(value)
@@ -109,14 +98,11 @@ class MovieEdit extends Component {
         this.setState({
             movie: movieData
         })
-        console.log("Movie genre["+this.state.movie.genreIds+"]")
     }
 
     handleRadio(classification) {
       let value = classification.target.defaultValue;
-      this.setState({
-        classification: value,
-      })
+      this.setState({classification: value,})
     }
 
     async handleSubmit(event) {
@@ -127,8 +113,9 @@ class MovieEdit extends Component {
     }
 
     render() {
-        const {item} = this.state;
-        const title = <h2>{item.id ? 'Edit Movie' : 'Add Movie'}</h2>;
+        const titleGenres = "Genres"
+        const titleClassification = "Classification"
+        const title = <h2>{this.state.movie.id ? 'Editing' : 'Add'}</h2>;
         const enumClassification = [
             {id: "G", value: "G-General, suitable for all ages"},
             {id: "PG", value: "PG-Parental Guidance Suggested"},
@@ -165,7 +152,8 @@ class MovieEdit extends Component {
         ]
         const label = {inputProps: {'aria-label': 'Checkbox demo'}};
         return <div>
-            <TextField id="outlined-basic" name="id" variant="outlined" value={this.state.movie.id || ''}/>
+            {title}
+            <TextField id="outlined-basic" name="id" hidden={true} variant="outlined" value={this.state.movie.id || ''}/>
             <Box
                 component="form"
                 sx={{
@@ -176,9 +164,11 @@ class MovieEdit extends Component {
             >
                 <TextField id="outlined-basic" label="Name" variant="outlined" value={this.state.movie.name || ''}
                            onChange={event => this.handleFormChange(event, "name")}/>
-                <TextField id="outlined-basic" label="Ids" variant="outlined" value={this.state.movie.genreIds || ''}
-                           onChange={event => this.handleFormChange(event, "name")}/>
             </Box>
+            <label style={{marginLeft: 8}}><b>{titleGenres}</b></label>
+            <Box
+                component="form"
+                sx={{'& .MuiTextField-root': {mr: 8}}}>
             {
                 enumGenres
                     .map(option => (
@@ -195,6 +185,7 @@ class MovieEdit extends Component {
                             onChange={this.handleSelect}
                         />
                     ))}
+            </Box>
             <Box
                 component="form"
                 sx={{
@@ -231,6 +222,7 @@ class MovieEdit extends Component {
                     ))}
                 </Select>
             </Box>
+            <label style={{marginLeft: 8, marginTop: 8}}><b>{titleClassification}</b></label>
             <Box
                 component="form"
                 sx={{'& .MuiTextField-root': {mr: 8}}}>
@@ -265,7 +257,7 @@ class MovieEdit extends Component {
             <ButtonGroup aria-label="sticky table">
                 <Stack spacing={2} direction="row" ml={1} mt={5}>
                     <Button variant="contained" onClick={this.handleSubmit} type={"submit"}>Save</Button>
-                    <Button variant="contained" component={Link} to={"/movies"}>Cancel</Button>
+                    <Button variant="contained" component={Link} to={"/movies"} variant="outlined">Cancel</Button>
                 </Stack>
             </ButtonGroup>
         </div>
