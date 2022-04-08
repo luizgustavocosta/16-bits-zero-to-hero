@@ -17,8 +17,7 @@ public class MovieDto {
     private String language;
     private Double rating;
     private LocalDateTime lastUpdate;
-    private List<GenreDto> genreList;
-    private List<GenreKeyValue> genre;
+    private List<Long> genreIds;
     private String genreAsString;
     private Classification classification;
     private List<ReviewDto> reviews;

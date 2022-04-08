@@ -1,17 +1,20 @@
 package com.costa.luiz.zero2hero.actions;
 
+import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.genre.GenreRepository;
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
 import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
-import com.costa.luiz.zero2hero.model.movie.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,9 @@ public class MovieResource {
     @Autowired
     private final MovieMapper movieMapper;
 
+    @Autowired
+    GenreRepository genreRepository;
+
     @GetMapping("/{username}/favorites")
     public List<Movie> getAll(@PathVariable String username) {
         throw new UnsupportedOperationException();
@@ -36,9 +42,10 @@ public class MovieResource {
     @GetMapping
     public List<MovieDto> getAll() {
         List<Movie> movies = service.findAll();
-        return movies.stream()
+        List<MovieDto> collect = movies.stream()
                 .map(movieMapper::toDto)
                 .collect(Collectors.toUnmodifiableList());
+        return collect;
     }
 
     @DeleteMapping(path = "/{id}")
@@ -59,6 +66,11 @@ public class MovieResource {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody MovieDto movieDto) {
+        //FIXME - Move to service
+        List<Genre> genres = movieDto.getGenreIds().stream()
+                .filter(Objects::nonNull)
+                .map(id -> genreRepository.findById(id).get())
+                .collect(Collectors.toUnmodifiableList());
         Movie movie = Movie.builder()
                 .id(movieDto.getId())
                 .name(movieDto.getName())
@@ -68,9 +80,7 @@ public class MovieResource {
                 .duration(movieDto.getDuration())
                 .rating(movieDto.getRating())
                 .classification(movieDto.getClassification())
-                .genre(movieDto.getGenreList().stream()
-                        .map(genreMapper::toGenre)
-                        .collect(Collectors.toUnmodifiableList()))
+                .genre(genres)
                 .build();
         service.update(movie);
     }

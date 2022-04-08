@@ -6,7 +6,7 @@ import ListMoviesComponent from './ListMoviesComponent';
 import NewUserComponent from './NewUserComponent';
 import MenuComponent from './MenuComponent';
 import AuthenticatedRoute from './AuthenticatedRoute';
-import MovieEdit from "../MovieEdit";
+import MovieEdit from './MovieEdit';
 class MovieApp extends Component {
   render() {
     return (

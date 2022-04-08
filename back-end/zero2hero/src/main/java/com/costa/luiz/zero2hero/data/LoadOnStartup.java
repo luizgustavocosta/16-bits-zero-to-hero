@@ -76,11 +76,11 @@ public class LoadOnStartup {
                     String[] genres = columns[2].split(" ");
                     List<Genre> genreList = getGenres(genres);
                     Movie movie = Movie.builder()
-                            .name(columns[0])
+                            .name(columns[0].trim())
                             .classification(Classification.get(columns[1].trim()))
-                            .language(columns[3])
+                            .language(columns[3].trim())
                             .year(Integer.parseInt(columns[4].trim()))
-                            .country(columns[5])
+                            .country(columns[5].trim())
                             .duration(Integer.parseInt(columns[6].trim()))
                             .rating(Double.parseDouble(columns[7].trim()))
                             .build();
