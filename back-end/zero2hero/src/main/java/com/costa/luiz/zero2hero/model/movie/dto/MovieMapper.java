@@ -22,4 +22,6 @@ public interface MovieMapper {
     @Mapping(target = "genreAsString", ignore = true)
     @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.genre.Genre::getId).collect(java.util.stream.Collectors.toList()))")
     MovieDto toDtoForReview(Movie movie);
+
+    Movie toMovie(MovieDto movieDto);
 }

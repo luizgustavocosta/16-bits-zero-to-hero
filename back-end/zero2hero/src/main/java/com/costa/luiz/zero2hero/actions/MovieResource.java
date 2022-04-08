@@ -1,21 +1,23 @@
 package com.costa.luiz.zero2hero.actions;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
 import com.costa.luiz.zero2hero.model.genre.GenreRepository;
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
-import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Collectors;
 
 @RestController
@@ -25,8 +27,6 @@ public class MovieResource {
 
     private final MovieService service;
 
-    @Autowired
-    private final GenreMapper genreMapper;
 
     @Autowired
     private final MovieMapper movieMapper;
@@ -41,11 +41,9 @@ public class MovieResource {
 
     @GetMapping
     public List<MovieDto> getAll() {
-        List<Movie> movies = service.findAll();
-        List<MovieDto> collect = movies.stream()
+        return service.findAll().stream()
                 .map(movieMapper::toDto)
                 .collect(Collectors.toUnmodifiableList());
-        return collect;
     }
 
     @DeleteMapping(path = "/{id}")
@@ -66,29 +64,11 @@ public class MovieResource {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public void update(@RequestBody MovieDto movieDto) {
-        //FIXME - Move to service
-        List<Genre> genres = movieDto.getGenreIds().stream()
-                .filter(Objects::nonNull)
-                .map(id -> genreRepository.findById(id).get())
-                .collect(Collectors.toUnmodifiableList());
-        Movie movie = Movie.builder()
-                .id(movieDto.getId())
-                .name(movieDto.getName())
-                .year(movieDto.getYear())
-                .country(movieDto.getCountry())
-                .language(movieDto.getLanguage())
-                .duration(movieDto.getDuration())
-                .rating(movieDto.getRating())
-                .classification(movieDto.getClassification())
-                .genre(genres)
-                .build();
-        service.update(movie);
+        service.update(movieMapper.toMovie(movieDto), movieDto.getGenreIds());
     }
 
     @GetMapping(path = "/{id}")
     public MovieDto getById(@PathVariable("id") Long id) {
-        Movie movie = service.findById(id);
-        MovieDto movieDto = movieMapper.toDto(movie);
-        return movieDto;
+        return movieMapper.toDto(service.findById(id));
     }
 }
