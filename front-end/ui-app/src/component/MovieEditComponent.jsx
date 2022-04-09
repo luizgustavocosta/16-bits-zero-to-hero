@@ -17,7 +17,7 @@ import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
 import Select from "@mui/material/Select";
 
-class MovieEdit extends Component {
+class MovieEditComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -41,7 +41,7 @@ class MovieEdit extends Component {
         if (this.props.match.params.id !== 'new') {
             let axiosResponse = await this.findBy(`${this.props.match.params.id}`);
             const movie = axiosResponse.data;
-            this.setState({ movie: movie});
+            this.setState({movie: movie});
         } else {
             this.state.movie.genreIds = []
         }
@@ -77,17 +77,16 @@ class MovieEdit extends Component {
     }
 
     handleFormChange = (event, name) => {
-      let movieData = {...this.state.movie}
-      movieData[name] = event.target.value
-      this.setState({
-        movie: movieData
-      })
+        let movieData = {...this.state.movie}
+        movieData[name] = event.target.value
+        this.setState({
+            movie: movieData
+        })
     }
 
     handleSelect(genre) {
         const value = Number(genre.target.value);
         const current = this.state.movie.genreIds
-        console.log(this.state.movie.genreIds)
         if (this.state.movie.genreIds !== undefined && this.state.movie.genreIds.includes(value)) {
             delete current[current.indexOf(value)]
         } else {
@@ -101,13 +100,13 @@ class MovieEdit extends Component {
     }
 
     handleRadio(classification) {
-      let value = classification.target.defaultValue;
-      this.setState({classification: value,})
+        let value = classification.target.defaultValue;
+        this.setState({classification: value,})
     }
 
     async handleSubmit(event) {
         event.preventDefault();
-        console.info("Item->" + JSON.stringify(this.state.movie))
+        console.info("Movie sent to backend->" + JSON.stringify(this.state.movie))
         await this.save(this.state.movie);
         this.props.history.push('/movies');
     }
@@ -150,10 +149,10 @@ class MovieEdit extends Component {
             {id: 14, name: "Western"},
             {id: 15, name: "Other"},
         ]
-        const label = {inputProps: {'aria-label': 'Checkbox demo'}};
         return <div>
             {title}
-            <TextField id="outlined-basic" name="id" hidden={true} variant="outlined" value={this.state.movie.id || ''}/>
+            <TextField id="outlined-basic" name="id" hidden={true} variant="outlined"
+                       value={this.state.movie.id || ''}/>
             <Box
                 component="form"
                 sx={{
@@ -169,22 +168,22 @@ class MovieEdit extends Component {
             <Box
                 component="form"
                 sx={{'& .MuiTextField-root': {mr: 8}}}>
-            {
-                enumGenres
-                    .map(option => (
-                        <FormControlLabel
-                            variant="standard"
-                            style={{marginLeft: 8, marginBottom: 0}}
-                            label={option.name}
-                            key={option.name}
-                            value={option.id}
-                            checked={
-                                this.state.movie.genreIds !== null && this.state.movie.genreIds !== undefined && Object.values(this.state.movie.genreIds).includes(Number(option.id))
-                            }
-                            control={<Checkbox/>}
-                            onChange={this.handleSelect}
-                        />
-                    ))}
+                {
+                    enumGenres
+                        .map(option => (
+                            <FormControlLabel
+                                variant="standard"
+                                style={{marginLeft: 8, marginBottom: 0}}
+                                label={option.name}
+                                key={option.name}
+                                value={option.id}
+                                checked={
+                                    this.state.movie.genreIds !== null && this.state.movie.genreIds !== undefined && Object.values(this.state.movie.genreIds).includes(Number(option.id))
+                                }
+                                control={<Checkbox/>}
+                                onChange={this.handleSelect}
+                            />
+                        ))}
             </Box>
             <Box
                 component="form"
@@ -197,10 +196,12 @@ class MovieEdit extends Component {
                 <TextField id="outlined-basic" label="Year" variant="outlined" value={this.state.movie.year || ''}
                            onChange={event => this.handleFormChange(event, "year")}/>
                 <FormControl sx={{m: 1, width: '25ch'}} variant="outlined">
-                    <TextField id="outlined-basic" label="Duration" variant="outlined" value={this.state.movie.duration || ''}
+                    <TextField id="outlined-basic" label="Duration" variant="outlined"
+                               value={this.state.movie.duration || ''}
                                onChange={event => this.handleFormChange(event, "duration")}/>
                 </FormControl>
-                <TextField id="outlined-basic" label="Language" variant="outlined" value={this.state.movie.language || ''}
+                <TextField id="outlined-basic" label="Language" variant="outlined"
+                           value={this.state.movie.language || ''}
                            onChange={event => this.handleFormChange(event, "language")}/>
                 <Select
                     sx={{ml: 1, maxWidth: 790}}
@@ -216,6 +217,7 @@ class MovieEdit extends Component {
                             <img
                                 loading="lazy"
                                 width="20"
+                                alt={option.id}
                                 src={option.icon}
                             />&nbsp;{option.value}
                         </MenuItem>
@@ -256,12 +258,12 @@ class MovieEdit extends Component {
             </Box>
             <ButtonGroup aria-label="sticky table">
                 <Stack spacing={2} direction="row" ml={1} mt={5}>
-                    <Button variant="contained" onClick={this.handleSubmit} type={"submit"}>Save</Button>
-                    <Button variant="contained" component={Link} to={"/movies"} variant="outlined">Cancel</Button>
+                    <Button name="Save" variant="contained" onClick={this.handleSubmit} type={"submit"}>Save</Button>
+                    <Button name="Cancel" component={Link} to={"/movies"} variant="outlined">Cancel</Button>
                 </Stack>
             </ButtonGroup>
         </div>
     }
 }
 
-export default withRouter(MovieEdit);
+export default withRouter(MovieEditComponent);

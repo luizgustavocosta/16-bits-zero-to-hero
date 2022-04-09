@@ -45,7 +45,7 @@ public class Movie {
     @Enumerated(EnumType.STRING)
     private Classification classification;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinColumn(name = "movie_id")
     @ToString.Exclude
     private List<Review> reviews;

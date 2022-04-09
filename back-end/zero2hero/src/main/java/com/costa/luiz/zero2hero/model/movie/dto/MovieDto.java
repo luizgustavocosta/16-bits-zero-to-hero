@@ -4,6 +4,7 @@ import com.costa.luiz.zero2hero.model.movie.Classification;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data

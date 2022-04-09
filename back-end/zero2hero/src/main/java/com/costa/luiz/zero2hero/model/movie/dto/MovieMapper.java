@@ -1,9 +1,14 @@
 package com.costa.luiz.zero2hero.model.movie.dto;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
+import com.costa.luiz.zero2hero.model.movie.Review;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper
 public interface MovieMapper {
@@ -14,7 +19,7 @@ public interface MovieMapper {
             "movie.getGenre().stream()" +
             ".map(com.costa.luiz.zero2hero.model.genre.Genre::getName)" +
             ".collect(java.util.stream.Collectors.toList())))")
-    @Mapping(target = "reviews", ignore = true)
+    @Mapping(target = "reviews", expression = "java(reviews(movie.getReviews()))")
     @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.genre.Genre::getId).collect(java.util.stream.Collectors.toList()))")
     MovieDto toDto(Movie movie);
 
@@ -23,5 +28,20 @@ public interface MovieMapper {
     @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.genre.Genre::getId).collect(java.util.stream.Collectors.toList()))")
     MovieDto toDtoForReview(Movie movie);
 
+    @Mapping(target = "genre", ignore = true)
     Movie toMovie(MovieDto movieDto);
+
+    default List<ReviewDto> reviews(List<Review> reviews) {
+        return
+                reviews.stream()
+                        .map(review -> ReviewDto.builder()
+                                .id(review.getId())
+                                .author(AuthorDto.builder()
+                                        .id(review.getAuthor().getId())
+                                        .name(review.getAuthor().getName())
+                                        .build())
+                                .archived(review.isArchived())
+                                .review(review.getReview())
+                                .build()).collect(Collectors.toUnmodifiableList());
+    }
 }

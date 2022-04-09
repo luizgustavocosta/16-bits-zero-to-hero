@@ -107,8 +107,8 @@ public class LoadOnStartup {
                     }
                     Review review = createReview(movie, author);
                     author.getReviews().add(review);
-                    reviewRepository.save(review);
                     movie.getReviews().add(review);
+                    reviewRepository.save(review);
                     authorRepository.save(author);
                     movieRepository.save(movie);
                 });

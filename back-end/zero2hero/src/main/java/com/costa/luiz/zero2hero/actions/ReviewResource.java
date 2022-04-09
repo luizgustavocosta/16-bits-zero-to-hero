@@ -59,10 +59,10 @@ public class ReviewResource {
                 .id(review.getId())
                 .review(review.getReview())
                 .archived(review.isArchived())
-                .author(AuthorDto.builder()
-                        .id(review.getAuthor().getId())
-                        .name(review.getAuthor().getName())
-                        .build())
+//                .author(AuthorDto.builder()
+//                        .id(review.getAuthor().getId())
+//                        .name(review.getAuthor().getName())
+//                        .build())
                 .build();
     }
 }
