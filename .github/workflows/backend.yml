@@ -1,0 +1,21 @@
+name: Backend.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+  gradle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v2
+        with:
+          java-version: 11
+      - name: Setup and execute Gradle 'test' task
+        uses: gradle/gradle-build-action@v2
+      - run: cd back-end/zero2hero && chmod +x gradlew && ./gradlew test
