@@ -16,6 +16,10 @@
 ### Build Status
 <hr>
 
+[![Node.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml)
+
+[![Backend.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/backend.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/backend.yml)
+
 ### Code Style
 <hr>
 https://www.oracle.com/java/technologies/javase/codeconventions-contents.html
