@@ -17,3 +17,14 @@ https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-an
 
 CURL
 curl -X "DELETE" -u luiz:costa http://localhost:8080/api/v1/reviews/35
+
+Swagger Spring Boot issue
+https://www.youtube.com/watch?v=PpvnlaEHz2o&ab_channel=FromDeveloperToDeveloper
+
+Swagger API
+http://localhost:8080/swagger-ui/index.html
+
+
+
+curl -v -u boba:fett http://localhost:8080/movies/1
+curl -v -u james:bond http://localhost:8080/movies/1

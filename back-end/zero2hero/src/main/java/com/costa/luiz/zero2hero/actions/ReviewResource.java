@@ -6,6 +6,7 @@ import com.costa.luiz.zero2hero.model.movie.ReviewRepository;
 import com.costa.luiz.zero2hero.model.movie.dto.AuthorDto;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.ReviewDto;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name="Reviews")
 public class ReviewResource {
 
-    final ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
-    final MovieRepository movieRepository;
+    private final MovieRepository movieRepository;
 
     private final MovieMapper movieMapper;
 

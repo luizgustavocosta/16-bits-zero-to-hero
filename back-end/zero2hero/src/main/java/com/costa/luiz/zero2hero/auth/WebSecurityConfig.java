@@ -20,11 +20,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${spring.ldap.base}")
     private String ldapBase;
 
-    @Value("${roles.view}")
-    private String viewRoles;
+    @Value("${role.view}")
+    private String view;
 
-    @Value("${roles.view}")
-    private String editRoles;
+    @Value("${role.edit}")
+    private String edit;
+
+    private static final String[] WHITELIST = {
+            //H2
+            "/h2-console/**",
+            // -- Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**"
+            // other public endpoints of your API may be appended to this array
+    };
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,11 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-//                .antMatchers("/movies").pr(viewRoles)
-//                .antMatchers("/movies/{id}").hasAnyAuthority(editRoles)
-                .antMatchers(HttpMethod.POST,"/movies").access("hasRole('ROLE_OTHERS')")
-//                .antMatchers("/movies/{id}").hasRole("ROLE_OTHERS")
-                .antMatchers("/movies/{id}").access("hasRole('ROLE_OTHERS')")
+                .antMatchers(HttpMethod.POST,"/movies").access("hasRole(" + "'"+edit +"')")
+                .antMatchers("/movies/{id}").access("hasRole(" + "'"+view +"')")
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
@@ -60,8 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/h2-console/**");
-        //web.ignoring().antMatchers("/**");
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(WHITELIST);
     }
 }
