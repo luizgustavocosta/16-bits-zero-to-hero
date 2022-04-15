@@ -7,7 +7,7 @@ import java.util.Set;
 
 @Data
 @RequiredArgsConstructor
-public class AuthenticationBean {
+public class Authentication {
 
     private final String message;
     private final Set<String> roles;
