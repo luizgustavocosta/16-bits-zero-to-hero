@@ -25,4 +25,4 @@ jobs:
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
           arguments: build
-          gradle-executable: /back-end/zero2hero/gradle
+          gradle-executable: /16-bits-zero-to-hero/back-end/zero2hero/gradlew
