@@ -22,7 +22,7 @@ jobs:
           java-version: '11'
           distribution: 'temurin'
       - name: Build with Gradle
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
+        uses: gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
           arguments: build
-          gradle-executable: back-end/zero2hero/gradle
+          gradle-executable: back-end/zero2hero
