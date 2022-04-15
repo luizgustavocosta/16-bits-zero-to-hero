@@ -21,8 +21,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
+      - run: chmod +x back-end/zero2hero/gradlew
       - name: Build with Gradle
         uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
         with:
           arguments: build
-          gradle-executable: /16-bits-zero-to-hero/back-end/zero2hero/gradlew
+          gradle-executable: back-end/zero2hero/gradlew
