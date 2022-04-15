@@ -21,9 +21,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'temurin'
-      - run: cd back-end/zero2hero && chmod +x gradlew
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@0d13054264b0bb894ded474f08ebb30921341cee
-        with:
-          arguments: build
-          gradle-executable: back-end/zero2hero/gradlew
+      - name: Setup and execute Gradle 'test' task
+      uses: gradle/gradle-build-action@v2
+      - run: cd back-end/zero2hero && chmod +x gradlew && ./gradlew test
