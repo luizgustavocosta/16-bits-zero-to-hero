@@ -11,7 +11,7 @@ Create a project with front-end and back-end to run easily locally or through th
 ### Solution
 <hr>
 
-![Architecture](/documentation/Architectural_diagram.png, "Architecture")
+![Architecture](documentation/Architectural_diagram.png)
 
 
 Front-end
