@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import CourseDataService from '../service/MovieDataService.js';
+import DataService from '../service/BackendService.js';
 import {Link} from 'react-router-dom';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
@@ -40,7 +40,7 @@ class MovieListComponent extends Component {
     };
 
     remove(id) {
-        CourseDataService.delete(id)
+        DataService.delete(id)
             .then(
                 response => {
                     this.refreshMovies();
@@ -53,7 +53,7 @@ class MovieListComponent extends Component {
     }
 
     refreshMovies() {
-        CourseDataService.retrieveAllMovies()
+        DataService.retrieveAllMovies()
             .then(
                 response => {
                     this.setState({movies: response.data})

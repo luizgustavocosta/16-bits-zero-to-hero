@@ -1,6 +1,7 @@
 import axios from 'axios'
+import applicationConfig from './../application.json'
 
-const API_URL = 'http://localhost:8080'
+const API_URL = applicationConfig.SERVER_URL
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 export const USER_PROFILE = 'userProfile'
@@ -13,17 +14,6 @@ class AuthenticationService {
       {headers: {authorization: this.createBasicAuthToken(username, password)}})
   }
 
-  executeJwtAuthenticationService(username, password) {
-    return axios.post(`${API_URL}/authenticate`, {
-      username,
-      password
-    })
-  }
-
-  createBasicAuthToken(username, password) {
-    return 'Basic ' + window.btoa(username + ":" + password)
-  }
-
   registerSuccessfulLogin(username, password, roles) {
     sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
     sessionStorage.setItem(USER_PROFILE, "admin")
@@ -31,18 +21,14 @@ class AuthenticationService {
     this.setupAxiosInterceptors(this.createBasicAuthToken(username, password))
   }
 
-  registerSuccessfulLoginForJwt(username, token) {
-    sessionStorage.setItem(USER_NAME_SESSION_ATTRIBUTE_NAME, username)
-    this.setupAxiosInterceptors(this.createJWTToken(token))
+  createBasicAuthToken(username, password) {
+    //https://developer.mozilla.org/en-US/docs/Web/API/btoa
+    return 'Basic ' + window.btoa(username + ":" + password)
   }
-
-  createJWTToken(token) {
-    return 'Bearer ' + token
-  }
-
 
   logout() {
     sessionStorage.removeItem(USER_NAME_SESSION_ATTRIBUTE_NAME);
+    // FIXME - Call the backend endpoint
   }
 
   isUserLoggedIn() {

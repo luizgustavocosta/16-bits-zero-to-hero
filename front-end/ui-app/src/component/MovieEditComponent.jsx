@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Link, withRouter} from 'react-router-dom';
-import axios from 'axios'
 import {Rating} from "@material-ui/lab";
 import {
     FormControl,
@@ -16,6 +15,8 @@ import Box from "@mui/material/Box";
 import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
 import Select from "@mui/material/Select";
+import BackendDataService from "../service/BackendService.js";
+import applicationConfig from './../application.json'
 
 class MovieEditComponent extends Component {
 
@@ -56,15 +57,15 @@ class MovieEditComponent extends Component {
     }
 
     findBy(id) {
-        return axios.get(`http://localhost:8080/movies/${id}`,);
+        return BackendDataService.findBy(id);
     }
 
     findAllGenres() {
-        return axios.get(`http://localhost:8080/api/v1/genres`,);
+        return BackendDataService.findAllGenres();
     }
 
-    save(item) {
-        return axios.put(`http://localhost:8080/movies`, item);
+    save(movie) {
+        return BackendDataService.save(movie);
     }
 
     handleChange(event) {
@@ -108,7 +109,7 @@ class MovieEditComponent extends Component {
         event.preventDefault();
         console.info("Movie sent to backend->" + JSON.stringify(this.state.movie))
         await this.save(this.state.movie);
-        this.props.history.push('/movies');
+        this.props.history.push(applicationConfig.MOVIE_SERVICE);
     }
 
     render() {

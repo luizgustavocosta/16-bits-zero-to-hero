@@ -1,0 +1,5 @@
+{
+  "SERVER_URL": "http://localhost:8080",
+  "MOVIE_SERVICE": "/movies",
+  "GENRE_SERVICE": "/api/v1/genres"
+}

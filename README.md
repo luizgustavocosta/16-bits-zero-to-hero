@@ -18,7 +18,7 @@
 
 [![Node.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml)
 
-[![Backend.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/backend.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/backend.yml)
+[![Java CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/java-ci.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/java-ci.yml)
 
 ### Code Style
 <hr>

@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Alert, AlertTitle} from "@material-ui/lab";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
+import applicationConfig from './../application.json'
 
 class LoginComponent extends Component {
 
@@ -40,7 +41,7 @@ class LoginComponent extends Component {
             .executeBasicAuthenticationService(this.state.username, this.state.password)
             .then(value => {
                 AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password, value.data.roles)
-                this.props.history.push(`/movies`)
+                this.props.history.push(applicationConfig.MOVIE_SERVICE)
             }).catch(() => {
             this.setState({showSuccessMessage: false})
             this.setState({hasLoginFailed: true})
