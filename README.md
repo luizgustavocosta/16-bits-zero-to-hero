@@ -1,8 +1,15 @@
 # 16-bits-zero-to-hero
 
+### Build Status
+<hr>
+
+[![Node.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml)
+
+[![Java CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml)
+
 ### Project title
 <hr>
-Zero to hero using React and SpringBoot
+🗒 Zero to hero 🚀 using React and SpringBoot
 
 ### Motivation
 <hr>
@@ -17,22 +24,16 @@ Create a project with front-end and back-end to run easily locally or through th
 
 ![fe](documentation/images/front-end-language-32.png)
 - JavaScript
-- React
-- MUI
+- React 17.0.2
+- MUI 5
 
 ![be](documentation/images/java-development-32.png)
 - Java 11
 - SpringBoot 2.6.3
 - Spring
 - Hibernate
-- Swagger
-
-### Build Status
-<hr>
-
-[![Node.js CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/node.js.yml)
-
-[![Java CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml)
+- Swagger - OpenAPI 1.6.7
+- MapStruct
 
 ### Back-end code style
 <hr>
@@ -40,28 +41,20 @@ Create a project with front-end and back-end to run easily locally or through th
 [Java Code Conventions](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html)
 
 <hr>
-Java
-
-- Spring
-- Hibernate
-- Swagger
-
-<hr>
-JavaScript
-
-- React
-- MUI
 
 ### Installation
 <hr>
-
-Back-end
 
 ### How to use it?
 <hr>
 
 #### Locally
+```
+ cd back-end/zero2hero && ./gradlew bootRun
+```
+[Swagger documentation](http://localhost:8080/swagger-ui/index.html)
 
+##### Disable security
 #### Back-end
 
 ```
