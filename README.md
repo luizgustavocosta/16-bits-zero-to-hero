@@ -80,7 +80,7 @@ cd front-end/ui-app && npm install && npm start
 
 Open this [link](http://localhost:3000/) and use the Username and Password on the login screen
 
-<kdb><img src="documentation/login.png"/></kdb>
+<kdb><img src="https://github.com/luizgustavocosta/16-bits-zero-to-hero/blob/main/documentation/images/login.png"/></kdb>
 
 #### Gitpod
 
