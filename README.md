@@ -11,15 +11,21 @@ Create a project with front-end and back-end to run easily locally or through th
 ### Solution
 <hr>
 
-![Architecture](/documentation/Architectural_diagram.png, "Architecture")
+![Architecture](documentation/images/Architectural_diagram.png)
 
+### Tech / Framework used
 
-Front-end
-- JavaScript, React, and MUI
+![fe](documentation/images/front-end-language-32.png)
+- JavaScript
+- React
+- MUI
 
-Back-end
+![be](documentation/images/java-development-32.png)
 - Java 11
-- SpringBoot
+- SpringBoot 2.6.3
+- Spring
+- Hibernate
+- Swagger
 
 ### Build Status
 <hr>
@@ -28,16 +34,11 @@ Back-end
 
 [![Java CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml)
 
-### Code Style
+### Back-end code style
 <hr>
-https://www.oracle.com/java/technologies/javase/codeconventions-contents.html
-https://airbnb.io/javascript/react/
 
-### Documentation example
+[Java Code Conventions](https://www.oracle.com/java/technologies/javase/codeconventions-contents.html)
 
-https://spring-petclinic.github.io/
-
-### Tech / Framework used
 <hr>
 Java
 
@@ -58,51 +59,52 @@ Back-end
 
 ### How to use it?
 <hr>
-Gitpod
 
-#### Flows
-<hr>
+#### Locally
 
-### Reference
-<hr>
-https://github.com/tekiegirl/TheMadKatas
+#### Back-end
 
-https://www.veryicon.com/
+```
+ cd back-end/zero2hero && ./gradlew bootRun
+```
+
+##### Endpoints
+[Swagger documentation](http://localhost:8080/swagger-ui/index.html)
+
+
+#### Front-end
+
+```
+cd front-end/ui-app && npm install && npm start
+```
+
+Open this [link](http://localhost:3000/) and use the Username and Password on the login screen
+
+<kdb><img src="documentation/login.png"/></kdb>
+
+#### Gitpod
+
+Steps
+
+1. Clone the repo https://github.com/luizgustavocosta/16-bits-zero-to-hero
+2. Open the [Gitpod](https://www.gitpod.io/), be sure you're logged in
+3. Add the project hitting the button New Workspace
+4. Open the terminal for the back-end
+5. type ```cd back-end/zero2hero && ./gradlew bootRun```
+6. Make the URL public
+7. Back-end up and running ![Back-end](documentation/images/Gitpod-backend.png) 
+8. Open the file ``application.json`` inside the UI project and update the value for ``SERVER_URL``. The server URL should be the back-end URL.
+9. Type the command ``cd front-end/ui-app && npm install && npm start``
+10. Voilá app up and running ![Front-end](documentation/images/React-frontend.png)
+
+### References
+
+- https://www.veryicon.com/
+- https://spring-petclinic.github.io/
+- https://github.com/in28minutes/spring-boot-react-fullstack-examples
+- https://github.com/joelparkerhenderson/architecture-decision-record
 
 ### License
 <hr>
-[MIT](https://choosealicense.com/licenses/mit/)
 
-Java project to show how to run frontend (React) and backend (Java) using Spring
-
-Examples from
-
-``
-https://github.com/in28minutes/spring-boot-react-fullstack-examples
-``
-
-Creating Spring project
-```
-https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.6.3&packaging=jar&jvmVersion=11&groupId=com.costa.luiz&artifactId=zero2hero&name=zero2hero&description=Demo%20project&packageName=com.costa.luiz.zero2hero&dependencies=lombok,web,data-jpa,h2,actuator
-```
-
-
-Front-end
-```
-npx create-react-app ui-app
-cd ui-app && npm start
-```
-
-Add dependencies
-``` 
-npm install axios --save-dev
-npm install react-router-dom --save-dev
-```
-
-### How to run
-#### React
-```
-cd front-end && npm install && npm start
-```
-
-ADR from https://github.com/joelparkerhenderson/architecture-decision-record
++ [MIT](https://choosealicense.com/licenses/mit/)
