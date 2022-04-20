@@ -1,8 +1,10 @@
 package com.costa.luiz.zero2hero.model.movie;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import com.costa.luiz.zero2hero.model.genre.GenreRepository;
-import lombok.AllArgsConstructor;
+import com.costa.luiz.zero2hero.repository.GenreRepository;
+import com.costa.luiz.zero2hero.repository.MovieRepository;
+import com.costa.luiz.zero2hero.repository.ReviewRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,13 +16,12 @@ import java.util.stream.Collectors;
 import static java.util.Objects.nonNull;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class MovieService {
 
     private final MovieRepository movieRepository;
-
     private final ReviewRepository reviewRepository;
-    private GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
     public List<Movie> findAll() {
         return movieRepository.findAll()

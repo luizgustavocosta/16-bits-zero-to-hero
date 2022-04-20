@@ -1,15 +1,14 @@
 package com.costa.luiz.zero2hero.actions;
 
-import com.costa.luiz.zero2hero.model.movie.MovieRepository;
 import com.costa.luiz.zero2hero.model.movie.Review;
-import com.costa.luiz.zero2hero.model.movie.ReviewRepository;
 import com.costa.luiz.zero2hero.model.movie.dto.AuthorDto;
+import com.costa.luiz.zero2hero.repository.ReviewRepository;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
 import com.costa.luiz.zero2hero.model.movie.dto.ReviewDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,11 +24,10 @@ public class ReviewResource {
 
     private final ReviewRepository reviewRepository;
 
-    private final MovieRepository movieRepository;
-
     private final MovieMapper movieMapper;
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void deleteBy(@PathVariable Long id) {
         log.info("The review {} will be deleted", id);
         Optional<Review> optionalReview = reviewRepository.findById(id);
@@ -61,10 +59,10 @@ public class ReviewResource {
                 .id(review.getId())
                 .review(review.getReview())
                 .archived(review.isArchived())
-//                .author(AuthorDto.builder()
-//                        .id(review.getAuthor().getId())
-//                        .name(review.getAuthor().getName())
-//                        .build())
+                .author(AuthorDto.builder()
+                        .id(review.getAuthor().getId())
+                        .name(review.getAuthor().getName())
+                        .build())
                 .build();
     }
 }

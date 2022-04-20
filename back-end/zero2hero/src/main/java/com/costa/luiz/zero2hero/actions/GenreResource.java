@@ -1,7 +1,7 @@
 package com.costa.luiz.zero2hero.actions;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import com.costa.luiz.zero2hero.model.genre.GenreRepository;
+import com.costa.luiz.zero2hero.repository.GenreRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

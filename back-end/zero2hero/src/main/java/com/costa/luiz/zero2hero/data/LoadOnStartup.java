@@ -1,12 +1,17 @@
 package com.costa.luiz.zero2hero.data;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import com.costa.luiz.zero2hero.model.genre.GenreRepository;
-import com.costa.luiz.zero2hero.model.movie.*;
+import com.costa.luiz.zero2hero.model.movie.Author;
+import com.costa.luiz.zero2hero.model.movie.Classification;
+import com.costa.luiz.zero2hero.model.movie.Movie;
+import com.costa.luiz.zero2hero.model.movie.Review;
+import com.costa.luiz.zero2hero.repository.AuthorRepository;
+import com.costa.luiz.zero2hero.repository.GenreRepository;
+import com.costa.luiz.zero2hero.repository.MovieRepository;
+import com.costa.luiz.zero2hero.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.EventListener;
@@ -29,16 +34,12 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class LoadOnStartup {
 
-    @Autowired
     private final MovieRepository movieRepository;
 
-    @Autowired
     private final GenreRepository genreRepository;
 
-    @Autowired
     private final AuthorRepository authorRepository;
 
-    @Autowired
     private final ReviewRepository reviewRepository;
 
     @EventListener(ApplicationReadyEvent.class)
@@ -49,7 +50,7 @@ public class LoadOnStartup {
         Files.readAllLines(ResourceUtils.getFile("classpath:data/genres.csv").toPath())
                 .stream()
                 .skip(1)
-                .forEachOrdered(row -> genreRepository.saveAndFlush(Genre.builder().name(row.trim()).build()));
+                .forEachOrdered(row -> genreRepository.save(Genre.builder().name(row.trim()).build()));
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -60,7 +61,7 @@ public class LoadOnStartup {
         Files.readAllLines(ResourceUtils.getFile("classpath:data/authors.csv").toPath())
                 .stream()
                 .skip(1)
-                .forEachOrdered(row -> authorRepository.saveAndFlush(Author.builder().name(row.trim()).build()));
+                .forEachOrdered(row -> authorRepository.save(Author.builder().name(row.trim()).build()));
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -108,9 +109,9 @@ public class LoadOnStartup {
                     Review review = createReview(movie, author);
                     author.getReviews().add(review);
                     movie.getReviews().add(review);
-                    reviewRepository.save(review);
-                    authorRepository.save(author);
                     movieRepository.save(movie);
+                    authorRepository.save(author);
+                    reviewRepository.save(review);
                 });
         log.info("Reviews inserted");
     }

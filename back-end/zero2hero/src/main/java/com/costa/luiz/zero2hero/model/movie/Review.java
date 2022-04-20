@@ -18,7 +18,7 @@ import javax.persistence.*;
 public class Review {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "review_id")

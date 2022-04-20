@@ -4,6 +4,7 @@ import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
+import com.costa.luiz.zero2hero.repository.jdbc.MovieJDBCRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -78,5 +79,14 @@ public class MovieResource {
     @GetMapping(path = "/{id}")
     public MovieDto getById(@PathVariable("id") Long id) {
         return movieMapper.toDto(service.findById(id));
+    }
+
+
+    MovieJDBCRepository movieJDBCRepository;
+
+    @GetMapping("jdbc")
+    public List<Movie> findAllByJDBC() {
+        List<Movie> movies = movieJDBCRepository.findAll();
+        return movies;
     }
 }
