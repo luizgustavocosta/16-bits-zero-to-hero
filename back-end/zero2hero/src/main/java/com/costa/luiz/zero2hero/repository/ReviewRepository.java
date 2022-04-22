@@ -13,8 +13,6 @@ public interface ReviewRepository {
     Optional<Review> findById(Long id);
     List<Review> findAll();
     List<Review> findAllByMovie(Movie movie);
-    List<Review> findAllByMovieIsNull();
     Review save(Review review);
-    void deleteAllByMovie_Id(Long id);
-    void deleteAllMovieIdIsNull();
+    void deleteAllByMovieId(Long id);
 }

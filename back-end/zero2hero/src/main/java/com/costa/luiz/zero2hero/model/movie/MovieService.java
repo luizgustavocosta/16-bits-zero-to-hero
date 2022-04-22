@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Objects.nonNull;
@@ -39,20 +40,16 @@ public class MovieService {
 
     @Transactional
     public void deleteById(Long id) {
+        reviewRepository.deleteAllByMovieId(id);
         movieRepository.deleteById(id);
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    void deleteReviewsToMovie(Long id) {
-        reviewRepository.deleteAllByMovie_Id(id);
-    }
-
     public void update(Movie movie, List<Long> genreIds) {
-        List<Genre> genres = genreIds.stream()
+        Set<Genre> genres = genreIds.stream()
                 .filter(Objects::nonNull)
                 .map(id -> genreRepository.findById(id).orElse(null))
                 .filter(Objects::nonNull)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toUnmodifiableSet());
         movie.setGenre(genres);
         movieRepository.save(movie);
     }

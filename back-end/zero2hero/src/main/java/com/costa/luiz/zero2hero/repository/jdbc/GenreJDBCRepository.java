@@ -1,7 +1,6 @@
 package com.costa.luiz.zero2hero.repository.jdbc;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.repository.GenreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,9 @@ import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+
+import static java.util.Objects.isNull;
 
 @Repository
 @Profile("jdbc")
@@ -76,16 +73,21 @@ public class GenreJDBCRepository implements GenreRepository {
                     BeanPropertyRowMapper.newInstance(Genre.class)
             );
         } catch (EmptyResultDataAccessException ex) {
-            throw new ObjectRetrievalFailureException(Genre.class, name);
+            return null;
         }
         return genre;
     }
 
     @Override
     public Genre save(Genre genre) {
-        BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(genre);
-        Number key = this.genreJdbcInsert.executeAndReturnKey(parameterSource);
-        genre.setId(key.longValue());
-        return genre;
+        Genre savedGenre = findByName(genre.getName());
+        if (isNull(savedGenre)) {
+            BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(genre);
+            Number key = this.genreJdbcInsert.executeAndReturnKey(parameterSource);
+            genre.setId(key.longValue());
+            return genre;
+        }
+        return savedGenre;
     }
+
 }

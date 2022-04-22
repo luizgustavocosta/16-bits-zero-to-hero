@@ -17,13 +17,11 @@ import java.util.List;
 public interface ReviewSpringRepository extends ReviewRepository, JpaRepository<Review, Long> {
 
     List<Review> findAllByMovie(Movie movie);
-    void deleteAllByMovie_Id(Long id);
-    List<Review> findAllByMovieIsNull();
 
     @Transactional
     @Modifying
-    @Query(value = "delete from Review review where review.movie is null")
-    void deleteAllMovieIdIsNull();
+    @Query(value = "delete from Review review where review.movie.id = :id")
+    void deleteAllByMovieId(Long id);
 
 
 }

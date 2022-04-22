@@ -1,10 +1,6 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -21,11 +17,8 @@ public class Review {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "review_id")
     private Author author;
     private String review;
-    private boolean archived;
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "movie_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.DETACH)
     private Movie movie;
 }

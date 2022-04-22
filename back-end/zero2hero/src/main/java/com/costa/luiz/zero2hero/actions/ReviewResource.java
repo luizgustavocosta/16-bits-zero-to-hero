@@ -33,7 +33,6 @@ public class ReviewResource {
         Optional<Review> optionalReview = reviewRepository.findById(id);
         if (optionalReview.isPresent()) {
             Review review = optionalReview.get();
-            review.setArchived(true);
             reviewRepository.save(review);
         }
     }
@@ -58,7 +57,6 @@ public class ReviewResource {
                 .movie(movieMapper.toDtoForReview(review.getMovie()))
                 .id(review.getId())
                 .review(review.getReview())
-                .archived(review.isArchived())
                 .author(AuthorDto.builder()
                         .id(review.getAuthor().getId())
                         .name(review.getAuthor().getName())

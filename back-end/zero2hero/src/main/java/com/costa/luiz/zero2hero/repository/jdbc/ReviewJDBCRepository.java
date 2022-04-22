@@ -1,6 +1,5 @@
 package com.costa.luiz.zero2hero.repository.jdbc;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.Review;
 import com.costa.luiz.zero2hero.repository.ReviewRepository;
@@ -16,11 +15,7 @@ import org.springframework.orm.ObjectRetrievalFailureException;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Repository
 @Profile("jdbc")
@@ -80,17 +75,7 @@ public class ReviewJDBCRepository implements ReviewRepository {
     }
 
     @Override
-    public List<Review> findAllByMovieIsNull() {
-        return null;
-    }
-
-    @Override
-    public void deleteAllByMovie_Id(Long id) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public void deleteAllMovieIdIsNull() {
+    public void deleteAllByMovieId(Long id) {
 
     }
 }

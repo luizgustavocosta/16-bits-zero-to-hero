@@ -22,7 +22,9 @@ import org.springframework.util.ResourceUtils;
 
 import java.nio.file.Files;
 import java.time.Instant;
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -67,6 +69,7 @@ public class LoadOnStartup {
     @EventListener(ApplicationReadyEvent.class)
     @Order(2)
     @SneakyThrows
+    @Transactional
     public void insertMovies() {
         log.info("Preparing to insert data");
         Files.readAllLines(ResourceUtils.getFile("classpath:data/movies.csv").toPath())
@@ -75,7 +78,8 @@ public class LoadOnStartup {
                 .forEach(row -> {
                     String[] columns = row.split(",");
                     String[] genres = columns[2].split(" ");
-                    List<Genre> genreList = getGenres(genres);
+                    Set<Genre> genreList = getGenres(genres);
+                    new ArrayList<>(genreList).forEach(genreRepository::save);
                     Movie movie = Movie.builder()
                             .name(columns[0].trim())
                             .classification(Classification.get(columns[1].trim()))
@@ -84,15 +88,15 @@ public class LoadOnStartup {
                             .country(columns[5].trim())
                             .duration(Integer.parseInt(columns[6].trim()))
                             .rating(Double.parseDouble(columns[7].trim()))
+                            .reviews(Collections.emptyList())
+                            .genre(genreList)
                             .build();
-                    movieRepository.save(movie);
-                    movie.setGenre(genreList);
                     movieRepository.save(movie);
                 });
     }
 
     @EventListener(ApplicationReadyEvent.class)
-    @Order(2)
+    @Order(3)
     @SneakyThrows
     @Transactional
     public void insertReviews() {
@@ -109,9 +113,9 @@ public class LoadOnStartup {
                     Review review = createReview(movie, author);
                     author.getReviews().add(review);
                     movie.getReviews().add(review);
-                    movieRepository.save(movie);
-                    authorRepository.save(author);
                     reviewRepository.save(review);
+                    authorRepository.save(author);
+                    movieRepository.save(movie);
                 });
         log.info("Reviews inserted");
     }
@@ -124,10 +128,10 @@ public class LoadOnStartup {
                 .build();
     }
 
-    private List<Genre> getGenres(String[] genres) {
+    private Set<Genre> getGenres(String[] genres) {
         return Stream.of(genres)
                 .filter(row -> !row.isEmpty())
                 .map(genreRepository::findByName)
-                .collect(Collectors.toUnmodifiableList());
+                .collect(Collectors.toUnmodifiableSet());
     }
 }

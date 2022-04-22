@@ -1,33 +1,13 @@
 package com.costa.luiz.zero2hero.model.movie;
 
 import com.costa.luiz.zero2hero.model.genre.Genre;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Getter
 @Setter
@@ -52,7 +32,7 @@ public class Movie {
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
-            CascadeType.MERGE
+            CascadeType.MERGE,
     })
     @JoinTable(name = "movies_genre",
             joinColumns = @JoinColumn(name = "movie_id"),
@@ -60,13 +40,12 @@ public class Movie {
     )
     @ToString.Exclude
     @Builder.Default
-    private List<Genre> genre = new ArrayList<>();
+    private Set<Genre> genre = new HashSet<>();
 
     @Enumerated(EnumType.STRING)
     private Classification classification;
 
-    @OneToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinColumn(name = "movie_id")
+    @OneToMany(cascade = CascadeType.DETACH, mappedBy = "movie")
     @ToString.Exclude
     @Builder.Default
     private List<Review> reviews = new ArrayList<>();

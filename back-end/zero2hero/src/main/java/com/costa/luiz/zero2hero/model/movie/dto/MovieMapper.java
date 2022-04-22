@@ -40,7 +40,6 @@ public interface MovieMapper {
                                         .id(review.getAuthor().getId())
                                         .name(review.getAuthor().getName())
                                         .build())
-                                .archived(review.isArchived())
                                 .review(review.getReview())
                                 .build()).collect(Collectors.toUnmodifiableList());
     }
