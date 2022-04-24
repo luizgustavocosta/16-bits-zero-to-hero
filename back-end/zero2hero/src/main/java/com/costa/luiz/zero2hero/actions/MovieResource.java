@@ -4,7 +4,6 @@ import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.MovieService;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
 import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
-import com.costa.luiz.zero2hero.repository.jdbc.MovieJDBCRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -22,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +62,7 @@ public class MovieResource {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public void save(@RequestBody MovieDto movieDto) {
+    public void save(@RequestBody @Valid MovieDto movieDto) {
         Movie movie = Movie.builder()
                 .name(movieDto.getName())
                 .year(movieDto.getYear())
@@ -72,7 +72,7 @@ public class MovieResource {
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void update(@RequestBody MovieDto movieDto) {
+    public void update(@Valid @RequestBody MovieDto movieDto) {
         service.update(movieMapper.toMovie(movieDto), movieDto.getGenreIds());
     }
 
@@ -82,11 +82,4 @@ public class MovieResource {
     }
 
 
-    MovieJDBCRepository movieJDBCRepository;
-
-    @GetMapping("jdbc")
-    public List<Movie> findAllByJDBC() {
-        List<Movie> movies = movieJDBCRepository.findAll();
-        return movies;
-    }
 }

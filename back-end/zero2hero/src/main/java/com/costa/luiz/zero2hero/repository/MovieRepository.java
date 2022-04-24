@@ -1,14 +1,14 @@
 package com.costa.luiz.zero2hero.repository;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+@Repository
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 
-public interface MovieRepository {
+    @Query(name = "DELETE FROM movies_genre WHERE id = ?1")
+    void deleteMovieById(Long id);
 
-    List<Movie> findAll();
-    Optional<Movie> findById(Long id);
-    Movie save(Movie movie);
-    void deleteById(Long id);
 }

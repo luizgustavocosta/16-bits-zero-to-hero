@@ -2,17 +2,21 @@ package com.costa.luiz.zero2hero.repository;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.Review;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
-public interface ReviewRepository {
+public interface ReviewRepository extends JpaRepository<Review, Long> {
 
-    Optional<Review> findById(Long id);
-    List<Review> findAll();
     List<Review> findAllByMovie(Movie movie);
-    Review save(Review review);
+
+    @Transactional
+    @Modifying
+    @Query(value = "delete from Review review where review.movie.id = :id")
     void deleteAllByMovieId(Long id);
 }

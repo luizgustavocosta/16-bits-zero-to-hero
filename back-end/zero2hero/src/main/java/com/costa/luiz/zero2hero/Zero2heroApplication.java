@@ -12,6 +12,7 @@ public class Zero2heroApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(Zero2heroApplication.class, args);
+        log.debug("Application started");
     }
 
 }
