@@ -1,7 +1,11 @@
 package com.costa.luiz.zero2hero.model.movie.dto;
 
 import com.costa.luiz.zero2hero.model.movie.Classification;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -13,6 +17,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class MovieDto {
 
     private Long id;

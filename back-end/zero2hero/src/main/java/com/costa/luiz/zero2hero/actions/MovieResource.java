@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,6 +59,7 @@ public class MovieResource {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(code = OK)
     public void delete(@PathVariable("id") Long id) {
         service.deleteById(id);
     }
@@ -71,7 +75,8 @@ public class MovieResource {
         service.newMovie(movie);
     }
 
-    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(code = OK)
     public void update(@Valid @RequestBody MovieDto movieDto) {
         service.update(movieMapper.toMovie(movieDto), movieDto.getGenreIds());
     }
