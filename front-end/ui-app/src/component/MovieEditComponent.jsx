@@ -259,8 +259,8 @@ class MovieEditComponent extends Component {
             </Box>
             <ButtonGroup aria-label="sticky table">
                 <Stack spacing={2} direction="row" ml={1} mt={5}>
-                    <Button name="Save" variant="contained" onClick={this.handleSubmit} type={"submit"}>Save</Button>
-                    <Button name="Cancel" component={Link} to={"/movies"} variant="outlined">Cancel</Button>
+                    <Button name="Save" variant="contained" onClick={this.handleSubmit} type={"submit"} title="Save">Save</Button>
+                    <Button name="Cancel" component={Link} to={"/movies"} variant="outlined" title="Cancel">Cancel</Button>
                 </Stack>
             </ButtonGroup>
         </div>

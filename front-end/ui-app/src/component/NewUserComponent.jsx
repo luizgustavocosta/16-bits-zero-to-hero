@@ -70,10 +70,11 @@ class NewUserComponent extends Component {
                     </FormGroup>
 
                 </Box>
-                <Button variant="contained" onClick={this.handleClickOpen}>
+                <Button variant="contained" onClick={this.handleClickOpen} title="Save">
                     Save
                 </Button>
                 <Dialog
+                    title="confirmationDialog"
                     open={this.state.open}
                     keepMounted
                     aria-describedby="alert-dialog-slide-description"
