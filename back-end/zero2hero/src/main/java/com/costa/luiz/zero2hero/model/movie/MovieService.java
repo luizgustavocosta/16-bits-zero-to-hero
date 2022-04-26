@@ -43,7 +43,7 @@ public class MovieService {
         movieRepository.deleteById(id);
     }
 
-    public void update(Movie movie, List<Long> genreIds) {
+    public void save(Movie movie, List<Long> genreIds) {
         Set<Genre> genres = genreIds.stream()
                 .filter(Objects::nonNull)
                 .map(id -> genreRepository.findById(id).orElse(null))

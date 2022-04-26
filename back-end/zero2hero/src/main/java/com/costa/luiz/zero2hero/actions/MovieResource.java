@@ -12,15 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -50,6 +42,7 @@ public class MovieResource {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "500", description = "Server error")
     })
+    @ResponseStatus(code = OK)
     public ResponseEntity<List<MovieDto>> getAll() {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(service.findAll()
@@ -64,27 +57,16 @@ public class MovieResource {
         service.deleteById(id);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public void save(@RequestBody @Valid MovieDto movieDto) {
-        Movie movie = Movie.builder()
-                .name(movieDto.getName())
-                .year(movieDto.getYear())
-                .build();
-        //FIXME add MapStruct
-        service.newMovie(movie);
-    }
-
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = OK)
     public void update(@Valid @RequestBody MovieDto movieDto) {
-        service.update(movieMapper.toMovie(movieDto), movieDto.getGenreIds());
+        service.save(movieMapper.toMovie(movieDto), movieDto.getGenreIds());
     }
 
     @GetMapping(path = "/{id}")
+    @ResponseStatus(code = OK)
     public MovieDto getById(@PathVariable("id") Long id) {
         return movieMapper.toDto(service.findById(id));
     }
-
 
 }

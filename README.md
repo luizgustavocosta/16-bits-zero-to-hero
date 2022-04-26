@@ -20,12 +20,17 @@ Create a project with front-end and back-end to run easily locally or through th
 
 ![Architecture](documentation/images/Architectural_diagram.png)
 
+### Database diagram
+![database](documentation/images/ER_Diagram.png)
+
 ### Tech / Framework used
 
 ![fe](documentation/images/front-end-language-32.png)
 - JavaScript
 - React 17.0.2
 - MUI 5
+- Jest
+- GitHub actions
 
 ![be](documentation/images/java-development-32.png)
 - Java 11
@@ -34,6 +39,8 @@ Create a project with front-end and back-end to run easily locally or through th
 - Hibernate
 - Swagger - OpenAPI 1.6.7
 - MapStruct
+- JUnit 5
+- GitHub actions
 
 ### Back-end code style
 <hr>
