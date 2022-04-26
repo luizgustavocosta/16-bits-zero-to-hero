@@ -42,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST,"/movies").access("hasRole(" + "'"+edit +"')")
+                .antMatchers(HttpMethod.DELETE,"/movies/{id}").access("hasRole(" + "'"+edit +"')")
                 .antMatchers("/movies/{id}").access("hasRole(" + "'"+view +"')")
                 .anyRequest().authenticated()
                 .and()

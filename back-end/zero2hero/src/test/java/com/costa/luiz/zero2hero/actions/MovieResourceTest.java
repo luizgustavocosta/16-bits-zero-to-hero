@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(MovieResource.class)
@@ -35,19 +36,19 @@ class MovieResourceTest {
     MovieService service;
 
     @Test
-    @WithMockUser
+    @WithMockUser(roles={"OTHERS"})
     void deleteMovie() throws Exception {
-
         doNothing().when(service).deleteById(ID);
-        this.mockMvc.perform(delete(PATH+"/"+ ID)
+        this.mockMvc.perform(delete(PATH + "/{id}",String.valueOf(ID))
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
+                .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
     void deleteBlockedForUserUnauthorized() throws Exception {
-        this.mockMvc.perform(delete(PATH+"/"+ ID)
+        this.mockMvc.perform(delete(PATH + "/{id}", ID)
                         .accept(MediaType.APPLICATION_JSON_VALUE)
                         .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isUnauthorized());
@@ -70,8 +71,8 @@ class MovieResourceTest {
 
         this.mockMvc.perform(put(PATH)
                         .content(request)
-                .accept(MediaType.APPLICATION_JSON_VALUE)
-                .contentType(MediaType.APPLICATION_JSON_VALUE))
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isOk());
     }
 }
