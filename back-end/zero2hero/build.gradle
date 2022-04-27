@@ -2,10 +2,12 @@ plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'jacoco'
+	id 'org.sonarqube' version '2.8'
 }
-
 group = 'com.costa.luiz'
 version = '0.0.1-SNAPSHOT'
+description = '16-bits-zero-2-hero'
 sourceCompatibility = '11'
 
 configurations {
@@ -41,7 +43,20 @@ dependencies {
 	implementation('org.springframework.boot:spring-boot-starter-validation')
 
 }
-
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+sonarqube {
+	properties {
+		property 'sonar.host.url', 'https://sonarcloud.io'
+		property 'sonar.organization', 'luizgustavocosta'
+		property 'sonar.projectKey', 'luizgustavocosta_16-bits-zero-to-hero'
+	}
 }

@@ -28,3 +28,10 @@ http://localhost:8080/swagger-ui/index.html
 
 curl -v -u boba:fett http://localhost:8080/movies/1
 curl -v -u james:bond http://localhost:8080/movies/1
+
+
+Jacoco
+https://reflectoring.io/jacoco/
+
+Sonar
+https://github.com/SonarSource/sonarcloud-github-action-samples/tree/gradle
