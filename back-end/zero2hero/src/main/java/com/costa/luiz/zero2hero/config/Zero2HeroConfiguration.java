@@ -1,12 +1,12 @@
-package com.costa.luiz.zero2hero.beans;
+package com.costa.luiz.zero2hero.config;
 
-import com.costa.luiz.zero2hero.model.movie.dto.GenreMapper;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
+import com.costa.luiz.zero2hero.service.dto.GenreMapper;
+import com.costa.luiz.zero2hero.service.dto.MovieMapper;
 import org.springdoc.core.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 
 @org.springframework.context.annotation.Configuration
-public class Configuration {
+public class Zero2HeroConfiguration {
 
     @Bean
     public GenreMapper genreMapper() {

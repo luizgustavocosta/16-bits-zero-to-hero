@@ -1,4 +1,4 @@
-package com.costa.luiz.zero2hero.model.genre;
+package com.costa.luiz.zero2hero.model.movie;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

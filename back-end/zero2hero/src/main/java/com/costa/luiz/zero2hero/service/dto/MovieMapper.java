@@ -1,4 +1,4 @@
-package com.costa.luiz.zero2hero.model.movie.dto;
+package com.costa.luiz.zero2hero.service.dto;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
 import com.costa.luiz.zero2hero.model.movie.Review;
@@ -6,7 +6,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,15 +16,15 @@ public interface MovieMapper {
 
     @Mapping(target = "genreAsString", expression = "java(String.join(\",\"," +
             "movie.getGenre().stream()" +
-            ".map(com.costa.luiz.zero2hero.model.genre.Genre::getName)" +
+            ".map(com.costa.luiz.zero2hero.model.movie.Genre::getName)" +
             ".collect(java.util.stream.Collectors.toList())))")
     @Mapping(target = "reviews", expression = "java(reviews(movie.getReviews()))")
-    @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.genre.Genre::getId).collect(java.util.stream.Collectors.toList()))")
+    @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.movie.Genre::getId).collect(java.util.stream.Collectors.toList()))")
     MovieDto toDto(Movie movie);
 
     @Mapping(target = "reviews", ignore = true)
     @Mapping(target = "genreAsString", ignore = true)
-    @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.genre.Genre::getId).collect(java.util.stream.Collectors.toList()))")
+    @Mapping(target = "genreIds", expression = "java(movie.getGenre().stream().map(com.costa.luiz.zero2hero.model.movie.Genre::getId).collect(java.util.stream.Collectors.toList()))")
     MovieDto toDtoForReview(Movie movie);
 
     @Mapping(target = "genre", ignore = true)

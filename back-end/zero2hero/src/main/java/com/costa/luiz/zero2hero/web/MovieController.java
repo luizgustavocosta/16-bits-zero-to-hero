@@ -1,9 +1,9 @@
-package com.costa.luiz.zero2hero.actions;
+package com.costa.luiz.zero2hero.web;
 
 import com.costa.luiz.zero2hero.model.movie.Movie;
-import com.costa.luiz.zero2hero.model.movie.MovieService;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
+import com.costa.luiz.zero2hero.service.MovieService;
+import com.costa.luiz.zero2hero.service.dto.MovieDto;
+import com.costa.luiz.zero2hero.service.dto.MovieMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -24,7 +24,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @Tag(name="Movies")
 @RequestMapping("/movies")
-public class MovieResource {
+public class MovieController {
 
     private final MovieService service;
 

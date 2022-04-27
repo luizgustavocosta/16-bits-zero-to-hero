@@ -1,9 +1,9 @@
-package com.costa.luiz.zero2hero.actions;
+package com.costa.luiz.zero2hero.web;
 
 import com.costa.luiz.zero2hero.model.movie.Review;
-import com.costa.luiz.zero2hero.model.movie.dto.AuthorDto;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
-import com.costa.luiz.zero2hero.model.movie.dto.ReviewDto;
+import com.costa.luiz.zero2hero.service.dto.AuthorDto;
+import com.costa.luiz.zero2hero.service.dto.MovieMapper;
+import com.costa.luiz.zero2hero.service.dto.ReviewDto;
 import com.costa.luiz.zero2hero.repository.ReviewRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 @Tag(name="Reviews")
-public class ReviewResource {
+public class ReviewController {
 
     private final ReviewRepository reviewRepository;
 

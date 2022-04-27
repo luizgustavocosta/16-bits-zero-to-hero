@@ -1,6 +1,8 @@
-package com.costa.luiz.zero2hero.model.movie;
+package com.costa.luiz.zero2hero.service;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.movie.Genre;
+import com.costa.luiz.zero2hero.model.movie.Movie;
+import com.costa.luiz.zero2hero.model.movie.Review;
 import com.costa.luiz.zero2hero.repository.GenreRepository;
 import com.costa.luiz.zero2hero.repository.MovieRepository;
 import com.costa.luiz.zero2hero.repository.ReviewRepository;

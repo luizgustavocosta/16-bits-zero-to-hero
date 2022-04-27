@@ -1,6 +1,6 @@
-package com.costa.luiz.zero2hero.data;
+package com.costa.luiz.zero2hero.startup;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.movie.Genre;
 import com.costa.luiz.zero2hero.model.movie.Author;
 import com.costa.luiz.zero2hero.model.movie.Classification;
 import com.costa.luiz.zero2hero.model.movie.Movie;

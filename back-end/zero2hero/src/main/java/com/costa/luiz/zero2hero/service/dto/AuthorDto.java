@@ -1,4 +1,4 @@
-package com.costa.luiz.zero2hero.model.movie.dto;
+package com.costa.luiz.zero2hero.service.dto;
 
 import com.costa.luiz.zero2hero.model.movie.Review;
 import lombok.AllArgsConstructor;

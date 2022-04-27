@@ -1,6 +1,5 @@
 package com.costa.luiz.zero2hero.model.movie;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;

@@ -1,9 +1,9 @@
-package com.costa.luiz.zero2hero.actions;
+package com.costa.luiz.zero2hero.web;
 
 import com.costa.luiz.zero2hero.model.movie.Classification;
-import com.costa.luiz.zero2hero.model.movie.MovieService;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieDto;
-import com.costa.luiz.zero2hero.model.movie.dto.MovieMapper;
+import com.costa.luiz.zero2hero.service.MovieService;
+import com.costa.luiz.zero2hero.service.dto.MovieDto;
+import com.costa.luiz.zero2hero.service.dto.MovieMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(MovieResource.class)
-class MovieResourceTest {
+@WebMvcTest(MovieController.class)
+class MovieControllerTest {
 
     private final String PATH = "/movies";
 

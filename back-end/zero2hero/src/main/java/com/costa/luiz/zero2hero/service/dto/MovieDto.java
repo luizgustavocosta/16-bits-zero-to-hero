@@ -1,11 +1,10 @@
-package com.costa.luiz.zero2hero.model.movie.dto;
+package com.costa.luiz.zero2hero.service.dto;
 
 import com.costa.luiz.zero2hero.model.movie.Classification;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -13,7 +12,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Data

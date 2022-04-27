@@ -1,6 +1,6 @@
-package com.costa.luiz.zero2hero.actions;
+package com.costa.luiz.zero2hero.web;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.movie.Genre;
 import com.costa.luiz.zero2hero.repository.GenreRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/api/v1/genres")
 @Tag(name="Genres")
-public class GenreResource {
+public class GenreController {
 
     private final GenreRepository repository;
 

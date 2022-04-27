@@ -1,6 +1,6 @@
-package com.costa.luiz.zero2hero.actions;
+package com.costa.luiz.zero2hero.web;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.movie.Genre;
 import com.costa.luiz.zero2hero.repository.GenreRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(GenreResource.class)
-class GenreResourceTest {
+@WebMvcTest(GenreController.class)
+class GenreControllerTest {
 
     @Autowired
     private MockMvc mockMvc;

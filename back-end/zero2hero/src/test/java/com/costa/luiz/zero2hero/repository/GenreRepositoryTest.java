@@ -1,6 +1,6 @@
 package com.costa.luiz.zero2hero.repository;
 
-import com.costa.luiz.zero2hero.model.genre.Genre;
+import com.costa.luiz.zero2hero.model.movie.Genre;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

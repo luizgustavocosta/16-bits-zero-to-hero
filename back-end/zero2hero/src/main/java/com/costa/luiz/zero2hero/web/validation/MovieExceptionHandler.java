@@ -1,4 +1,4 @@
-package com.costa.luiz.zero2hero.actions.validation;
+package com.costa.luiz.zero2hero.web.validation;
 
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -15,8 +15,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @ControllerAdvice
@@ -45,6 +43,5 @@ public class MovieExceptionHandler extends ResponseEntityExceptionHandler {
     public void constraintViolationException(HttpServletResponse response) throws IOException {
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
-
 
 }
