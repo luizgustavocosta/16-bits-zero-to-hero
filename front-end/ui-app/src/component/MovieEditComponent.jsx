@@ -204,6 +204,8 @@ class MovieEditComponent extends Component {
                 <TextField id="outlined-basic" label="Language" variant="outlined"
                            value={this.state.movie.language || ''}
                            onChange={event => this.handleFormChange(event, "language")}/>
+            </Box>
+            <Box>
                 <Select
                     sx={{ml: 1, maxWidth: 790}}
                     labelId="movie-country"
