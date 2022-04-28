@@ -1,13 +1,12 @@
 package com.costa.luiz.zero2hero.web;
 
 import com.costa.luiz.zero2hero.model.movie.Review;
+import com.costa.luiz.zero2hero.repository.ReviewRepository;
 import com.costa.luiz.zero2hero.service.dto.AuthorDto;
 import com.costa.luiz.zero2hero.service.dto.MovieMapper;
 import com.costa.luiz.zero2hero.service.dto.ReviewDto;
-import com.costa.luiz.zero2hero.repository.ReviewRepository;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +22,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/v1/reviews")
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 @Tag(name="Reviews")
 public class ReviewController {
 
@@ -34,7 +32,6 @@ public class ReviewController {
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public void deleteBy(@PathVariable Long id) {
-        log.info("The review {} will be deleted", id);
         Optional<Review> optionalReview = reviewRepository.findById(id);
         if (optionalReview.isPresent()) {
             Review review = optionalReview.get();
@@ -44,7 +41,6 @@ public class ReviewController {
 
     @GetMapping
     public List<ReviewDto> findAll() {
-        log.info("Looking for all reviews");
         return reviewRepository.findAll().stream()
                 .map(this::getReviewDto)
                 .collect(Collectors.toUnmodifiableList());
@@ -52,7 +48,6 @@ public class ReviewController {
 
     @GetMapping(path = "/{id}")
     public ReviewDto findById(@PathVariable Long id) {
-        log.info("Looking for id {}", id);
         Review review = reviewRepository.findById(id).orElseThrow();
         return getReviewDto(review);
     }
