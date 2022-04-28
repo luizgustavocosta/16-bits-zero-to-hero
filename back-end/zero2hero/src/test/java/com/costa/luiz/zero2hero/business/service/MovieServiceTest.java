@@ -6,13 +6,11 @@ import com.costa.luiz.zero2hero.persistence.repository.GenreRepository;
 import com.costa.luiz.zero2hero.persistence.repository.MovieRepository;
 import com.costa.luiz.zero2hero.persistence.repository.ReviewRepository;
 import com.costa.luiz.zero2hero.persistence.repository.movie.Movie;
-import org.assertj.core.data.Index;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +20,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 class MovieServiceTest {
 
