@@ -25,6 +25,13 @@ Create a project with front-end and back-end to run easily locally or through th
 ### Database diagram
 ![database](documentation/images/ER_Diagram.png)
 
+### Architecture 
+#### Layered Architecture Style
+
+The layered architecture, also known as the n-tiered architecture style, is one of the most common architecture styles. This style of architecture is the de facto standard for most applications, primarily because of its simplicity, familiarity, and low cost. It is also a very natural way to develop applications due to Conway’s law, which states that organizations that design systems are constrained to produce designs which are copies of the communication structures of these organizations. In most organizations there are user interface (UI) developers, backend developers, rules developers, and database experts (DBAs). These organizational layers fit nicely into the tiers of a traditional layered architecture, making it a natural choice for many business applications. The layered architecture style also falls into several architectural anti-patterns, including the architecture by implication anti-pattern and the accidental architecture anti-pattern. If a developer or architect is unsure which architecture style they are using, or if an Agile development team “just starts coding,” chances are good that it is the layered architecture style they are implementing. (Mark Richards, Neal Ford)
+
+![Layer Architecture](documentation/images/Layer.png)
+
 ### Tech / Framework used
 
 ![fe](documentation/images/front-end-language-32.png)
@@ -97,7 +104,7 @@ Steps
 7. Back-end up and running ![Back-end](documentation/images/Gitpod-backend.png) 
 8. Open the file ``application.json`` inside the UI project and update the value for ``SERVER_URL``. The server URL should be the back-end URL.
 9. Type the command ``cd front-end/ui-app && npm install && npm start``
-10. Voilá app up and running ![Front-end](documentation/images/React-frontend.png)
+10. Voilà app up and running ![Front-end](documentation/images/React-frontend.png)
 
 ### References
 
@@ -106,6 +113,8 @@ Steps
 - https://github.com/in28minutes/spring-boot-react-fullstack-examples
 - https://github.com/joelparkerhenderson/architecture-decision-record
 - https://docs.sonarcloud.io/advanced-setup/automatic-analysis/
+- https://github.com/zhangjunhd/reading-notes/blob/master/software/FundamentalsOfSoftwareArchitecture.md
+- https://www.archunit.org/userguide/html/000_Index.html
 
 ### License
 <hr>

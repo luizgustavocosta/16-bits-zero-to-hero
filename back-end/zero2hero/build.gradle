@@ -41,6 +41,8 @@ dependencies {
 	implementation "org.springdoc:springdoc-openapi-ui:1.6.7"
 	// Validator
 	implementation('org.springframework.boot:spring-boot-starter-validation')
+	// Architecture
+	testImplementation 'com.tngtech.archunit:archunit:0.23.1'
 
 }
 tasks.named('test') {
