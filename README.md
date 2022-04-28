@@ -7,6 +7,8 @@
 
 [![Java CI](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml/badge.svg)](https://github.com/luizgustavocosta/16-bits-zero-to-hero/actions/workflows/gradle.yml)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=luizgustavocosta_16-bits-zero-to-hero&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=luizgustavocosta_16-bits-zero-to-hero)
+
 ### Project title
 <hr>
 🗒 Zero to hero 🚀 using React and SpringBoot
@@ -103,6 +105,7 @@ Steps
 - https://spring-petclinic.github.io/
 - https://github.com/in28minutes/spring-boot-react-fullstack-examples
 - https://github.com/joelparkerhenderson/architecture-decision-record
+- https://docs.sonarcloud.io/advanced-setup/automatic-analysis/
 
 ### License
 <hr>
