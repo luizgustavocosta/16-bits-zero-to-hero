@@ -12,14 +12,14 @@ import java.util.Arrays;
 @Aspect
 @Component
 @Slf4j
-public class LoggingWeb {
+public class LoggingByAspect {
 
-    @Pointcut("within(com.costa.luiz.zero2hero.web..*)")
-    public void applicationPackagePointcut() {
-    }
+    @Pointcut("within(com.costa.luiz.zero2hero.web..*)" +
+            "|| within(com.costa.luiz.zero2hero.repository..*)")
+    public void packagePointCut() {}
 
-    @Around("applicationPackagePointcut()")
-    public Object logAround(ProceedingJoinPoint joinPoint) throws Exception {
+    @Around("packagePointCut()")
+    public Object logAround(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("In -> {}.{}() with argument -> {}",
                 joinPoint.getSignature().getDeclaringTypeName(),
                 joinPoint.getSignature().getName(),
