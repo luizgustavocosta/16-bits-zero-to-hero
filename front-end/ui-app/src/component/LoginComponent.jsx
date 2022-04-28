@@ -41,7 +41,7 @@ class LoginComponent extends Component {
             .executeBasicAuthenticationService(this.state.username, this.state.password)
             .then(value => {
                 AuthenticationService.registerSuccessfulLogin(this.state.username, this.state.password, value.data.roles)
-                this.props.history.push(applicationConfig.MOVIE_SERVICE)
+                this.props.history.push("/movies")
             }).catch(() => {
             this.setState({showSuccessMessage: false})
             this.setState({hasLoginFailed: true})
