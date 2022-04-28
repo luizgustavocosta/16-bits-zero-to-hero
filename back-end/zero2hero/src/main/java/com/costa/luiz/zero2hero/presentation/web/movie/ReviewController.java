@@ -1,9 +1,6 @@
 package com.costa.luiz.zero2hero.presentation.web.movie;
 
 import com.costa.luiz.zero2hero.business.service.ReviewService;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Review;
-import com.costa.luiz.zero2hero.business.service.dto.AuthorDto;
-import com.costa.luiz.zero2hero.business.service.dto.MovieMapper;
 import com.costa.luiz.zero2hero.business.service.dto.ReviewDto;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +13,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @RequestMapping("/api/v1/reviews")
 @RestController
@@ -26,8 +21,6 @@ import java.util.stream.Collectors;
 public class ReviewController {
 
     private final ReviewService reviewService;
-
-    private final MovieMapper movieMapper;
 
     @DeleteMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)

@@ -30,7 +30,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Profile({"in-memory", "default"})
 @Slf4j
 @Component
 @RequiredArgsConstructor
@@ -79,7 +78,7 @@ public class LoadOnStartup {
                     String[] columns = row.split(",");
                     String[] genres = columns[2].split(" ");
                     Set<Genre> genreList = getGenres(genres);
-                    new ArrayList<>(genreList).forEach(genreRepository::save);
+                    genreRepository.saveAll(new ArrayList<>(genreList));
                     Movie movie = Movie.builder()
                             .name(columns[0].trim())
                             .classification(Classification.get(columns[1].trim()))

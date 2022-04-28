@@ -27,7 +27,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Movies")
-@RequestMapping("/movies")
+@RequestMapping("/api/v1/movies")
 public class MovieController {
 
     private final MovieService service;

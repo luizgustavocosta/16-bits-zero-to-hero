@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(MovieController.class)
 class MovieControllerTest {
 
-    private final String PATH = "/movies";
+    private final String PATH = "/api/v1/movies";
 
     private final long ID = 42L;
 
