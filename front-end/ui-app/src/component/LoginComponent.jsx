@@ -9,7 +9,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {Alert, AlertTitle} from "@material-ui/lab";
 import {Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from "@material-ui/core";
-import applicationConfig from './../application.json'
 
 class LoginComponent extends Component {
 
