@@ -21,9 +21,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ResourceUtils;
 
 import java.nio.file.Files;
+import java.security.SecureRandom;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -104,6 +106,9 @@ public class LoadOnStartup {
         movieRepository.findAll()
                 .forEach(movie -> {
                     Author author = authorRepository.findAll().get(atomicInteger.incrementAndGet());
+                    SecureRandom random = new SecureRandom(); // Avoid security-sensitive
+                    byte bytes[] = new byte[20];
+                    random.nextBytes(bytes); // Check if bytes is used for hashing, encryption, etc...
                     if (ThreadLocalRandom.current().nextInt() % 2 == 0) {
                         Review review = createReview(movie, author);
                         author.getReviews().add(review);
