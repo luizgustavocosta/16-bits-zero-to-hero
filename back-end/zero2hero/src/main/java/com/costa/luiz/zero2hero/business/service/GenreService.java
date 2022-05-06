@@ -3,7 +3,6 @@ package com.costa.luiz.zero2hero.business.service;
 import com.costa.luiz.zero2hero.business.service.dto.GenreDto;
 import com.costa.luiz.zero2hero.business.service.dto.GenreMapper;
 import com.costa.luiz.zero2hero.persistence.repository.GenreRepository;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Genre;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

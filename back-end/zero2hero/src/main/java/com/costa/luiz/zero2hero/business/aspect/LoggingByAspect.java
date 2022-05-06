@@ -14,8 +14,8 @@ import java.util.Arrays;
 @Slf4j
 public class LoggingByAspect {
 
-    @Pointcut("within(com.costa.luiz.zero2hero.web..*)" +
-            "|| within(com.costa.luiz.zero2hero.repository..*)")
+    @Pointcut("within(com.costa.luiz.zero2hero.presentation.web..*)" +
+            "|| within(com.costa.luiz.zero2hero.persistence.repository..*)")
     public void packagePointCut() {}
 
     @Around("packagePointCut()")

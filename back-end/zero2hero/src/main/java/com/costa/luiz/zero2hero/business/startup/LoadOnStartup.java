@@ -1,14 +1,10 @@
 package com.costa.luiz.zero2hero.business.startup;
 
-import com.costa.luiz.zero2hero.persistence.repository.movie.Genre;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Author;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Classification;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Movie;
-import com.costa.luiz.zero2hero.persistence.repository.movie.Review;
 import com.costa.luiz.zero2hero.persistence.repository.AuthorRepository;
 import com.costa.luiz.zero2hero.persistence.repository.GenreRepository;
 import com.costa.luiz.zero2hero.persistence.repository.MovieRepository;
 import com.costa.luiz.zero2hero.persistence.repository.ReviewRepository;
+import com.costa.luiz.zero2hero.persistence.repository.movie.*;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -18,17 +14,21 @@ import org.springframework.context.event.EventListener;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.ResourceUtils;
 
-import java.nio.file.Files;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.Objects.nonNull;
 
 @Profile({"in-memory", "default"})
 @Slf4j
@@ -44,15 +44,15 @@ public class LoadOnStartup {
 
     private final ReviewRepository reviewRepository;
 
+    private final ClassLoader classLoader = this.getClass().getClassLoader();
+
     @EventListener(ApplicationReadyEvent.class)
     @Order(0)
-    @SneakyThrows
     public void insertGenre() {
         log.info("Preparing to insert genres");
-        Files.readAllLines(ResourceUtils.getFile("classpath:data/genres.csv").toPath())
-                .stream()
-                .skip(1)
-                .forEachOrdered(row -> genreRepository.save(Genre.builder().name(row.trim()).build()));
+        readCSV("genres.csv")
+                .forEach(row -> genreRepository.save(Genre.builder().name(row.trim()).build()));
+        log.info("Rows inserted {}", genreRepository.findAll().size());
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -60,10 +60,8 @@ public class LoadOnStartup {
     @SneakyThrows
     public void insertAuthors() {
         log.info("Preparing to insert authors");
-        Files.readAllLines(ResourceUtils.getFile("classpath:data/authors.csv").toPath())
-                .stream()
-                .skip(1)
-                .forEachOrdered(row -> authorRepository.save(Author.builder().name(row.trim()).build()));
+        readCSV("authors.csv")
+                .forEach(row -> authorRepository.save(Author.builder().name(row.trim()).build()));
     }
 
     @EventListener(ApplicationReadyEvent.class)
@@ -72,9 +70,7 @@ public class LoadOnStartup {
     @Transactional
     public void insertMovies() {
         log.info("Preparing to insert data");
-        Files.readAllLines(ResourceUtils.getFile("classpath:data/movies.csv").toPath())
-                .stream()
-                .skip(1)
+        readCSV("movies.csv")
                 .forEach(row -> {
                     String[] columns = row.split(",");
                     String[] genres = columns[2].split(" ");
@@ -133,5 +129,19 @@ public class LoadOnStartup {
                 .filter(row -> !row.isEmpty())
                 .map(genreRepository::findByName)
                 .collect(Collectors.toUnmodifiableSet());
+    }
+
+    public List<String> readCSV(String fileName) {
+        try (InputStream resourceAsStream = classLoader.getResourceAsStream("data/" + fileName)) {
+            if (nonNull(resourceAsStream)) {
+                BufferedReader reader = new BufferedReader(new InputStreamReader(resourceAsStream));
+                return reader.lines()
+                        .skip(1)
+                        .collect(Collectors.toUnmodifiableList());
+            }
+        } catch (Exception exception) {
+            log.error(exception.getMessage(), exception);
+        }
+        return Collections.emptyList();
     }
 }
