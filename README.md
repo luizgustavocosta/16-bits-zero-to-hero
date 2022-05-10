@@ -64,11 +64,15 @@ The layered architecture, also known as the n-tiered architecture style, is one 
 ### How to use it?
 <hr>
 
+#### Docker
+
+`docker-compose up`
+
 #### Locally
 ```
  cd back-end/zero2hero && ./gradlew bootRun
 ```
-[Swagger documentation](http://localhost:8080/swagger-ui/index.html)
+[Swagger documentation](http://127.0.0.1:8080/swagger-ui/index.html)
 
 ##### Disable security
 #### Back-end
@@ -78,7 +82,7 @@ The layered architecture, also known as the n-tiered architecture style, is one 
 ```
 
 ##### Endpoints
-[Swagger documentation](http://localhost:8080/swagger-ui/index.html)
+[Swagger documentation](http://127.0.0.1:8080/swagger-ui/index.html)
 
 
 #### Front-end
@@ -87,7 +91,7 @@ The layered architecture, also known as the n-tiered architecture style, is one 
 cd front-end/ui-app && npm install && npm start
 ```
 
-Open this [link](http://localhost:3000/) and use the Username and Password on the login screen
+Open this [link](http://127.0.0.1:3000/) and use the Username and Password on the login screen
 
 <kdb><img src="https://github.com/luizgustavocosta/16-bits-zero-to-hero/blob/main/documentation/images/login.png"/></kdb>
 

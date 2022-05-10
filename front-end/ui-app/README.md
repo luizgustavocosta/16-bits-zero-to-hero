@@ -77,3 +77,18 @@ https://www.alura.com.br/artigos/o-que-e-modelo-anemico-e-por-que-fugir-dele
 
 # MUI React
 https://mui.com/
+
+
+## Docker
+```shell
+docker build -t 16-bits-ui:0.0.1 .
+```
+
+Run
+```shell
+docker run --name 16-bits-ui  -p3000:3000 eda7e37e2b75
+```
+
+### References
+https://dev.to/karanpratapsingh/dockerize-your-react-app-4j2e
+https://blog.codeexpertslearning.com.br/dockerizando-uma-aplicação-react-js-f6a22e93bc5d
