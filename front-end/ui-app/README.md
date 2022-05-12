@@ -81,12 +81,17 @@ https://mui.com/
 
 ## Docker
 ```shell
-docker build -t 16-bits-ui:0.0.1 .
+docker build -t 16bits/zero2hero-fe:0.0.1 .
 ```
 
 Run
 ```shell
-docker run --name 16-bits-ui  -p3000:3000 eda7e37e2b75
+docker run --name 16bits-ui  -p3000:3000 eda7e37e2b75
+```
+
+Publish
+```shell
+docker push 16bits/zero2hero-fe:0.0.1
 ```
 
 ### References
