@@ -27,21 +27,21 @@ After have the artifact, let's tell to Docker create our image
 
 ### Creating the image
 ```shell
-docker build -t 16-bits/zero2hero:0.0.1 .
+docker build -t 16bits/zero2hero-be:0.0.1 .
 ```
 or 
 ```shell
-docker build --build-arg JAR_FILE=build/libs/\*.jar -t 16bits/zero2hero:0.0.2 .
+docker build --build-arg JAR_FILE=build/libs/\*.jar -t 16bits/zero2hero-be:0.0.1 .
 ```
 
 ### Run the image
 
 The value `88699e939bef` is the image id. 
 
-Check using the command `docker image ls | grep 16-bits`
+Check using the command `docker image ls | grep 16bits`
 
 ```shell
-docker run --name 16-bits-hero -p8080:8080 -d 88699e939bef
+docker run --name 16bits-hero -p8080:8080 -d 88699e939bef
 ```
 ### References
 
