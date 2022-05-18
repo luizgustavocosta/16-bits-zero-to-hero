@@ -2,14 +2,14 @@ version: '3'
 services:
 
   16-bits-back-end:
-    image: "16-bits/zero2hero:0.0.1"
+    image: "16-bits/zero2hero-be:0.0.1"
     container_name: 16-bits-back-end
     ports:
       - "8080:8080"
     environment:
       - SPRING.PROFILES.ACTIVE=default
   16-bits-front-end:
-    image: "16-bits-ui:0.0.1"
+    image: "16bits/zero2hero-fe:0.0.1"
     container_name: 16-bits-front-end
     ports:
       - "3000:3000"

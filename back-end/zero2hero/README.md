@@ -41,7 +41,7 @@ The value `88699e939bef` is the image id.
 Check using the command `docker image ls | grep 16bits`
 
 ```shell
-docker run --name 16bits-back -p8080:8080 -d 88699e939bef
+docker run --name 16bits-hero -p8080:8080 -d 88699e939bef
 ```
 
 ### Publish the image
