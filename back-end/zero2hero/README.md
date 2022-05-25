@@ -20,7 +20,7 @@ After the application has been started the following address will be available
 
 ### Build project
 ```bash
-chmod +x gradlew && ./gradlew build
+chmod +x gradlew && ./gradlew clean build
 ```
 
 After have the artifact, let's tell to Docker create our image
