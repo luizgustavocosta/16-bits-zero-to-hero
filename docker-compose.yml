@@ -1,8 +1,7 @@
 version: '3'
 services:
-
   16-bits-back-end:
-    image: "16-bits/zero2hero-be:0.0.1"
+    image: "16bits/zero2hero-be:0.0.1"
     container_name: 16-bits-back-end
     ports:
       - "8080:8080"
@@ -13,5 +12,3 @@ services:
     container_name: 16-bits-front-end
     ports:
       - "3000:3000"
-    links:
-      - 16-bits-back-end

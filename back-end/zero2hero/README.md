@@ -20,7 +20,7 @@ After the application has been started the following address will be available
 
 ### Build project
 ```bash
-chmod +x gradlew && ./gradlew build
+chmod +x gradlew && ./gradlew clean build
 ```
 
 After have the artifact, let's tell to Docker create our image
@@ -61,3 +61,4 @@ docker push 16bits/zero2hero-be:0.0.1
 - [Swagger Spring Boot issue](https://www.youtube.com/watch?v=PpvnlaEHz2o&ab_channel=FromDeveloperToDeveloper)
 - [Jacoco](https://reflectoring.io/jacoco/)
 - [Sonar](https://github.com/SonarSource/sonarcloud-github-action-samples/tree/gradle)
+- [CockroachDB](https://hub.docker.com/r/cockroachdb/cockroach/tags)

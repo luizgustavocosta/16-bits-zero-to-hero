@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+  16-bits-cockroach:
+    image: cockroachdb/cockroach:v22.1.0
+    container_name: 16-bits-cockroach
+    ports:
+      - "26257:26257"
+      - "8081:8080"
+    command: start-single-node --insecure
+    volumes:
+      - "${PWD}/cockroach-data/16-bits-cockroach:/cockroach/cockroach-data"
+  16-bits-back-end:
+    depends_on:
+      - 16-bits-cockroach
+    image: "16bits/zero2hero-be:0.0.2"
+    container_name: 16-bits-back-end
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_APPLICATION_JSON: '{
+          "spring.profiles.active":"default,cockroach",
+          "spring.datasource.url"  : "jdbc:postgresql://16-bits-cockroach:26257/defaultdb?sslmode=disable&user=root"
+      }'
+  16-bits-front-end:
+    image: "16bits/zero2hero-fe:0.0.1"
+    container_name: 16-bits-front-end
+    ports:
+      - "3000:3000"

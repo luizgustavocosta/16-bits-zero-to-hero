@@ -30,7 +30,7 @@ import java.util.stream.Stream;
 
 import static java.util.Objects.nonNull;
 
-@Profile({"in-memory", "default"})
+@Profile({"in-memory"})
 @Slf4j
 @Component
 @RequiredArgsConstructor
