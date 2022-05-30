@@ -4,6 +4,7 @@ plugins {
 	id 'java'
 	id 'jacoco'
 	id 'org.sonarqube' version '3.3'
+	id 'org.unbroken-dome.test-sets' version '4.0.0' //IT
 }
 group = 'com.costa.luiz'
 version = '0.0.1-SNAPSHOT'
@@ -50,6 +51,18 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+// IT
+testSets {
+	integrationTest
+}
+
+// Make all tests use JUnit 5
+tasks.withType(Test) {
+	useJUnitPlatform()
+}
+
+check.dependsOn integrationTest
 
 jacocoTestReport {
 	reports {

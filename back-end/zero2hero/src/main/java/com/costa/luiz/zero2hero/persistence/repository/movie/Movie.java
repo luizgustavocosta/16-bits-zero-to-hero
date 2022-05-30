@@ -6,11 +6,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Getter
 @Setter
@@ -33,7 +29,8 @@ public class Movie {
     @CreationTimestamp
     private LocalDateTime lastUpdate;
 
-    @ManyToMany(cascade = {
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE,
     })
