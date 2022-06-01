@@ -108,7 +108,7 @@ class MovieEditComponent extends Component {
     async handleSubmit(event) {
         event.preventDefault();
         console.info("Movie sent to backend->" + JSON.stringify(this.state.movie))
-        let serverResponse = await this.save(this.state.movie);
+        await this.save(this.state.movie);
         this.props.history.push(applicationConfig.MOVIES);
     }
 
