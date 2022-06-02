@@ -13,8 +13,17 @@ After the application has been started the following address will be available
    1. User/Pass - tony/stark or boba/fett 
 2. H2 - http://localhost:8080/h2-console/login.jsp?jsessionid=75e2f51f110a1827420f3a5d1a3df1fa
    1. URL connection - Same of application.properties file, `jdbc:h2:mem:moviesdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`
-   
 
+
+#### Run tests
+```shell
+./gradle clean test
+```
+
+#### Run integration tests
+```shell
+./gradlew clean integrationTest
+```
 ### Docker
 
 
@@ -62,3 +71,5 @@ docker push 16bits/zero2hero-be:0.0.1
 - [Jacoco](https://reflectoring.io/jacoco/)
 - [Sonar](https://github.com/SonarSource/sonarcloud-github-action-samples/tree/gradle)
 - [CockroachDB](https://hub.docker.com/r/cockroachdb/cockroach/tags)
+- [Gradle test sets](https://github.com/unbroken-dome/gradle-testsets-plugin)
+- [Running integration tests in Gradle](https://tomgregory.com/gradle-integration-tests/#Benefits_of_integration_tests)

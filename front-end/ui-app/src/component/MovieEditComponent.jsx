@@ -109,7 +109,7 @@ class MovieEditComponent extends Component {
         event.preventDefault();
         console.info("Movie sent to backend->" + JSON.stringify(this.state.movie))
         await this.save(this.state.movie);
-        this.props.history.push(applicationConfig.MOVIE_SERVICE);
+        this.props.history.push(applicationConfig.MOVIES);
     }
 
     render() {

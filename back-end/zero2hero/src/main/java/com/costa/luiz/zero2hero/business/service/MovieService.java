@@ -10,6 +10,7 @@ import com.costa.luiz.zero2hero.persistence.repository.movie.Movie;
 import com.costa.luiz.zero2hero.persistence.repository.movie.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public class MovieService {
     private final GenreRepository genreRepository;
     private final MovieMapper movieMapper;
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public List<MovieDto> findAll() {
         return movieRepository.findAll()
                 .stream()
@@ -37,6 +39,7 @@ public class MovieService {
                 .collect(Collectors.toUnmodifiableList());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public MovieDto findById(Long id) {
         return movieRepository.findById(id).map(movieMapper::toDto).orElseThrow();
     }
@@ -47,6 +50,7 @@ public class MovieService {
         movieRepository.deleteById(id);
     }
 
+    @Transactional
     public void save(MovieDto movieDto) {
         Movie movie = movieMapper.toMovie(movieDto);
         Set<Genre> genres = movieDto.getGenreIds().stream()
