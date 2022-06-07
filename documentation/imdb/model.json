@@ -1,0 +1,349 @@
+{
+  "items": [
+    {
+      "id": "tt8041270",
+      "title": "Jurassic World Dominion",
+      "fullTitle": "Jurassic World Dominion (2022)",
+      "year": "2022",
+      "releaseState": "June 10",
+      "image": "https://m.media-amazon.com/images/M/MV5BZmQ1NDZjMTktMjFhZC00ZGY5LWEyMTMtNDhkOWM4NmMyZjI0XkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "146",
+      "runtimeStr": "2h 26mins",
+      "plot": "Four years after the destruction of Isla Nublar, dinosaurs now live--and hunt--alongside humans all over the world. This fragile balance will reshape the future and determine, once and for all, whether human beings are to remain the apex predators on a planet they now share with history's most fearsome creatures in a new Era.",
+      "contentRating": "PG-13",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "",
+      "genres": "Action, Adventure, Sci-Fi, Thriller",
+      "genreList": [
+        {
+          "key": "Action",
+          "value": "Action"
+        },
+        {
+          "key": "Adventure",
+          "value": "Adventure"
+        },
+        {
+          "key": "Sci-Fi",
+          "value": "Sci-Fi"
+        },
+        {
+          "key": "Thriller",
+          "value": "Thriller"
+        }
+      ],
+      "directors": "Colin Trevorrow",
+      "directorList": [
+        {
+          "id": "nm1119880",
+          "name": "Colin Trevorrow"
+        }
+      ],
+      "stars": "Chris Pratt, Bryce Dallas Howard, Laura Dern, Sam Neill",
+      "starList": [
+        {
+          "id": "nm0695435",
+          "name": "Chris Pratt"
+        },
+        {
+          "id": "nm0397171",
+          "name": "Bryce Dallas Howard"
+        },
+        {
+          "id": "nm0000368",
+          "name": "Laura Dern"
+        },
+        {
+          "id": "nm0000554",
+          "name": "Sam Neill"
+        }
+      ]
+    },
+    {
+      "id": "tt10298810",
+      "title": "Lightyear",
+      "fullTitle": "Lightyear (2022)",
+      "year": "2022",
+      "releaseState": "June 17",
+      "image": "https://m.media-amazon.com/images/M/MV5BYTg2Zjk0ZTctM2ZmMi00MDRmLWJjOGYtNWM0YjBmZTBjMjRkXkEyXkFqcGdeQXVyMTM1MTE1NDMx._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "100",
+      "runtimeStr": "1h 40mins",
+      "plot": "The story of Buzz Lightyear and his adventures to infinity and beyond.",
+      "contentRating": "PG",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "",
+      "genres": "Animation, Action, Adventure, Drama, Family, Sci-Fi",
+      "genreList": [
+        {
+          "key": "Animation",
+          "value": "Animation"
+        },
+        {
+          "key": "Action",
+          "value": "Action"
+        },
+        {
+          "key": "Adventure",
+          "value": "Adventure"
+        },
+        {
+          "key": "Drama",
+          "value": "Drama"
+        },
+        {
+          "key": "Family",
+          "value": "Family"
+        },
+        {
+          "key": "Sci-Fi",
+          "value": "Sci-Fi"
+        }
+      ],
+      "directors": "Angus MacLane",
+      "directorList": [
+        {
+          "id": "nm0533691",
+          "name": "Angus MacLane"
+        }
+      ],
+      "stars": "Chris Evans, Keke Palmer, Dale Soules, Taika Waititi",
+      "starList": [
+        {
+          "id": "nm0262635",
+          "name": "Chris Evans"
+        },
+        {
+          "id": "nm1551130",
+          "name": "Keke Palmer"
+        },
+        {
+          "id": "nm0815831",
+          "name": "Dale Soules"
+        },
+        {
+          "id": "nm0169806",
+          "name": "Taika Waititi"
+        }
+      ]
+    },
+    {
+      "id": "tt9783600",
+      "title": "Spiderhead",
+      "fullTitle": "Spiderhead (2022)",
+      "year": "2022",
+      "releaseState": "June 17",
+      "image": "https://m.media-amazon.com/images/M/MV5BNDVkZTc4OTktNTAyOC00MzQxLThiZjMtM2M3MTlmYzFjY2FkXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "106",
+      "runtimeStr": "1h 46mins",
+      "plot": "In the near future, convicts are offered the chance to volunteer as medical subjects to shorten their sentence. One such subject for a new drug capable of generating feelings of love begins questioning the reality of his emotions.",
+      "contentRating": "R",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "",
+      "genres": "Action, Crime, Drama, Sci-Fi, Thriller",
+      "genreList": [
+        {
+          "key": "Action",
+          "value": "Action"
+        },
+        {
+          "key": "Crime",
+          "value": "Crime"
+        },
+        {
+          "key": "Drama",
+          "value": "Drama"
+        },
+        {
+          "key": "Sci-Fi",
+          "value": "Sci-Fi"
+        },
+        {
+          "key": "Thriller",
+          "value": "Thriller"
+        }
+      ],
+      "directors": "Joseph Kosinski",
+      "directorList": [
+        {
+          "id": "nm2676052",
+          "name": "Joseph Kosinski"
+        }
+      ],
+      "stars": "Miles Teller, Chris Hemsworth, Charles Parnell, Jurnee Smollett",
+      "starList": [
+        {
+          "id": "nm1886602",
+          "name": "Miles Teller"
+        },
+        {
+          "id": "nm1165110",
+          "name": "Chris Hemsworth"
+        },
+        {
+          "id": "nm0663174",
+          "name": "Charles Parnell"
+        },
+        {
+          "id": "nm0810619",
+          "name": "Jurnee Smollett"
+        }
+      ]
+    },
+    {
+      "id": "tt13270424",
+      "title": "Brian and Charles",
+      "fullTitle": "Brian and Charles (2022)",
+      "year": "2022",
+      "releaseState": "June 17",
+      "image": "https://m.media-amazon.com/images/M/MV5BOTA5Y2E2ODItMzk0OC00NjA0LWE3YzYtMmJkMjA1MTIxOTIzXkEyXkFqcGdeQXVyMTA2MDU0NjM5._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "90",
+      "runtimeStr": "1h 30mins",
+      "plot": "After a particularly harsh winter Brian goes into a deep depression; completely isolated and with no one to talk to, Brian does what any sane person would do when faced with such a melancholic situation. He builds a robot.",
+      "contentRating": "PG",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "70",
+      "genres": "Comedy",
+      "genreList": [
+        {
+          "key": "Comedy",
+          "value": "Comedy"
+        }
+      ],
+      "directors": "Jim Archer",
+      "directorList": [
+        {
+          "id": "nm5027657",
+          "name": "Jim Archer"
+        }
+      ],
+      "stars": "David Earl, Chris Hayward, Louise Brealey, Jamie Michie",
+      "starList": [
+        {
+          "id": "nm2393045",
+          "name": "David Earl"
+        },
+        {
+          "id": "nm1374322",
+          "name": "Chris Hayward"
+        },
+        {
+          "id": "nm1154764",
+          "name": "Louise Brealey"
+        },
+        {
+          "id": "nm1652341",
+          "name": "Jamie Michie"
+        }
+      ]
+    },
+    {
+      "id": "tt3704428",
+      "title": "Elvis",
+      "fullTitle": "Elvis (2022)",
+      "year": "2022",
+      "releaseState": "June 24",
+      "image": "https://m.media-amazon.com/images/M/MV5BMjk0YWFlZDQtZjIzYi00Y2Q3LTkxMjktNmMzNzc1NzFmMzhjXkEyXkFqcGdeQXVyNjc0NzQzNTM@._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "159",
+      "runtimeStr": "2h 39mins",
+      "plot": "A look at the life of the legendary rock and roll star, Elvis Presley.",
+      "contentRating": "PG-13",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "62",
+      "genres": "Biography, Drama, Music",
+      "genreList": [
+        {
+          "key": "Biography",
+          "value": "Biography"
+        },
+        {
+          "key": "Drama",
+          "value": "Drama"
+        },
+        {
+          "key": "Music",
+          "value": "Music"
+        }
+      ],
+      "directors": "Baz Luhrmann",
+      "directorList": [
+        {
+          "id": "nm0525303",
+          "name": "Baz Luhrmann"
+        }
+      ],
+      "stars": "Tom Hanks, Austin Butler, Olivia DeJonge, Dacre Montgomery",
+      "starList": [
+        {
+          "id": "nm0000158",
+          "name": "Tom Hanks"
+        },
+        {
+          "id": "nm2581521",
+          "name": "Austin Butler"
+        },
+        {
+          "id": "nm4609822",
+          "name": "Olivia DeJonge"
+        },
+        {
+          "id": "nm4223882",
+          "name": "Dacre Montgomery"
+        }
+      ]
+    },
+    {
+      "id": "tt7144666",
+      "title": "The Black Phone",
+      "fullTitle": "The Black Phone (2021)",
+      "year": "2021",
+      "releaseState": "June 24",
+      "image": "https://m.media-amazon.com/images/M/MV5BOWVmNTBiYTUtZWQ3Yi00ZDlhLTgyYjUtNzBhZjM3YjRiNGRkXkEyXkFqcGdeQXVyNzYyOTM1ODI@._V1_UX128_CR0,4,128,176_AL_.jpg",
+      "runtimeMins": "102",
+      "runtimeStr": "1h 42mins",
+      "plot": "After being abducted by a child killer and locked in a soundproof basement, a 13-year-old boy starts receiving calls on a disconnected phone from the killer's previous victims.",
+      "contentRating": "R",
+      "imDbRating": "",
+      "imDbRatingCount": "",
+      "metacriticRating": "79",
+      "genres": "Horror",
+      "genreList": [
+        {
+          "key": "Horror",
+          "value": "Horror"
+        }
+      ],
+      "directors": "Scott Derrickson",
+      "directorList": [
+        {
+          "id": "nm0220600",
+          "name": "Scott Derrickson"
+        }
+      ],
+      "stars": "Ethan Hawke, Jeremy Davies, James Ransone, Mason Thames",
+      "starList": [
+        {
+          "id": "nm0000160",
+          "name": "Ethan Hawke"
+        },
+        {
+          "id": "nm0001111",
+          "name": "Jeremy Davies"
+        },
+        {
+          "id": "nm0710447",
+          "name": "James Ransone"
+        },
+        {
+          "id": "nm9296746",
+          "name": "Mason Thames"
+        }
+      ]
+    }
+  ],
+  "errorMessage": ""
+}
