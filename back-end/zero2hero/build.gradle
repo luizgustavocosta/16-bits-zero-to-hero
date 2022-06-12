@@ -50,6 +50,7 @@ dependencies {
 	testImplementation "org.junit.jupiter:junit-jupiter:5.8.1"
 	testImplementation "org.testcontainers:testcontainers:1.17.2"
 	testImplementation "org.testcontainers:junit-jupiter:1.17.2"
+	testImplementation "org.testcontainers:cockroachdb:1.17.2"
 	//Parameterized
 	testImplementation 'org.junit.jupiter:junit-jupiter-params:5.5.2'
 

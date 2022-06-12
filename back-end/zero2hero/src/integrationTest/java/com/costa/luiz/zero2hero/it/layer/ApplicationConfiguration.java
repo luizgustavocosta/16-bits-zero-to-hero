@@ -5,14 +5,25 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
-public class Configuration {
+import static java.util.Objects.nonNull;
+
+public class ApplicationConfiguration {
 
     Properties properties = new Properties();
 
-    public Configuration() {
-        try (InputStream inputStream = getClass().getClassLoader()
-                .getResourceAsStream("application.properties")) {
+    private static ApplicationConfiguration instance = null;
 
+    public static ApplicationConfiguration getInstance() {
+        if (nonNull(instance)) {
+            return instance;
+        }
+        instance = new ApplicationConfiguration();
+        return instance;
+    }
+
+    private ApplicationConfiguration() {
+        try (InputStream inputStream = getClass().getClassLoader()
+                .getResourceAsStream("application-testcontainers.properties")) {
             InputStream file = Optional.ofNullable(inputStream).orElseThrow(IllegalStateException::new);
             properties.load(file);
 
@@ -41,15 +52,35 @@ public class Configuration {
         return properties.getProperty("app.profiles.in-memory");
     }
 
+    public String getCockroachProfile() {
+        return properties.getProperty("app.profiles.cockroach");
+    }
+
     public String getAppDockerName() {
         return properties.getProperty("app.docker.name");
+    }
+
+    public String getDatabaseDockerName() {
+        return properties.getProperty("app.docker.database.name");
     }
 
     public int getAppPort() {
         return Integer.parseInt(properties.getProperty("app.port"));
     }
 
+    public int getAppSecondPort() {
+        return Integer.parseInt(properties.getProperty("app.second.port"));
+    }
+
     public String getGenreApi() {
         return properties.getProperty("app.genre.api");
+    }
+
+    public int getAppCockroachPortUI() {
+        return Integer.parseInt(properties.getProperty("app.cockroach.port.ui"));
+    }
+
+    public int getAppCockroachPortJDCB() {
+        return Integer.parseInt(properties.getProperty("app.cockroach.port.jdbc"));
     }
 }
