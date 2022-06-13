@@ -12,7 +12,7 @@ services:
   16-bits-back-end:
     depends_on:
       - 16-bits-cockroach
-    image: "16bits/zero2hero-be:0.0.2"
+    image: "16bits/zero2hero-be:0.0.3-SNAPSHOT"
     container_name: 16-bits-back-end
     ports:
       - "8080:8080"
