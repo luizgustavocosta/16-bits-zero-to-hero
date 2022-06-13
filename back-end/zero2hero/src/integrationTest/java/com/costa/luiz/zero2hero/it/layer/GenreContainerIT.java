@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -26,7 +27,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 class GenreContainerIT extends Zero2HeroInfraSupport {
 
     @Container
-    private final GenericContainer backendContainer = new GenericContainer(
+    private static final GenericContainer backendContainer = new GenericContainer(
             DockerImageName.parse(APPLICATION_CONFIGURATION.getAppDockerName()))
             .dependsOn(COCKROACH_CONTAINER)
             .withNetwork(COCKROACH_CONTAINER.getNetwork())
@@ -36,7 +37,7 @@ class GenreContainerIT extends Zero2HeroInfraSupport {
             .withExposedPorts(APPLICATION_CONFIGURATION.getAppSecondPort())
             .waitingFor(Wait.forLogMessage(".*Started Zero2heroApplication.*\\n", 1));
 
-    private String buildJDBCConnection() {
+    private static String buildJDBCConnection() {
         return "jdbc:postgresql://"
                 + COCKROACH_CONTAINER.getNetworkAliases().iterator().next()
                 + ":26257/postgres?sslmode=disable&user=root";
@@ -55,9 +56,9 @@ class GenreContainerIT extends Zero2HeroInfraSupport {
                                 .toUriString(),
                         HttpMethod.GET, new HttpEntity<>(
                                 createHeaders(user, password)),
-                        GenreDto[].class);
+                        new ParameterizedTypeReference<List<GenreDto>>() {});
         assertTrue(response.getStatusCode().is2xxSuccessful());
-        assertEquals(15, Objects.requireNonNull(response.getBody()).length);
+        assertEquals(15, Objects.requireNonNull(response.getBody()).size());
     }
 
     static Stream<Arguments> getUsers() {

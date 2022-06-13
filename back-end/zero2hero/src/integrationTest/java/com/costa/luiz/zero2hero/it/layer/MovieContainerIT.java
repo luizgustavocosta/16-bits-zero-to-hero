@@ -52,7 +52,7 @@ class MovieContainerIT extends Zero2HeroInfraSupport {
                 + ":26257/postgres?sslmode=disable&user=root";
     }
 
-    protected static String url() {
+    protected String url() {
         return "http://localhost:" + backendContainer.getMappedPort(APPLICATION_CONFIGURATION.getAppSecondPort());
     }
 
