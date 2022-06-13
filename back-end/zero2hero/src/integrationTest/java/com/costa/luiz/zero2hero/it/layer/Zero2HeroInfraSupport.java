@@ -13,7 +13,7 @@ import java.nio.charset.StandardCharsets;
 @Testcontainers
 abstract class Zero2HeroInfraSupport {
 
-    protected static final ApplicationConfiguration APPLICATION_CONFIGURATION = ApplicationConfiguration.getInstance();
+    protected static final ApplicationConfigurationReader APPLICATION_CONFIGURATION = ApplicationConfigurationReader.getInstance();
 
     @Container
     static CockroachContainer COCKROACH_CONTAINER = new CockroachContainer(

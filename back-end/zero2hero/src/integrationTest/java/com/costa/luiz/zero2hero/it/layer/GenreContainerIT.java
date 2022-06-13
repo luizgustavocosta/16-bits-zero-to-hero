@@ -14,6 +14,7 @@ import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -22,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 @DisplayName("Genre - Testcontainers")
-class GenreIT extends Zero2HeroInfraSupport {
+class GenreContainerIT extends Zero2HeroInfraSupport {
 
     @Container
     private final GenericContainer backendContainer = new GenericContainer(
@@ -50,7 +51,7 @@ class GenreIT extends Zero2HeroInfraSupport {
     void getAllGenres(String user, String password) {
         var response = new RestTemplate()
                 .exchange(UriComponentsBuilder.fromHttpUrl(url())
-                                .path(APPLICATION_CONFIGURATION.getGenreApi())
+                                .path(APPLICATION_CONFIGURATION.getGenresApi())
                                 .toUriString(),
                         HttpMethod.GET, new HttpEntity<>(
                                 createHeaders(user, password)),

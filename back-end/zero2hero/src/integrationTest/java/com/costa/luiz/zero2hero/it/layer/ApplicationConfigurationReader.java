@@ -7,21 +7,21 @@ import java.util.Properties;
 
 import static java.util.Objects.nonNull;
 
-public class ApplicationConfiguration {
+public class ApplicationConfigurationReader {
 
     Properties properties = new Properties();
 
-    private static ApplicationConfiguration instance = null;
+    private static ApplicationConfigurationReader instance = null;
 
-    public static ApplicationConfiguration getInstance() {
+    public static ApplicationConfigurationReader getInstance() {
         if (nonNull(instance)) {
             return instance;
         }
-        instance = new ApplicationConfiguration();
+        instance = new ApplicationConfigurationReader();
         return instance;
     }
 
-    private ApplicationConfiguration() {
+    private ApplicationConfigurationReader() {
         try (InputStream inputStream = getClass().getClassLoader()
                 .getResourceAsStream("application-testcontainers.properties")) {
             InputStream file = Optional.ofNullable(inputStream).orElseThrow(IllegalStateException::new);
@@ -72,8 +72,12 @@ public class ApplicationConfiguration {
         return Integer.parseInt(properties.getProperty("app.second.port"));
     }
 
-    public String getGenreApi() {
-        return properties.getProperty("app.genre.api");
+    public String getGenresApi() {
+        return properties.getProperty("app.genres.api");
+    }
+
+    public String getMoviesApi() {
+        return properties.getProperty("app.movies.api");
     }
 
     public int getAppCockroachPortUI() {
