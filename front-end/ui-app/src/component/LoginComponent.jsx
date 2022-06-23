@@ -150,6 +150,7 @@ class LoginComponent extends Component {
                                     type="submit"
                                     variant="contained"
                                     onClick={this.loginClicked}
+                                    id="signIn"
                                     sx={{mt: 1, mb: 1, mr: 30}}>
                                     Sign In
                                 </Button>
@@ -157,6 +158,7 @@ class LoginComponent extends Component {
                                     type="submit"
                                     variant="outlined"
                                     sx={{mt: 1, mb: 1, ml: 10}}
+                                    id="newUser"
                                     href={"/newUser"}>
                                     Create account
                                 </Button>

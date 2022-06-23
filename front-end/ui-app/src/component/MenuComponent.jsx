@@ -16,6 +16,7 @@ class MenuComponent extends Component {
                             variant="contained"
                             align="right"
                             color={"inherit"}
+                            id="logoutButton"
                             sx={{mt: 3, mb: 2}}>Logout</Button>
                 }
             </header>

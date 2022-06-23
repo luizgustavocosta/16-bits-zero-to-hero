@@ -1,7 +1,6 @@
 import axios from 'axios'
-import applicationConfig from './../application.json'
 
-const API_URL = applicationConfig.SERVER_URL
+const API_URL = process.env.REACT_APP_BACKEND_SERVER_URL
 
 export const USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser'
 export const USER_PROFILE = 'userProfile'
