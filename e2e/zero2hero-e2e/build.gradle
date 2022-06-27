@@ -1,0 +1,63 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+group = 'com.costa.luiz'
+version = '0.0.1-SNAPSHOT'
+description = 'zero2hero-e2e'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.22'
+    runtimeOnly 'com.h2database:h2:1.4.200'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.3'
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    //CockroachDB
+    implementation 'org.postgresql:postgresql:42.2.18'
+    //Testcontainers
+    testImplementation "org.junit.jupiter:junit-jupiter:5.8.1"
+    testImplementation "org.testcontainers:testcontainers:1.17.2"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.2"
+    testImplementation "org.testcontainers:cockroachdb:1.17.2"
+    //Parameterized
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.5.2'
+    //AssertJ
+    testImplementation("org.assertj:assertj-core:3.23.1")
+    //e2e
+    testImplementation "org.testcontainers:selenium:1.17.2"
+    implementation group: 'org.seleniumhq.selenium', name: 'selenium-remote-driver', version: '3.141.59'
+    // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
+    //implementation group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '4.2.2'
+    implementation 'org.seleniumhq.selenium:selenium-chrome-driver:3.141.59'
+
+
+
+
+}
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Make all tests use JUnit 5
+tasks.withType(Test) {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
