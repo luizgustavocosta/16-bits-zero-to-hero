@@ -70,8 +70,8 @@ class MovieContainerIT extends Zero2HeroInfraSupport {
         var movieResponse = response.getBody();
 
         assertAll("Assert the movies",
-                () -> assertThat(movieResponse.size())
-                        .as("Movies expected").isEqualTo(11),
+                () -> assertThat(movieResponse)
+                        .as("Movies expected").hasSize(11),
                 () -> assertThat(movieResponse)
                         .filteredOn("name", "Carandiru").isNotNull(),
                 () -> assertThat(movieResponse)
