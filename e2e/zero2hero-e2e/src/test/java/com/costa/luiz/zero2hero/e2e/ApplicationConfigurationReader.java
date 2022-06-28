@@ -51,6 +51,14 @@ public class ApplicationConfigurationReader {
         return properties.getProperty("app.regular.password");
     }
 
+    public String getNonUser() {
+        return properties.getProperty("app.nonuser.user");
+    }
+
+    public String getNonUserPassword() {
+        return properties.getProperty("app.nonuser.password");
+    }
+
     public String getInMemoryProfile() {
         return properties.getProperty("app.profiles.in-memory");
     }
