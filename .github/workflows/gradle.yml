@@ -1,7 +1,10 @@
 name: Java CI
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
+      - 'feature/**'
+      - 'fix/**'
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -44,6 +44,7 @@ class WorksButNotIdealIT {
                                 .toUriString(),
                         HttpMethod.GET, new HttpEntity<>(createHeaders()),
                         MovieDto[].class);
+        System.out.printf("APP-LOGS", backendContainer.getLogs());
         assertTrue(response.getStatusCode().is2xxSuccessful());
         assertEquals(11, Objects.requireNonNull(response.getBody()).length);
         assertEquals("The Lord of the rings", Arrays.stream(response.getBody()).iterator().next().getName());
