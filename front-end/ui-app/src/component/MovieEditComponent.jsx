@@ -16,7 +16,6 @@ import Radio from "@mui/material/Radio";
 import Checkbox from "@mui/material/Checkbox";
 import Select from "@mui/material/Select";
 import BackendDataService from "../service/BackendService.js";
-import applicationConfig from './../application.json'
 
 class MovieEditComponent extends Component {
 
@@ -109,7 +108,7 @@ class MovieEditComponent extends Component {
         event.preventDefault();
         console.info("Movie sent to backend->" + JSON.stringify(this.state.movie))
         await this.save(this.state.movie);
-        this.props.history.push(applicationConfig.MOVIES);
+        this.props.history.push(process.env.REACT_APP_PATH_MOVIES);
     }
 
     render() {
@@ -161,6 +160,7 @@ class MovieEditComponent extends Component {
                 }}
                 noValidate
                 autoComplete="off"
+                id="addButton"
             >
                 <TextField id="outlined-basic" label="Name" variant="outlined" value={this.state.movie.name || ''}
                            onChange={event => this.handleFormChange(event, "name")}/>

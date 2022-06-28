@@ -1,7 +1,7 @@
 import axios from 'axios'
-import application from './../application.json'
-const SERVER_API_URL_MOVIES = application.SERVER_URL + application.MOVIE_SERVICE
-const SERVER_API_URL_GENRES = application.SERVER_URL + application.GENRE_SERVICE
+
+const SERVER_API_URL_MOVIES = process.env.REACT_APP_BACKEND_SERVER_URL + process.env.REACT_APP_BACKEND_MOVIE_SERVICE
+const SERVER_API_URL_GENRES = process.env.REACT_APP_BACKEND_SERVER_URL + process.env.REACT_APP_BACKEND_GENRE_SERVICE
 
 class BackendService {
 

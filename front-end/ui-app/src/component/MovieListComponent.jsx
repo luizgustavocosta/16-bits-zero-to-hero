@@ -74,10 +74,15 @@ class MovieListComponent extends Component {
         const rows = this.state.movies;
 
         return (
-            <div>
+            <div id="movieList">
+                {sessionStorage.getItem("userRoles")
+                    .split(',')
+                    .filter(item => (item === 'ROLE_OTHERS'))
+                    .length > 0 &&
                 <Link to={"/movies/new"}>
-                    <Button variant="contained" sx={{mb: 2}}>Add</Button>
+                    <Button variant="contained" sx={{mb: 2}} id="addButton">Add</Button>
                 </Link>
+                }
                 <Paper sx={{width: '100%', overflow: 'hidden', mt: '2px'}}>
                     <TableContainer sx={{maxHeight: 600}}>
                         <Table stickyHeader aria-label="sticky table">
