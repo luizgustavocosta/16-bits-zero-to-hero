@@ -28,7 +28,7 @@ class WorksButNotIdealIT {
 
     @Container
     private static final GenericContainer backendContainer = new GenericContainer(
-            DockerImageName.parse("16bits/zero2hero-be:0.0.2"))
+            DockerImageName.parse("16bits/zero2hero-be:0.0.3"))
             .withEnv("spring.profiles.active", "default, in-memory")
             .withEnv("server.port", "8100")
             .withExposedPorts(8100)
