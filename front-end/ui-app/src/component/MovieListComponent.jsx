@@ -74,7 +74,7 @@ class MovieListComponent extends Component {
         const rows = this.state.movies;
 
         return (
-            <div>
+            <div id="movieList">
                 {sessionStorage.getItem("userRoles")
                     .split(',')
                     .filter(item => (item === 'ROLE_OTHERS'))
