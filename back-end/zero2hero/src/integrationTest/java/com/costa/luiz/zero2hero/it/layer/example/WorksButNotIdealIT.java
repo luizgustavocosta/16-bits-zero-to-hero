@@ -1,6 +1,7 @@
 package com.costa.luiz.zero2hero.it.layer.example;
 
 import com.costa.luiz.zero2hero.business.service.dto.MovieDto;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Testcontainers
 @DisplayName("Example of Hard coded configuration")
+@Slf4j
 class WorksButNotIdealIT {
 
     @Container
@@ -44,6 +46,9 @@ class WorksButNotIdealIT {
                                 .toUriString(),
                         HttpMethod.GET, new HttpEntity<>(createHeaders()),
                         MovieDto[].class);
+
+        log.info("Application log {}", backendContainer.getLogs());
+
         assertTrue(response.getStatusCode().is2xxSuccessful());
         assertEquals(11, Objects.requireNonNull(response.getBody()).length);
         assertEquals("The Lord of the rings", Arrays.stream(response.getBody()).iterator().next().getName());
