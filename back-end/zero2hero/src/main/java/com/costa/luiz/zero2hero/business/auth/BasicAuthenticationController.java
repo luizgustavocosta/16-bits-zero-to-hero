@@ -23,6 +23,6 @@ public class BasicAuthenticationController {
                 .collect(Collectors.toSet());
         log.info("User {} has been authenticated", authentication.getPrincipal());
         log.info("This user has the following roles {}", roles);
-        return new Authentication("You are authenticated", roles);
+        return new Authentication("You are authenticated", roles, true, authentication.getName());
     }
 }

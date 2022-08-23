@@ -11,5 +11,7 @@ public class Authentication {
 
     private final String message;
     private final Set<String> roles;
+    private final boolean authenticated;
+    private final String user;
 
 }
