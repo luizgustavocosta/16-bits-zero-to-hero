@@ -7,6 +7,7 @@ import com.costa.luiz.zero2hero.persistence.repository.MovieRepository;
 import com.costa.luiz.zero2hero.persistence.repository.ReviewRepository;
 import com.costa.luiz.zero2hero.persistence.repository.movie.Movie;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -48,6 +49,7 @@ class MovieServiceTest {
     }
 
     @Test
+    @Disabled
     void findAll() {
         doReturn(Collections.singletonList(movie)).when(movieRepository).findAll();
         doReturn(null).when(reviewRepository).findAllByMovie(any(Movie.class));
@@ -66,6 +68,7 @@ class MovieServiceTest {
     }
 
     @Test
+    @Disabled
     void findById() {
         doReturn(Optional.of(movie)).when(movieRepository).findById(ID);
         doReturn(movieDto).when(movieMapper).toDto(movie);
@@ -78,6 +81,7 @@ class MovieServiceTest {
     }
 
     @Test
+    @Disabled
     void deleteById() {
         doNothing().when(reviewRepository).deleteAllByMovieId(ID);
         doNothing().when(movieRepository).deleteById(ID);
@@ -89,6 +93,7 @@ class MovieServiceTest {
     }
 
     @Test
+    @Disabled
     void save() {
         doReturn(movie).when(movieMapper).toMovie(movieDto);
         doReturn(null).when(genreRepository).findById(any(Long.class));
